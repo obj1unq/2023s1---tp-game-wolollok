@@ -22,7 +22,7 @@ object canion {
 	method disparar() {
 		if (not game.hasVisual(balaCanion)) {
 			game.sound("disparoCanion.mp3").play()
-			game.schedule(200, {balaCanion.disparar(position)})
+			balaCanion.disparar(position)
 			
 		}
 	}

@@ -23,8 +23,8 @@ object balaCanion {
 
 	method eliminarEnemigo() {
 		game.whenCollideDo(self, { enemigo =>
-			enemigo.serDestruido()
 			self.desaparecer()
+			enemigo.serDestruido()
 		})
 	}
 
