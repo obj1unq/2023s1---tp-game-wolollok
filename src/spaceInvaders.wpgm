@@ -1,0 +1,35 @@
+import wollok.game.*
+import canion.*
+import naves.*
+import balas.*
+
+program spaceInvaders {
+
+//	CONFIG	
+
+	game.title("Space Invaders")
+	game.height(20)
+	game.width(30)
+	game.boardGround("fondo1.jpg")
+	game.cellSize(35)
+	
+//	VISUALES
+	
+	game.addVisual(canion)
+	game.addVisual(nave1)
+	game.addVisual(nave2)
+	game.addVisual(nave3)
+	
+
+
+//  CONTROLES
+
+	keyboard.left().onPressDo { canion.mover(canion.position().left(1)) }
+	keyboard.right().onPressDo { canion.mover(canion.position().right(1)) }
+	keyboard.space().onPressDo {canion.disparar()}
+
+//	START
+
+	game.start()
+	
+}
