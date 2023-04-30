@@ -16,9 +16,15 @@ program spaceInvaders {
 //	VISUALES
 	
 	game.addVisual(canion)
-	game.addVisual(nave1)
-	game.addVisual(nave2)
-	game.addVisual(nave3)
+	game.addVisual(nave11)
+	game.addVisual(nave12)
+	game.addVisual(nave13)
+	game.addVisual(nave21)
+	game.addVisual(nave22)
+	game.addVisual(nave23)
+	game.addVisual(nave31)
+	game.addVisual(nave32)
+	game.addVisual(nave33)
 	
 
 
