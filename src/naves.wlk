@@ -2,89 +2,102 @@ import wollok.game.*
 import canion.*
 import balas.*
 
+class Nave {
 
-class Nave{
-	
 	var property image
-	
-	
-	method serDestruido(){
+
+	method serDestruido() {
 		game.sound("explosion1.mp3").play()
 		self.image("explosion1.png")
-		game.schedule(200, {=>self.image("explosion2.png")})
-		game.schedule(400, {=>self.image("explosion3.png")})
-		game.schedule(600, {=>game.removeVisual(self)})
-		
+		game.schedule(200, {=> self.image("explosion2.png")})
+		game.schedule(400, {=> self.image("explosion3.png")})
+		game.schedule(600, {=> game.removeVisual(self)})
 	}
-	
-	method disparar(){} //TODO
+
+	method disparar() {
+	} // TODO
+
 }
 
-class Nave3Patas inherits Nave{
-	
-	var property image = "nave2.png"
-	
+class NaveConFuego inherits Nave(image = "nave1.png") {
+	const property puntaje = 200
+	var property position
 }
 
-class NaveConFuego inherits Nave{
-	var property image = "nave1.png"
-	
-}
-
-class Nave2Patas inherits Nave{
-	var property image = "nave3.png"
-	
+class Nave3Patas inherits Nave(image = "nave2.png") {
+	const property puntaje = 500
+	var property position
 }
 
 
-object nave11 inherits NaveConFuego {
-	
-	var property position = game.at(3, 14)
-		
+class Nave2Patas inherits Nave(image = "nave3.png") {
+	const property puntaje = 1000
+	var property position
 }
 
-object nave12 inherits NaveConFuego {
-	
-	var property position = game.at(5, 14)
-		
-}
+// NAVES CON FUEGO
 
-object nave13 inherits NaveConFuego {
-	
-	var property position = game.at(7, 14)
-		
-}
+object nave10 inherits NaveConFuego(position = game.at(1, 14)) {}
 
-object nave21 inherits Nave3Patas{
-	
-	var property position = game.at(3, 16)
-	
-}
+object nave11 inherits NaveConFuego(position = game.at(3, 14)) {}
 
-object nave22 inherits Nave3Patas{
-	
-	var property position = game.at(5, 16)
-	
-}
+object nave12 inherits NaveConFuego(position = game.at(5, 14)) {}
 
-object nave23 inherits Nave3Patas{
-	
-	var property position = game.at(7, 16)
-	
-}
+object nave13 inherits NaveConFuego(position = game.at(7, 14)) {}
 
-object nave31 inherits Nave2Patas {
-	
-	var property position = game.at(3, 18)
-}
+object nave14 inherits NaveConFuego(position = game.at(9, 14)) {}
 
-object nave32 inherits Nave2Patas {
-	
-	var property position = game.at(5, 18)
-}
+object nave15 inherits NaveConFuego(position = game.at(11, 14)) {}
 
-object nave33 inherits Nave2Patas {
-	
-	var property position = game.at(7, 18)
-}
+object nave16 inherits NaveConFuego(position = game.at(13, 14)) {}
+
+object nave17 inherits NaveConFuego(position = game.at(15, 14)) {}
+
+object nave18 inherits NaveConFuego(position = game.at(17, 14)) {}
+
+object nave19 inherits NaveConFuego(position = game.at(19, 14)) {}
+
+// NAVES 3 PATAS
+
+object nave20 inherits Nave3Patas(position = game.at(1, 16)) {}
+
+object nave21 inherits Nave3Patas(position = game.at(3, 16)) {}
+
+object nave22 inherits Nave3Patas(position = game.at(5, 16)) {}
+
+object nave23 inherits Nave3Patas(position = game.at(7, 16)) {}
+
+object nave24 inherits Nave3Patas(position = game.at(9, 16)) {}
+
+object nave25 inherits Nave3Patas(position = game.at(11, 16)) {}
+
+object nave26 inherits Nave3Patas(position = game.at(13, 16)) {}
+
+object nave27 inherits Nave3Patas(position = game.at(15, 16)) {}
+
+object nave28 inherits Nave3Patas(position = game.at(17, 16)) {}
+
+object nave29 inherits Nave3Patas(position = game.at(19, 16)) {}
+
+// NAVES 2 PATAS
+
+object nave30 inherits Nave2Patas(position = game.at(1, 18)) {}
+
+object nave31 inherits Nave2Patas(position = game.at(3, 18)) {}
+
+object nave32 inherits Nave2Patas(position = game.at(5, 18)) {}
+
+object nave33 inherits Nave2Patas(position = game.at(7, 18)) {}
+
+object nave34 inherits Nave2Patas(position = game.at(9, 18)) {}
+
+object nave35 inherits Nave2Patas(position = game.at(11, 18)) {}
+
+object nave36 inherits Nave2Patas(position = game.at(13, 18)) {}
+
+object nave37 inherits Nave2Patas(position = game.at(15, 18)) {}
+
+object nave38 inherits Nave2Patas(position = game.at(17, 18)) {}
+
+object nave39 inherits Nave2Patas(position = game.at(19, 18)) {}
 
