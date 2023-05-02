@@ -4,7 +4,7 @@ import balas.*
 
 object canion {
 
-	var property position = game.at(15, 1)
+	var property position = game.at(game.center().x() , 1)
 	const property balas = []
 
 	method image() = "canion.png"
@@ -16,13 +16,13 @@ object canion {
 	}
 
 	method puedeMover(_posicion) {
-		return _posicion.x().between(0, 29)
+		return _posicion.x().between(0, game.width() - 1)
 	}
 
 	method disparar() {
 		if (not game.hasVisual(balaCanion)) {
 			game.sound("disparoCanion.mp3").play()
-			game.schedule(200, {balaCanion.disparar(position)})
+			balaCanion.disparar(position)
 			
 		}
 	}

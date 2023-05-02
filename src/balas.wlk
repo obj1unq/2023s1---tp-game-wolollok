@@ -17,14 +17,14 @@ object balaCanion {
 	method subirAuto() {
 		game.onTick(50, "subir bala", {=>
 			self.subir()
-			if (self.position().y() > 19) self.desaparecer() else self.eliminarEnemigo()
+			if (self.position().y() > game.height() - 1) self.desaparecer() else self.eliminarEnemigo()
 		})
 	}
 
 	method eliminarEnemigo() {
 		game.whenCollideDo(self, { enemigo =>
-			enemigo.serDestruido()
 			self.desaparecer()
+			enemigo.serDestruido()
 		})
 	}
 
