@@ -26,5 +26,8 @@ object canion {
 			
 		}
 	}
+	
+	method serDestruido(){}
+	
 }
 

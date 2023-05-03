@@ -79,7 +79,7 @@ object balaNave {
 	}
 	
 	method nuevoDisparo(){
-		const naveAlAzar = ovnis.get((1..ovnis.size()).anyOne())
+		const naveAlAzar = ovnis.get((0..ovnis.size()-1).anyOne())
 		naveAlAzar.disparar()
 	}
 	
