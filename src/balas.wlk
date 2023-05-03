@@ -17,13 +17,13 @@ object balaCanion {
 	method subirAuto() {
 		game.onTick(50, "subir bala", {=>
 			self.subir()
-			if (self.position().y() > game.height() - 1) self.desaparecer() else self.eliminarEnemigo()
+			if (self.position().y() > game.height() - 1) self.serDestruido() else self.eliminarEnemigo()
 		})
 	}
 
 	method eliminarEnemigo() {
 		game.whenCollideDo(self, { enemigo =>
-			self.desaparecer()
+			self.serDestruido()
 			enemigo.serDestruido()
 			ovnis.remove(enemigo)
 		})
@@ -33,7 +33,7 @@ object balaCanion {
 		position = position.up(1)
 	}
 
-	method desaparecer() {
+	method serDestruido() {
 		game.removeVisual(self)
 		game.removeTickEvent("subir bala")
 	}
@@ -55,7 +55,7 @@ object balaNave {
 	method bajarAuto(){
 		game.onTick(50, "bajar bala", {=>
 			self.bajar()
-			if (self.position().y() == 1) self.desaparecer() else self.daniarCanion()
+			if (self.position().y() == 1) self.serDestruido() else self.daniarCanion()
 		})
 	}
 	
@@ -63,7 +63,7 @@ object balaNave {
 		position = position.down(1)
 	}
 
-	method desaparecer() {
+	method serDestruido() {
 		game.removeVisual(self)
 		game.removeTickEvent("bajar bala")
 		self.nuevoDisparo()
@@ -72,7 +72,7 @@ object balaNave {
 	method daniarCanion(){
 		game.whenCollideDo(self, { objetivo =>
 			if (objetivo == canion){
-				self.desaparecer()
+				self.serDestruido()
 				objetivo.serDestruido()
 			}
 		})
@@ -82,5 +82,4 @@ object balaNave {
 		const naveAlAzar = ovnis.get((0..ovnis.size()-1).anyOne())
 		naveAlAzar.disparar()
 	}
-	
 }

@@ -5,7 +5,6 @@ import balas.*
 object canion {
 
 	var property position = game.at(game.center().x() , 1)
-	const property balas = []
 
 	method image() = "canion.png"
 
@@ -27,7 +26,7 @@ object canion {
 		}
 	}
 	
-	method serDestruido(){}
+	method serDestruido(){	}
 	
 }
 
