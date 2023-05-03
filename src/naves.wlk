@@ -2,9 +2,14 @@ import wollok.game.*
 import canion.*
 import balas.*
 
+const ovnis =  [nave10, nave11, nave12, nave13, nave14, nave15, nave16, nave17, nave18, nave19, 
+				nave20, nave21, nave22, nave23, nave24, nave25, nave26, nave27, nave28, nave29,  
+				nave30, nave31, nave32, nave33, nave34, nave35, nave36, nave37, nave38, nave39]
+
 class Nave {
 
 	var property image
+	var property position
 
 	method serDestruido() {
 		game.sound("explosion1.mp3").play()
@@ -15,24 +20,25 @@ class Nave {
 	}
 
 	method disparar() {
-	} // TODO
-
+		if (not game.hasVisual(balaNave)) {
+			game.sound("disparoNave.mp3").play()
+			balaNave.disparar(position)
+			
+		}
+	} 
 }
 
 class NaveConFuego inherits Nave(image = "nave1.png") {
 	const property puntaje = 200
-	var property position
 }
 
 class Nave3Patas inherits Nave(image = "nave2.png") {
 	const property puntaje = 500
-	var property position
 }
 
 
 class Nave2Patas inherits Nave(image = "nave3.png") {
 	const property puntaje = 1000
-	var property position
 }
 
 // NAVES CON FUEGO
