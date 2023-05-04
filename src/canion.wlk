@@ -25,8 +25,59 @@ object canion {
 			
 		}
 	}
+
+	method serDestruido() {
+		
+		const vida = vidas
+		
+		if (vida == tres) {
+			game.sound("primeraVidaPerdida.mp3").play()
+			vida.perderVida()
+			} else if (vida == dos) {
+				game.sound("segundaVidaPerdida.mp3").play()
+				vida.perderVida()
+			} else {
+				vida.perderVida()
+				//gamerOver?
+			}
+		
+	}
+}
+
+object vidas {
 	
-	method serDestruido(){	}
+	var property cantidad = tres
+	
+	method position() {
+		return game.at(1, 0)
+	}
+	
+	method image () {
+		return cantidad.toString() + "-vida.png"
+	}
+	
+	method perderVida() {
+		cantidad = cantidad.restarVida()
+	}
 	
 }
 
+object tres {
+	
+	method restarVida() {
+		return dos
+	}
+	
+}
+
+object dos {
+	method restarVida() {
+		return una
+	}
+}
+
+object una {
+	
+	method restarVida(){
+		
+	}
