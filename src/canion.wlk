@@ -81,3 +81,5 @@ object una {
 	method restarVida(){
 		
 	}
+}
+	}
