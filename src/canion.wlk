@@ -5,8 +5,6 @@ import balas.*
 object canion {
 
 	var property position = game.at(game.center().x() , 1)
-	const property balas = []
-	var property cantidaDeVidas = 3
 
 	method image() = "canion.png"
 
@@ -27,21 +25,19 @@ object canion {
 			
 		}
 	}
+
 	method serDestruido() {
 		
 		const vida = vidas
 		
-		if (cantidaDeVidas == 3) {
+		if (vida == tres) {
 			game.sound("primeraVidaPerdida.mp3").play()
 			vida.perderVida()
-			cantidaDeVidas -= 1
-			} else if (cantidaDeVidas == 2) {
+			} else if (vida == dos) {
 				game.sound("segundaVidaPerdida.mp3").play()
 				vida.perderVida()
-				cantidaDeVidas -= 1
 			} else {
 				vida.perderVida()
-				cantidaDeVidas -= 1
 				//gamerOver?
 			}
 		
@@ -85,6 +81,3 @@ object una {
 	method restarVida(){
 		
 	}
-	
-}
-
