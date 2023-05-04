@@ -56,7 +56,7 @@ object balaNave {
 	method bajarAuto(){
 		game.onTick(50, "bajar bala", {=>
 			self.bajar()
-			if (self.position() == canion.position()) self.daniarCanion() else if (self.position().y() < 1) self.serDestruido()
+			if (self.position() == 1) self.daniarCanion() else if (self.position().y() < 1) self.serDestruido()
 		})
 	}
 	
