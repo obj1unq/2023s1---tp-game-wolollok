@@ -21,10 +21,6 @@ object movimiento {
 		})
 	}
 
-	method estaEnElBorde(ovni) {
-		return ovni.position().x() == 29
-	}
-
 }
 
 object abajo {
