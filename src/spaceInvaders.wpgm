@@ -23,6 +23,7 @@ program spaceInvaders {
 //	VISUALES
 	
 	game.addVisual(canion)
+	game.addVisual(vidas)
 	ovnis.forEach{ovni => game.addVisual(ovni) }	
 
 
