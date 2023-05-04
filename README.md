@@ -1,10 +1,11 @@
-# Nombre del juego (<- borrar y completar)
+# Space Invaders
 
 ## Equipo de desarrollo
 
-- Alguien
-- Persona
-- etc.
+- Bolaños Rodrigo
+- Cuevas Leandro
+- Moreira Ignacio
+- Sofarelli Thiago
 
 ## Capturas
 
