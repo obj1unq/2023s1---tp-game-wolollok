@@ -13,6 +13,7 @@ program spaceInvaders {
 	game.boardGround("fondo1.jpg")
 	game.cellSize(35)
 	game.schedule(500, {balaNave.nuevoDisparo()})
+	movimiento.mover(ovnis)
 	
 		
 //	VISUALES

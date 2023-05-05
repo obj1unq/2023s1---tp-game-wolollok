@@ -38,6 +38,7 @@ object balaCanion {
 		game.removeTickEvent("subir bala")
 	}
 
+
 }
 
 object balaNave {
