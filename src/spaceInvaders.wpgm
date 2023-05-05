@@ -13,13 +13,15 @@ program spaceInvaders {
 	game.boardGround("fondo1.jpg")
 	game.cellSize(35)
 	game.schedule(500, {balaNave.nuevoDisparo()})
-	
+	movimiento.mover(ovnis)
+		
 		
 //	VISUALES
 	
 	game.addVisual(canion)
 	game.addVisual(vidas)
-	ovnis.forEach{ovni => game.addVisual(ovni) }	
+	ovnis.forEach{ovni => game.addVisual(ovni) }
+	scoreCompleto.forEach{score => game.addVisual(score)}	
 
 
 //  CONTROLES

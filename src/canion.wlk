@@ -4,8 +4,8 @@ import balas.*
 
 object canion {
 
-	var property position = game.at(game.center().x() , 1)
-	var property score = 100000
+	var property position = game.at(game.center().x(), 1)
+	var property score = 123456
 
 	method image() = "canion.png"
 
@@ -23,100 +23,135 @@ object canion {
 		if (not game.hasVisual(balaCanion)) {
 			game.sound("disparoCanion.mp3").play()
 			balaCanion.disparar(position)
-			
 		}
 	}
 
 	method serDestruido() {
-		
 		const vida = vidas
-		
 		if (vida == tres) {
 			game.sound("primeraVidaPerdida.mp3").play()
 			vida.perderVida()
-			} else if (vida == dos) {
-				game.sound("segundaVidaPerdida.mp3").play()
-				vida.perderVida()
-			} else {
-				vida.perderVida()
-				//gamerOver?
-			}
-		
+		} else if (vida == dos) {
+			game.sound("segundaVidaPerdida.mp3").play()
+			vida.perderVida()
+		} else {
+			vida.perderVida()
+		// gamerOver?
+		}
 	}
+
 }
 
 object vidas {
-	
+
 	var property cantidad = tres
-	
+
 	method position() {
 		return game.at(1, 0)
 	}
-	
-	method image () {
+
+	method image() {
 		return cantidad.toString() + "-vida.png"
 	}
-	
+
 	method perderVida() {
 		cantidad = cantidad.restarVida()
 	}
-	
+
 }
 
 object tres {
-	
+
 	method restarVida() {
 		return dos
 	}
-	
+
 }
 
 object dos {
+
 	method restarVida() {
 		return una
 	}
+
 }
 
 object una {
-	
-	method restarVida(){
-		
+
+	method restarVida() {
 	}
+
 }
 
-
 object unidad {
-	method image() { return  self.numero() + "-score.png" }
-	
-	method numero() {return canion.score().toString().charAt(5) }
+
+	var property position = game.at(29, 19)
+
+	method image() {
+		return self.numero() + "-score.png"
+	}
+
+	method numero() {
+		return canion.score().toString().charAt(5)
+	}
+
 }
 
 object decena {
-	method image() { return self.numero() + "-score.png" }
-	
-	method numero() { return canion.score().toString().charAt(4) }
-	
+
+	var property position = game.at(28, 19)
+
+	method image() {
+		return self.numero() + "-score.png"
+	}
+
+	method numero() {
+		return canion.score().toString().charAt(4)
+	}
+
 }
 
 object centena {
-	method image() { return  self.numero() + "-score.png" }
-	
-	method numero() { return canion.score().toString().charAt(3) }
-	
+
+	var property position = game.at(27, 19)
+
+	method image() {
+		return self.numero() + "-score.png"
+	}
+
+	method numero() {
+		return canion.score().toString().charAt(3)
+	}
+
 }
 
 object mil {
-	method image() { return self.numero()  + "-score.png" }
-	
-	method numero() { return canion.score().toString().charAt(2) }
+
+	var property position = game.at(26, 19)
+
+	method image() {
+		return self.numero() + "-score.png"
+	}
+
+	method numero() {
+		return canion.score().toString().charAt(2)
+	}
 
 }
 
 object decenaMil {
-	method image() { return self.numero() + "-score.png" }
-	
-	method numero() { return canion.score().toString().charAt(1)	}
-	
+
+	var property position = game.at(25, 19)
+
+	method image() {
+		return self.numero() + "-score.png"
+	}
+
+	method numero() {
+		return canion.score().toString().charAt(1)
+	}
+
 }
 
-const scoreCompleto = [unidad, decena, centena, mil, decenaMil]
+const scoreCompleto = [ unidad, decena, centena, mil, decenaMil ]
+
