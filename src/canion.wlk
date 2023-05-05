@@ -5,7 +5,7 @@ import balas.*
 object canion {
 
 	var property position = game.at(game.center().x() , 1)
-	var property score = 0
+	var property score = 100000
 
 	method image() = "canion.png"
 
@@ -86,41 +86,37 @@ object una {
 
 
 object unidad {
-	method image() { return  self.numero() + "score.png" }
+	method image() { return  self.numero() + "-score.png" }
 	
-	method numero() {return ((canion.score() - decenaMil.numeroUbicado() - mil.numeroUbicado() - centena.numeroUbicado() - decena.numeroUbicado())).truncate(0) }
+	method numero() {return canion.score().toString().charAt(5) }
 }
 
 object decena {
-	method image() { return self.numero() + "score.png" }
+	method image() { return self.numero() + "-score.png" }
 	
-	method numero() { return ((canion.score() - decenaMil.numeroUbicado()  - mil.numeroUbicado() - centena.numeroUbicado() ) / 10 ).truncate(0) }
+	method numero() { return canion.score().toString().charAt(4) }
 	
-	method numeroUbicado() { return self.numero() * 10 }
 }
 
 object centena {
-	method image() { return  self.numero() + "score.png" }
+	method image() { return  self.numero() + "-score.png" }
 	
-	method numero() { return ((canion.score() - decenaMil.numeroUbicado()  - mil.numeroUbicado() ) / 100 ).truncate(0) }
-
-	method numeroUbicado() { return self.numero() * 100 }
+	method numero() { return canion.score().toString().charAt(3) }
+	
 }
 
 object mil {
-	method image() { return self.numero()  + "score.png" }
+	method image() { return self.numero()  + "-score.png" }
 	
-	method numero() { return ((canion.score() - decenaMil.numeroUbicado() ) / 1000 ).truncate(0) }
+	method numero() { return canion.score().toString().charAt(2) }
 
-	method numeroUbicado() { return self.numero() * 1000 }
 }
 
 object decenaMil {
-	method image() { return self.numero() + "score.png" }
+	method image() { return self.numero() + "-score.png" }
 	
-	method numero() { return (canion.score()/10000).truncate(0)	}
+	method numero() { return canion.score().toString().charAt(1)	}
 	
-	method numeroUbicado() { return self.numero() * 10000 }
 }
 
 const scoreCompleto = [unidad, decena, centena, mil, decenaMil]
