@@ -9,7 +9,7 @@ object movimiento {
 	var property direccion = derecha
 
 	method mover(ovnis) {
-		game.onTick(50, "moverOvnis", {=>
+		game.onTick(600, "moverOvnis", {=>
 			if (!ovnis.any({ nave => direccion.estaEnElBorde(nave)})) {
 				ovnis.forEach{ nave => direccion.mover(nave)}
 			} else if (!ovnis.isEmpty()) {
@@ -26,7 +26,9 @@ object movimiento {
 object abajo {
 
 	method mover(nave) {
-		nave.mover(nave.position().down(1))
+		const x = nave.position().x()
+		const y = nave.position().y() - 1
+		nave.mover(game.at(x, y))
 	}
 
 }
@@ -38,7 +40,9 @@ object izquierda {
 	}
 
 	method mover(nave) {
-		nave.mover(nave.position().left(1))
+		const x = nave.position().x() - 1
+		const y = nave.position().y()
+		nave.mover(game.at(x, y))
 	}
 
 	method siguiente() {
@@ -54,7 +58,9 @@ object derecha {
 	}
 
 	method mover(nave) {
-		nave.mover(nave.position().right(1))
+		const x = nave.position().x() + 1
+		const y = nave.position().y()
+		nave.mover(game.at(x, y))
 	}
 
 	method estaEnElBorde(nave) {
