@@ -83,6 +83,7 @@ object una {
 
 }
 
+
 object unidad {
 
 	var property position = game.at(29, 19)
@@ -154,4 +155,5 @@ object decenaMil {
 }
 
 const scoreCompleto = [ unidad, decena, centena, mil, decenaMil ]
+
 

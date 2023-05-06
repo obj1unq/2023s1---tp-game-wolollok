@@ -14,7 +14,7 @@ program spaceInvaders {
 	game.cellSize(35)
 	game.schedule(500, {balaNave.nuevoDisparo()})
 	movimiento.mover(ovnis)
-		
+
 		
 //	VISUALES
 	
