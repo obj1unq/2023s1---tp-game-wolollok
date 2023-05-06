@@ -73,6 +73,7 @@ class Nave {
 
 	var property image
 	var property position
+	const property puntaje
 
 	method mover(_posicion) {
 		if (self.puedeMover(_posicion)) {
@@ -101,23 +102,16 @@ class Nave {
 
 }
 
-class NaveConFuego inherits Nave(image = "nave1.png") {
 
-	const property puntaje = 200
+class NaveConFuego inherits Nave(image = "nave1.png", puntaje = 200) {}
 
-}
 
-class Nave3Patas inherits Nave(image = "nave2.png") {
 
-	const property puntaje = 500
+class Nave3Patas inherits Nave(image = "nave2.png", puntaje = 500) {}
 
-}
 
-class Nave2Patas inherits Nave(image = "nave3.png") {
+class Nave2Patas inherits Nave(image = "nave3.png", puntaje = 1000) {}
 
-	const property puntaje = 1000
-
-}
 
 // NAVES CON FUEGO
 object nave10 inherits NaveConFuego(position = game.at(1, 14)) {
