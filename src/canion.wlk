@@ -5,7 +5,7 @@ import balas.*
 object canion {
 
 	var property position = game.at(game.center().x(), 1)
-	var property score = 123456
+	var property score = 100000
 
 	method image() = "canion.png"
 
@@ -24,6 +24,10 @@ object canion {
 			game.sound("disparoCanion.mp3").play()
 			balaCanion.disparar(position)
 		}
+	}
+	
+	method scorear(puntos) {
+		score = score + puntos
 	}
 
 	method serDestruido() {
