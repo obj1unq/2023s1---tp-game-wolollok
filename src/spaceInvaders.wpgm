@@ -2,6 +2,8 @@ import wollok.game.*
 import canion.*
 import naves.*
 import balas.*
+import direcciones.*
+import score.*
 
 program spaceInvaders {
 
@@ -21,13 +23,13 @@ program spaceInvaders {
 	game.addVisual(canion)
 	game.addVisual(vidas)
 	ovnis.forEach{ovni => game.addVisual(ovni) }
-	scoreCompleto.forEach{score => game.addVisual(score)}	
+	scoreCompleto.forEach{puntaje => game.addVisual(puntaje)}	
 
 
 //  CONTROLES
 
-	keyboard.left().onPressDo { canion.mover(canion.position().left(1)) }
-	keyboard.right().onPressDo { canion.mover(canion.position().right(1)) }
+	keyboard.left().onPressDo { canion.mover(izquierda) }
+	keyboard.right().onPressDo { canion.mover(derecha) }
 	keyboard.space().onPressDo {canion.disparar()}
 
 //	START

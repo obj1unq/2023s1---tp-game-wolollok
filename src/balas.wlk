@@ -1,6 +1,7 @@
 import wollok.game.*
 import canion.*
 import naves.*
+import direcciones.*
 
 object balaCanion {
 

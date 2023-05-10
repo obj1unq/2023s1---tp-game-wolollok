@@ -1,8 +1,12 @@
 import wollok.game.*
 import canion.*
 import balas.*
+import direcciones.*
+import score.*
 
-const ovnis = [ nave10, nave11, nave12, nave13, nave14, nave15, nave16, nave17, nave18, nave19, nave20, nave21, nave22, nave23, nave24, nave25, nave26, nave27, nave28, nave29, nave30, nave31, nave32, nave33, nave34, nave35, nave36, nave37, nave38, nave39 ]
+const ovnis = [ nave10, nave11, nave12, nave13, nave14, nave15, nave16, nave17, nave18, nave19, 
+				nave20, nave21, nave22, nave23, nave24, nave25, nave26, nave27, nave28, nave29, 
+				nave30, nave31, nave32, nave33, nave34, nave35, nave36, nave37, nave38, nave39]
 
 object movimiento {
 
@@ -11,60 +15,14 @@ object movimiento {
 	method mover(ovnis) {
 		game.onTick(600, "moverOvnis", {=>
 			if (!ovnis.any({ nave => direccion.estaEnElBorde(nave)})) {
-				ovnis.forEach{ nave => direccion.mover(nave)}
+				ovnis.forEach{ nave => nave.mover(direccion.nuevaPosicion(nave))}
 			} else if (!ovnis.isEmpty()) {
-				ovnis.forEach{ nave => abajo.mover(nave)}
+				ovnis.forEach{ nave => nave.mover(abajo.nuevaPosicion(nave))}
 				direccion = direccion.siguiente()
 			} else {
 				game.removeTickEvent("moverOvnis")
 			}
 		})
-	}
-
-}
-
-object abajo {
-
-	method mover(nave) {
-		const x = nave.position().x()
-		const y = nave.position().y() - 1
-		nave.mover(game.at(x, y))
-	}
-
-}
-
-object izquierda {
-
-	method estaEnElBorde(nave) {
-		return nave.position().x() == 0
-	}
-
-	method mover(nave) {
-		const x = nave.position().x() - 1
-		const y = nave.position().y()
-		nave.mover(game.at(x, y))
-	}
-
-	method siguiente() {
-		return derecha
-	}
-
-}
-
-object derecha {
-
-	method siguiente() {
-		return izquierda
-	}
-
-	method mover(nave) {
-		const x = nave.position().x() + 1
-		const y = nave.position().y()
-		nave.mover(game.at(x, y))
-	}
-
-	method estaEnElBorde(nave) {
-		return nave.position().x() == 29
 	}
 
 }
