@@ -91,7 +91,7 @@ class Nave {
 		game.schedule(200, {=> self.image("explosion2.png")})
 		game.schedule(400, {=> self.image("explosion3.png")})
 		game.schedule(600, {=> game.removeVisual(self)})
-		canion.scorear(puntaje)
+		score.scorear(puntaje)
 	}
 
 	method disparar() {

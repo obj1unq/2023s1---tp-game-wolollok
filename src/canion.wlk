@@ -5,7 +5,6 @@ import balas.*
 object canion {
 
 	var property position = game.at(game.center().x(), 1)
-	var property score = 100000
 
 	method image() = "canion.png"
 
@@ -26,9 +25,6 @@ object canion {
 		}
 	}
 	
-	method scorear(puntos) {
-		score = score + puntos
-	}
 
 	method serDestruido() {
 		const vida = vidas
@@ -87,7 +83,13 @@ object una {
 
 }
 
-
+object score {
+	var property puntaje = 100000
+	
+	method scorear(puntos) {
+		puntaje += puntos
+	}
+}
 object unidad {
 
 	var property position = game.at(29, 19)
@@ -97,7 +99,7 @@ object unidad {
 	}
 
 	method numero() {
-		return canion.score().toString().charAt(5)
+		return score.puntaje().toString().charAt(5)
 	}
 
 }
@@ -111,7 +113,7 @@ object decena {
 	}
 
 	method numero() {
-		return canion.score().toString().charAt(4)
+		return score.puntaje().toString().charAt(4)
 	}
 
 }
@@ -125,7 +127,7 @@ object centena {
 	}
 
 	method numero() {
-		return canion.score().toString().charAt(3)
+		return score.puntaje().toString().charAt(3)
 	}
 
 }
@@ -139,7 +141,7 @@ object mil {
 	}
 
 	method numero() {
-		return canion.score().toString().charAt(2)
+		return score.puntaje().toString().charAt(2)
 	}
 
 }
@@ -153,7 +155,7 @@ object decenaMil {
 	}
 
 	method numero() {
-		return canion.score().toString().charAt(1)
+		return score.puntaje().toString().charAt(1)
 	}
 
 }
