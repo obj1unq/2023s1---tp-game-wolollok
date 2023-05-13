@@ -1,6 +1,9 @@
 import wollok.game.*
 import canion.*
 
+
+//FALTA DESARROLLAR UNA PANTALLA PARA USAR ESTO
+
 object nombre {
 	
 	const property nombre = []
