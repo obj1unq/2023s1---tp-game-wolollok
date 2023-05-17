@@ -178,7 +178,6 @@ object naveAleatoria inherits Nave(position = game.at(0, 18), image = "canion.pn
 }
 
 object movimientoNaveAleatoria {
-
 	
 	method mover(nave) {
 	game.onTick(100, "moverNaveAleatoria", {=>
