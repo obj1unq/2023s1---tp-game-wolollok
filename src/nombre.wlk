@@ -9,8 +9,12 @@ object nombre {
 	const property nombre = []
 	
 	method position(){
-		return game.at(canion.position().x(), canion.position().y()-1)
+		return game.at(canion.position().x(), 0)
 	}
+	
+	method text() = nombre.join("")
+
+	method textColor() = "ffffffff"
 	
 	method agregar(letra){
 	 	nombre.add(letra)
@@ -22,10 +26,7 @@ object nombre {
 		}
 	}
 	
-	method text(){
-		return nombre.join("")
-	}
-	
+		
 	method inciarTeclas(){
 	
 	
