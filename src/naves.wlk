@@ -141,7 +141,7 @@ object nave38 inherits Nave2Patas(position = game.at(17, 18)) {}
 
 object nave39 inherits Nave2Patas(position = game.at(19, 18)) {}
 
-object naveAleatoria inherits Nave(position = game.at(0, 18), image = "canion.png") {
+object naveAleatoria inherits Nave(position = game.at(0, 18), image = "naveDorada.png") {
 	var property direccionamiento
 	
 	method aparecer() {
@@ -151,7 +151,6 @@ object naveAleatoria inherits Nave(position = game.at(0, 18), image = "canion.pn
 	}
 	method generarAccionar() {
 		movimientoNaveAleatoria.mover(self)
-		
 	}
 	
 	method direccion() {
@@ -173,7 +172,6 @@ object naveAleatoria inherits Nave(position = game.at(0, 18), image = "canion.pn
 		score.scorear(self.puntaje())
 	}
 	override method disparar() {}
-	
 	override method puntaje() = 1000.randomUpTo(1500)
 }
 
@@ -182,14 +180,17 @@ object movimientoNaveAleatoria {
 	method mover(nave) {
 	game.onTick(100, "moverNaveAleatoria", {=>
 			if (not nave.direccionamiento().estaEnElBorde(nave)) {
-				nave.mover(nave.direccionamiento().nuevaPosicion(nave))
+				nave.mover(self.nuevaPosicion(nave))
 			} else {
 				game.removeTickEvent("moverNaveAleatoria")
 				game.removeVisual(nave)
 			} 
-			
-		})
-}	
+			})
+	}
+	
+	method nuevaPosicion(nave) {
+		return nave.direccionamiento().nuevaPosicion(nave)
+	}	
 }
 const direcAleatorias = [derecha, izquierda]
 
