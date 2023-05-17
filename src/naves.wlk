@@ -164,12 +164,8 @@ object naveAleatoria inherits Nave(position = game.at(0, 18), image = "naveDorad
 	}
 	
 	override method serDestruido() {
-		game.sound("explosion1.mp3").play()
-		self.image("explosion1.png")
-		game.schedule(200, {=> self.image("explosion2.png")})
-		game.schedule(400, {=> self.image("explosion3.png")})
-		game.schedule(600, {=> game.removeVisual(self)})
 		score.scorear(self.puntaje())
+		super()
 	}
 	override method disparar() {}
 	override method puntaje() = 1000.randomUpTo(1500)
