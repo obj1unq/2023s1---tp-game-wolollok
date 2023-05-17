@@ -35,6 +35,7 @@ object izquierda {
 object derecha {
 	
 	method x() = 0
+	
 	method siguiente() {
 		return izquierda
 	}
@@ -50,4 +51,6 @@ object derecha {
 	}
 
 }
+
+
 

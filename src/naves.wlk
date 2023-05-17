@@ -151,7 +151,6 @@ object naveAleatoria inherits Nave(position = game.at(0, 18), image = "canion.pn
 	}
 	method generarAccionar() {
 		movimientoNaveAleatoria.mover(self)
-		self.disparar()
 		
 	}
 	
@@ -182,9 +181,9 @@ object movimientoNaveAleatoria {
 
 	
 	method mover(nave) {
-	game.onTick(500, "moverNaveAleatoria", {=>
+	game.onTick(100, "moverNaveAleatoria", {=>
 			if (not nave.direccionamiento().estaEnElBorde(nave)) {
-				nave.direccionamiento().mover(nave)
+				nave.direccionamiento().nuevaPosicion(nave)
 			} else {
 				game.removeTickEvent("moverNaveAleatoria")
 				game.removeVisual(nave)
