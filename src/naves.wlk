@@ -9,6 +9,7 @@ const ovnis = [ nave10, nave11, nave12, nave13, nave14, nave15, nave16, nave17, 
 				nave20, nave21, nave22, nave23, nave24, nave25, nave26, nave27, nave28, nave29, 
 				nave30, nave31, nave32, nave33, nave34, nave35, nave36, nave37, nave38, nave39]
 
+const ovnis2Patas = [nave30, nave31, nave32, nave33, nave34, nave35, nave36, nave37, nave38, nave39 ]
 object movimiento {
 
 	var property direccion = derecha
@@ -174,9 +175,7 @@ object naveAleatoria inherits Nave(position = game.at(0, 18), image = "canion.pn
 	}
 	override method disparar() {}
 	
-	override method puntaje() {
-		return 1000.randomUpTo(1500)
-	}
+	override method puntaje() = 1000.randomUpTo(1500)
 }
 
 object movimientoNaveAleatoria {
