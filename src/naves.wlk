@@ -141,7 +141,7 @@ object nave38 inherits Nave2Patas(position = game.at(17, 18)) {}
 
 object nave39 inherits Nave2Patas(position = game.at(19, 18)) {}
 
-object naveAleatoria inherits Nave(position = game.at(0, 18), image = "naveDorada.png") {
+object naveAleatoria inherits Nave(position = game.at(0, 18), image = "navecita.png") {
 	var property direccionamiento
 	
 	method aparecer() {
@@ -174,7 +174,7 @@ object naveAleatoria inherits Nave(position = game.at(0, 18), image = "naveDorad
 object movimientoNaveAleatoria {
 	
 	method mover(nave) {
-	game.onTick(100, "moverNaveAleatoria", {=>
+	game.onTick(500, "moverNaveAleatoria", {=>
 			if (not nave.direccionamiento().estaEnElBorde(nave)) {
 				nave.mover(self.nuevaPosicion(nave))
 			} else {

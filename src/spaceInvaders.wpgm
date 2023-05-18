@@ -24,7 +24,7 @@ program spaceInvaders {
 	game.addVisual(vidas)
 	ovnis.forEach{ovni => game.addVisual(ovni) }
 	scoreCompleto.forEach{puntaje => game.addVisual(puntaje)}	
-	game.onTick(3000, "agregar nave aleatoria", {naveAleatoria.aparecer()})
+	game.onTick(20000, "agregar nave aleatoria", {naveAleatoria.aparecer()})
 
 //  CONTROLES
 
