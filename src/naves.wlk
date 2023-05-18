@@ -138,4 +138,3 @@ object nave37 inherits Nave2Patas(position = game.at(15, 18)) {}
 object nave38 inherits Nave2Patas(position = game.at(17, 18)) {}
 
 object nave39 inherits Nave2Patas(position = game.at(19, 18)) {}
-

@@ -14,8 +14,7 @@ program spaceInvaders {
 	game.title("Space Invaders")
 	game.height(20)
 	game.width(30)
-	game.boardGround("fondo1.jpg")
-	game.cellSize(35) 
+	game.cellSize(35)
 	
 
 	pantallaNombre.iniciar()
