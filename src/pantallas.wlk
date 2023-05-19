@@ -13,7 +13,7 @@ object pantallaNombre {
 	
 	method iniciar(){
 		game.addVisual(self)
-		game.addVisualIn(nombre, game.at(15,15))
+		game.addVisualIn(nombre, game.at(14,13))
 		nombre.iniciarTeclas()
 	}
 	

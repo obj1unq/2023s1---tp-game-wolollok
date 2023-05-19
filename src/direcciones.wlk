@@ -10,6 +10,24 @@ object abajo {
 		const y = objeto.position().y() - 1
 		return game.at(x, y)
 	}
+	
+	method estaEnElBorde(objeto) {
+		return objeto.position().y() == 0
+	}
+
+}
+
+object arriba {
+
+	method nuevaPosicion(objeto) {
+		const x = objeto.position().x()
+		const y = objeto.position().y() + 1
+		return game.at(x, y)
+	}
+	
+	method estaEnElBorde(objeto) {
+		return objeto.position().y() == game.height()
+	}
 
 }
 
@@ -51,6 +69,4 @@ object derecha {
 	}
 
 }
-
-
 

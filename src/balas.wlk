@@ -3,76 +3,66 @@ import canion.*
 import naves.*
 import direcciones.*
 
-object balaCanion {
-
+class Bala {
+	const tick 
 	var property position
-
-	method image() = "balaCanion.png"
-
-	method disparar(posicionCanion) {
-		position = posicionCanion.up(2)
+	const direccionamiento
+	
+	method image() = self.toString() + ".png"
+	
+	method disparar(objeto) {
+		position = direccionamiento.nuevaPosicion(objeto)
 		game.addVisual(self)
-		self.subirAuto()
+		self.moverAuto()
 	}
+	
+	method mover() {
+		position = direccionamiento.nuevaPosicion(self)
+	}
+	method serDestruido() {
+		game.removeVisual(self)
+		game.removeTickEvent(tick)
+	}
+	method moverAuto()
+}
+object balaCanion inherits Bala(direccionamiento = arriba, position = game.origin(), tick = "subir bala") {
 
-	method subirAuto() {
-		game.onTick(50, "subir bala", {=>
-			self.subir()
-			if (self.position().y() > game.height() - 1) self.serDestruido() else self.eliminarEnemigo()
+	override method moverAuto() {
+		game.onTick(10, tick, {=>
+			self.mover()
+			if (direccionamiento.estaEnElBorde(self)) self.serDestruido() else self.eliminarEnemigo()
 		})
 	}
 
 	method eliminarEnemigo() {
-		game.whenCollideDo(self, { enemigo =>
+		game.onCollideDo(self, { enemigo =>
 			self.serDestruido()
 			enemigo.serDestruido()
 			ovnis.remove(enemigo)
 		})
 	}
 
-	method subir() {
-		position = position.up(1)
-	}
-
-	method serDestruido() {
-		game.removeVisual(self)
-		game.removeTickEvent("subir bala")
-	}
-
-
 }
 
-object balaNave {
+object balaNave inherits Bala(direccionamiento = abajo, position = game.origin(), tick = "bajar bala") {
 	
-	var property position
 	
-	method image() = "balaNave.png"
-	
-	method disparar(posicionNave) {
-		position = posicionNave.down(1)
-		game.addVisual(self)
-		self.bajarAuto()
-	}
-	
-	method bajarAuto(){
-		game.onTick(50, "bajar bala", {=>
-			self.bajar()
-			if (self.position().y() == 1) self.daniarCanion() else if (self.position().y() < 1) self.serDestruido()
+	override method moverAuto(){
+		game.onTick(50, tick, {=>
+			self.mover()
+			if (direccionamiento.estaEnElBorde(self)) self.daniarCanion() else if (self.position().y() < 1) self.serDestruido()
 		})
 	}
 	
-	method bajar() {
-		position = position.down(1)
-	}
+	
 
-	method serDestruido() {
-		game.removeVisual(self)
-		game.removeTickEvent("bajar bala")
+	override method serDestruido() {
+		super()
 		self.nuevoDisparo()
 	}
 	
 	method daniarCanion(){
-		game.whenCollideDo(self, { objetivo =>
+		game.onCollideDo(self, { objetivo =>
 			if (objetivo == canion){
 				self.serDestruido()
 				objetivo.serDestruido()
@@ -81,7 +71,7 @@ object balaNave {
 	}
 	
 	method nuevoDisparo(){
-		const naveAlAzar = ovnis.get((0..ovnis.size()-1).anyOne())
+		const naveAlAzar = ovnis.anyOne()
 		naveAlAzar.disparar()
 	}
 }

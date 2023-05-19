@@ -72,7 +72,7 @@ class Nave {
 	method disparar() {
 		if (not game.hasVisual(balaNave)) {
 			game.sound("disparoNave.mp3").play()
-			balaNave.disparar(position)
+			balaNave.disparar(self)
 		}
 	}
 
@@ -89,6 +89,8 @@ class Nave3Patas inherits Nave(image = "nave2.png", puntaje = 500) {
 class Nave2Patas inherits Nave(image = "nave3.png", puntaje = 1000) {
 
 }
+
+
 
 // NAVES CON FUEGO
 object nave10 inherits NaveConFuego(position = game.at(1, 14)) {
@@ -215,8 +217,8 @@ object nave39 inherits Nave2Patas(position = game.at(19, 18)) {
 
 object naveAleatoria inherits Nave(position = game.at(0, 18), image = "navecita.png") {
 
-	var property direccionamiento
-
+	var property direccionamiento = null
+	
 	method aparecer() {
 		self.image("navecita.png")
 		self.generarPosicion()

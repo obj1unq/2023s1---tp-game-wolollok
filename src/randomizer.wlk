@@ -8,7 +8,7 @@ object randomizer {
 	method position(nave) {
 		return game.at(	
 			nave.direccionamiento().x(),
-			game.height().randomUpTo(self.positionDeY())
+			game.height().randomUpTo(self.positionDeY() + 1)
 		)
 	}	
 	
