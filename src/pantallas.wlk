@@ -7,20 +7,31 @@ import score.*
 import nombre.*
 
 object pantallaNombre {
-		
+	
+	const property image = "fondoNombre.jpg"
+	const property position = game.at(0,0)
+	
 	method iniciar(){
-		
-		game.boardGround("fondoNombre.jpg")
+		game.addVisual(self)
 		game.addVisualIn(nombre, game.at(15,15))
+		nombre.iniciarTeclas()
+	}
+	
+	method siguientePantalla(){
+		game.clear()
+		nivel1.iniciar()
 	}
 	
 }
 
 object nivel1 {
 	
+	const property image = "fondo1.jpg"
+	const property position = game.at(0,0)
+	
 	method iniciar(){
 		
-		game.boardGround("fondo1.jpg")
+		game.addVisual(self)
 		game.schedule(500, {balaNave.nuevoDisparo()})
 		movimiento.mover(ovnis)
 		
@@ -28,11 +39,12 @@ object nivel1 {
 		
 		game.addVisual(canion)
 		game.addVisual(vidas)
+		game.addVisual(nombre)
 		ovnis.forEach{ovni => game.addVisual(ovni) }
 		scoreCompleto.forEach{puntaje => game.addVisual(puntaje)}
 		
 		// HECHOS CASUALES
-		game.onTick(20000, "agregar nave aleatoria", {naveAleatoria.aparecer()})
+		game.onTick(20000, "Agregar nave aleatoria", {naveAleatoria.aparecer()})
 		
 		//  CONTROLES
 

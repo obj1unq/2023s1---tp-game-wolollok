@@ -72,7 +72,6 @@ class Nave2Patas inherits Nave(image = "nave3.png", puntaje = 1000) {}
 
 // NAVES CON FUEGO
 
-
 object nave10 inherits NaveConFuego(position = game.at(1, 14)) {}
 
 object nave11 inherits NaveConFuego(position = game.at(3, 14)) {}
@@ -96,7 +95,6 @@ object nave19 inherits NaveConFuego(position = game.at(19, 14)) {}
 
 // NAVES 3 PATAS
 
-
 object nave20 inherits Nave3Patas(position = game.at(1, 16)) {}
 
 object nave21 inherits Nave3Patas(position = game.at(3, 16)) {}
@@ -119,7 +117,6 @@ object nave29 inherits Nave3Patas(position = game.at(19, 16)) {}
 
 
 // NAVES 2 PATAS
-
 
 object nave30 inherits Nave2Patas(position = game.at(1, 18)) {}
 
@@ -195,4 +192,5 @@ object movimientoNaveAleatoria {
 	}	
 }
 const direcAleatorias = [derecha, izquierda]
+
 
