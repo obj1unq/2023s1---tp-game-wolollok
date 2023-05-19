@@ -14,14 +14,13 @@ object movimiento {
 	var property direccion = derecha
 
 	method mover(ovnis) {
-		game.onTick(600, "moverOvnis", {=>
+		game.onTick(2000, "moverOvnis", {=>
 			if (not self.hayAlgunOvniAlBorde()) {
 				self.moverOvnisDePosicion(direccion)
-			}
+			} else {
 			direccion = direccion.siguiente()
 			self.moverOvnisDePosicion(abajo)
-		})
-		game.removeTickEvent("moverOvnis")
+		}})
 	}
 
 	method hayAlgunOvniAlBorde() {
@@ -30,16 +29,6 @@ object movimiento {
 
 	method moverOvnisDePosicion(dir) {
 		ovnis.forEach{ nave => nave.mover(dir.nuevaPosicion(nave))}
-	}
-
-	method quedanOvnisVivos() {
-		return not ovnis.isEmpty()
-	}
-
-	method moverOvnisAbajo() {
-		if (self.quedanOvnisVivos()) {
-			self.moverOvnisDePosicion(abajo)
-		}
 	}
 
 }
