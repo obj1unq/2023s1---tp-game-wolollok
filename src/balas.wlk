@@ -3,22 +3,33 @@ import canion.*
 import naves.*
 import direcciones.*
 
-object balaCanion {
-
+class Bala {
+	const tick 
 	var property position
-
-	method image() = "balaCanion.png"
-
+	const direccionamiento
+	method image() = self + ".png"
+	
 	method disparar(objeto) {
-		position = arriba.nuevaPosicion(objeto)
+		position = direccionamiento.nuevaPosicion(objeto)
 		game.addVisual(self)
-		self.subirAuto()
+		self.moverAuto()
 	}
+	
+	method mover() {
+		position = direccionamiento.nuevaPosicion(self)
+	}
+	method serDestruido() {
+		game.removeVisual(self)
+		game.removeTickEvent(tick)
+	}
+	method moverAuto()
+}
+object balaCanion inherits Bala(direccionamiento = arriba, position = game.origin(), tick = "subir bala") {
 
-	method subirAuto() {
-		game.onTick(25, "subir bala", {=>
-			self.subir()
-			if (arriba.estaEnElBorde(self)) self.serDestruido() else self.eliminarEnemigo()
+	override method moverAuto() {
+		game.onTick(25, tick, {=>
+			self.mover()
+			if (direccionamiento.estaEnElBorde(self)) self.serDestruido() else self.eliminarEnemigo()
 		})
 	}
 
@@ -30,44 +41,22 @@ object balaCanion {
 		})
 	}
 
-	method subir() {
-		position = arriba.nuevaPosicion(self)
-	}
-
-	method serDestruido() {
-		game.removeVisual(self)
-		game.removeTickEvent("subir bala")
-	}
-
-
 }
 
-object balaNave {
+object balaNave inherits Bala(direccionamiento = abajo, position = game.origin(), tick = "bajar bala") {
 	
-	var property position
 	
-	method image() = "balaNave.png"
-	
-	method disparar(objeto) {
-		position = abajo.nuevaPosicion(objeto)
-		game.addVisual(self)
-		self.bajarAuto()
-	}
-	
-	method bajarAuto(){
-		game.onTick(50, "bajar bala", {=>
-			self.bajar()
-			if (abajo.estaEnElBorde(self)) self.daniarCanion() else if (self.position().y() < 1) self.serDestruido()
+	override method moverAuto(){
+		game.onTick(50, tick, {=>
+			self.mover()
+			if (direccionamiento.estaEnElBorde(self)) self.daniarCanion() else if (self.position().y() < 1) self.serDestruido()
 		})
 	}
 	
-	method bajar() {
-		position = abajo.nuevaPosicion(self)
-	}
+	
 
-	method serDestruido() {
-		game.removeVisual(self)
-		game.removeTickEvent("bajar bala")
+	override method serDestruido() {
+		super()
 		self.nuevoDisparo()
 	}
 	
