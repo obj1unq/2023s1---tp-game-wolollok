@@ -10,12 +10,13 @@ const ovnis = [ nave10, nave11, nave12, nave13, nave14, nave15, nave16, nave17, 
 				nave30, nave31, nave32, nave33, nave34, nave35, nave36, nave37, nave38, nave39]
 
 const ovnis2Patas = [nave30, nave31, nave32, nave33, nave34, nave35, nave36, nave37, nave38, nave39 ]
+
 object movimiento {
 
 	var property direccion = derecha
 
 	method mover(ovnis) {
-		game.onTick(600, "moverOvnis", {=>
+		game.onTick(2000, "moverOvnis", {=>
 			if (!ovnis.any({ nave => direccion.estaEnElBorde(nave)})) {
 				ovnis.forEach{ nave => nave.mover(direccion.nuevaPosicion(nave))}
 			} else if (!ovnis.isEmpty()) {
@@ -68,6 +69,8 @@ class NaveConFuego inherits Nave(image = "nave1.png", puntaje = 200) {}
 class Nave3Patas inherits Nave(image = "nave2.png", puntaje = 500) {}
 
 class Nave2Patas inherits Nave(image = "nave3.png", puntaje = 1000) {}
+
+
 
 
 // NAVES CON FUEGO
@@ -139,7 +142,7 @@ object nave38 inherits Nave2Patas(position = game.at(17, 18)) {}
 object nave39 inherits Nave2Patas(position = game.at(19, 18)) {}
 
 object naveAleatoria inherits Nave(position = game.at(0, 18), image = "navecita.png") {
-	var property direccionamiento
+	var property direccionamiento = null
 	
 	method aparecer() {
 		self.image("navecita.png")

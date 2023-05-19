@@ -7,7 +7,8 @@ class Bala {
 	const tick 
 	var property position
 	const direccionamiento
-	method image() = self + ".png"
+	
+	method image() = self.toString() + ".png"
 	
 	method disparar(objeto) {
 		position = direccionamiento.nuevaPosicion(objeto)
@@ -27,7 +28,7 @@ class Bala {
 object balaCanion inherits Bala(direccionamiento = arriba, position = game.origin(), tick = "subir bala") {
 
 	override method moverAuto() {
-		game.onTick(25, tick, {=>
+		game.onTick(10, tick, {=>
 			self.mover()
 			if (direccionamiento.estaEnElBorde(self)) self.serDestruido() else self.eliminarEnemigo()
 		})
@@ -70,7 +71,7 @@ object balaNave inherits Bala(direccionamiento = abajo, position = game.origin()
 	}
 	
 	method nuevoDisparo(){
-		const naveAlAzar = ovnis.get((0..ovnis.size()-1).anyOne())
+		const naveAlAzar = ovnis.anyOne()
 		naveAlAzar.disparar()
 	}
 }
