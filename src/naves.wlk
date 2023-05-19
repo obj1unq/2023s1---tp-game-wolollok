@@ -56,7 +56,7 @@ class Nave {
 	method disparar() {
 		if (not game.hasVisual(balaNave)) {
 			game.sound("disparoNave.mp3").play()
-			balaNave.disparar(position)
+			balaNave.disparar(self)
 		}
 	}
 

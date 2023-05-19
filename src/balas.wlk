@@ -9,21 +9,21 @@ object balaCanion {
 
 	method image() = "balaCanion.png"
 
-	method disparar(posicionCanion) {
-		position = posicionCanion.up(2)
+	method disparar(objeto) {
+		position = arriba.nuevaPosicion(objeto)
 		game.addVisual(self)
 		self.subirAuto()
 	}
 
 	method subirAuto() {
-		game.onTick(50, "subir bala", {=>
+		game.onTick(25, "subir bala", {=>
 			self.subir()
-			if (self.position().y() > game.height() - 1) self.serDestruido() else self.eliminarEnemigo()
+			if (arriba.estaEnElBorde(self)) self.serDestruido() else self.eliminarEnemigo()
 		})
 	}
 
 	method eliminarEnemigo() {
-		game.whenCollideDo(self, { enemigo =>
+		game.onCollideDo(self, { enemigo =>
 			self.serDestruido()
 			enemigo.serDestruido()
 			ovnis.remove(enemigo)
@@ -31,7 +31,7 @@ object balaCanion {
 	}
 
 	method subir() {
-		position = position.up(1)
+		position = arriba.nuevaPosicion(self)
 	}
 
 	method serDestruido() {
@@ -48,8 +48,8 @@ object balaNave {
 	
 	method image() = "balaNave.png"
 	
-	method disparar(posicionNave) {
-		position = posicionNave.down(1)
+	method disparar(objeto) {
+		position = abajo.nuevaPosicion(objeto)
 		game.addVisual(self)
 		self.bajarAuto()
 	}
@@ -57,12 +57,12 @@ object balaNave {
 	method bajarAuto(){
 		game.onTick(50, "bajar bala", {=>
 			self.bajar()
-			if (self.position().y() == 1) self.daniarCanion() else if (self.position().y() < 1) self.serDestruido()
+			if (abajo.estaEnElBorde(self)) self.daniarCanion() else if (self.position().y() < 1) self.serDestruido()
 		})
 	}
 	
 	method bajar() {
-		position = position.down(1)
+		position = abajo.nuevaPosicion(self)
 	}
 
 	method serDestruido() {
@@ -72,7 +72,7 @@ object balaNave {
 	}
 	
 	method daniarCanion(){
-		game.whenCollideDo(self, { objetivo =>
+		game.onCollideDo(self, { objetivo =>
 			if (objetivo == canion){
 				self.serDestruido()
 				objetivo.serDestruido()
