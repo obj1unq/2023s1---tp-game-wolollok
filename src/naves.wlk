@@ -3,11 +3,13 @@ import canion.*
 import balas.*
 import direcciones.*
 import score.*
+import randomizer.*
 
 const ovnis = [ nave10, nave11, nave12, nave13, nave14, nave15, nave16, nave17, nave18, nave19, 
 				nave20, nave21, nave22, nave23, nave24, nave25, nave26, nave27, nave28, nave29, 
 				nave30, nave31, nave32, nave33, nave34, nave35, nave36, nave37, nave38, nave39]
 
+const ovnis2Patas = [nave30, nave31, nave32, nave33, nave34, nave35, nave36, nave37, nave38, nave39 ]
 object movimiento {
 
 	var property direccion = derecha
@@ -138,4 +140,59 @@ object nave37 inherits Nave2Patas(position = game.at(15, 18)) {}
 object nave38 inherits Nave2Patas(position = game.at(17, 18)) {}
 
 object nave39 inherits Nave2Patas(position = game.at(19, 18)) {}
+
+object naveAleatoria inherits Nave(position = game.at(0, 18), image = "navecita.png") {
+	var property direccionamiento
+	
+	method aparecer() {
+		self.image("navecita.png")
+		self.generarPosicion()
+		game.addVisual(self)
+		self.generarAccionar()
+	}
+	method generarAccionar() {
+		movimientoNaveAleatoria.mover(self)
+	}
+	
+	method direccion() {
+		direccionamiento = direcAleatorias.anyOne()
+	}
+	
+	method generarPosicion() {
+		self.direccion()
+		const posicion = randomizer.position(self)
+		position = posicion
+	}
+	
+	override method serDestruido() {
+		game.sound("explosion1.mp3").play()
+		self.image("explosion1.png")
+		game.schedule(200, {=> self.image("explosion2.png")})
+		game.schedule(400, {=> self.image("explosion3.png")})
+		game.schedule(600, {=> game.removeVisual(self)})
+		score.scorear(self.puntaje())
+		
+	}
+	override method disparar() {}
+	override method puntaje() = 1000.randomUpTo(1500)
+}
+
+object movimientoNaveAleatoria {
+	
+	method mover(nave) {
+	game.onTick(500, "moverNaveAleatoria", {=>
+			if (not nave.direccionamiento().estaEnElBorde(nave)) {
+				nave.mover(self.nuevaPosicion(nave))
+			} else {
+				game.removeTickEvent("moverNaveAleatoria")
+				game.removeVisual(nave)
+			} 
+			})
+	}
+	
+	method nuevaPosicion(nave) {
+		return nave.direccionamiento().nuevaPosicion(nave)
+	}	
+}
+const direcAleatorias = [derecha, izquierda]
 
