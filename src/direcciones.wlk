@@ -15,6 +15,7 @@ object abajo {
 
 object izquierda {
 
+	method x() = game.width() - 1
 	method siguiente() {
 		return derecha
 	}
@@ -32,7 +33,9 @@ object izquierda {
 }
 
 object derecha {
-
+	
+	method x() = 0
+	
 	method siguiente() {
 		return izquierda
 	}
@@ -48,4 +51,6 @@ object derecha {
 	}
 
 }
+
+
 
