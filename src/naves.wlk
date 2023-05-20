@@ -134,8 +134,7 @@ object naveAleatoria inherits Nave(position = game.at(0, 18), image = "navecita.
 
 	method generarPosicion() {
 		self.direccion()
-		const posicion = randomizer.position(self)
-		position = posicion
+		position = randomizer.position(self)
 	}
 
 	override method disparar() {

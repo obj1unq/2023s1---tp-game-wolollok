@@ -13,6 +13,10 @@ object randomizer {
 	}	
 	
 	method positionDeY() {
-		return ovnis.max({ ovni => ovni.position().y() })
+		return self.positionDeYPosibles().max()
+	}
+	
+	method positionDeYPosibles() {
+		return ovnis.map({ ovni => ovni.position().y() })
 	}
 }
