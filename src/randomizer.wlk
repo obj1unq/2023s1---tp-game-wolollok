@@ -12,11 +12,11 @@ object randomizer {
 		)
 	}	
 	
-	method positionDeYPosibles() {
-		return ovnis2Patas.map({ovni => ovni.position().y()})
+	method positionDeY() {
+		return self.positionDeYPosibles().max()
 	}
 	
-	method positionDeY() {
-		return self.positionDeYPosibles().anyOne()
+	method positionDeYPosibles() {
+		return ovnis.map({ ovni => ovni.position().y() })
 	}
 }
