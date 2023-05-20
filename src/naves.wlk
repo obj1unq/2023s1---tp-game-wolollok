@@ -90,7 +90,7 @@ class Factory {
 		const columnas = new Range(start = 0, end=20, step=2)
 		columnas.forEach{posicionX => ovnis.add(self.construir(posicionX))}
 	}
-	method construir(parametro)
+	method construir(parametroDeX)
 }
 object naveConFuegoFactory inherits Factory{
 	
@@ -109,7 +109,7 @@ object nave3PatasFactory inherits Factory{
 object nave2PatasFactory inherits Factory{
 	
 	override method construir(x){
-		return new Nave3Patas(position = game.at(x,18) )
+		return new Nave2Patas(position = game.at(x,18) )
 	}
 }
 
