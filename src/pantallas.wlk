@@ -32,6 +32,7 @@ object nivel1 {
 	method iniciar(){
 		
 		game.addVisual(self)
+		naveConFuegoFactory.construirNaves()
 		game.schedule(500, {balaNave.nuevoDisparo()})
 		movimiento.mover(ovnis)
 		

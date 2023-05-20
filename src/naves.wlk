@@ -5,7 +5,7 @@ import direcciones.*
 import score.*
 import randomizer.*
 
-const ovnis = [ nave10, nave11, nave12, nave13, nave14, nave15, nave16, nave17, nave18, nave19, nave20, nave21, nave22, nave23, nave24, nave25, nave26, nave27, nave28, nave29, nave30, nave31, nave32, nave33, nave34, nave35, nave36, nave37, nave38, nave39 ]
+const ovnis = []
 
 const ovnis2Patas = [ nave30, nave31, nave32, nave33, nave34, nave35, nave36, nave37, nave38, nave39 ]
 
@@ -79,48 +79,59 @@ class Nave2Patas inherits Nave(image = "nave3.png", puntaje = 1000) {
 
 }
 
+object naveConFuegoFactory{
+	
+	method construir(x){
+		return new NaveConFuego(position = game.at(x,14) )
+	}
+
+	method construirNaves(){
+		const columnas = new Range(start = 0, end=20, step=2)
+		columnas.forEach{posicionX => ovnis.add(self.construir(posicionX))}
+	}
+}
 
 
 // NAVES CON FUEGO
-object nave10 inherits NaveConFuego(position = game.at(1, 14)) {
-
-}
-
-object nave11 inherits NaveConFuego(position = game.at(3, 14)) {
-
-}
-
-object nave12 inherits NaveConFuego(position = game.at(5, 14)) {
-
-}
-
-object nave13 inherits NaveConFuego(position = game.at(7, 14)) {
-
-}
-
-object nave14 inherits NaveConFuego(position = game.at(9, 14)) {
-
-}
-
-object nave15 inherits NaveConFuego(position = game.at(11, 14)) {
-
-}
-
-object nave16 inherits NaveConFuego(position = game.at(13, 14)) {
-
-}
-
-object nave17 inherits NaveConFuego(position = game.at(15, 14)) {
-
-}
-
-object nave18 inherits NaveConFuego(position = game.at(17, 14)) {
-
-}
-
-object nave19 inherits NaveConFuego(position = game.at(19, 14)) {
-
-}
+//object nave10 inherits NaveConFuego(position = game.at(1, 14)) {
+//
+//}
+//
+//object nave11 inherits NaveConFuego(position = game.at(3, 14)) {
+//
+//}
+//
+//object nave12 inherits NaveConFuego(position = game.at(5, 14)) {
+//
+//}
+//
+//object nave13 inherits NaveConFuego(position = game.at(7, 14)) {
+//
+//}
+//
+//object nave14 inherits NaveConFuego(position = game.at(9, 14)) {
+//
+//}
+//
+//object nave15 inherits NaveConFuego(position = game.at(11, 14)) {
+//
+//}
+//
+//object nave16 inherits NaveConFuego(position = game.at(13, 14)) {
+//
+//}
+//
+//object nave17 inherits NaveConFuego(position = game.at(15, 14)) {
+//
+//}
+//
+//object nave18 inherits NaveConFuego(position = game.at(17, 14)) {
+//
+//}
+//
+//object nave19 inherits NaveConFuego(position = game.at(19, 14)) {
+//
+//}
 
 // NAVES 3 PATAS
 object nave20 inherits Nave3Patas(position = game.at(1, 16)) {
