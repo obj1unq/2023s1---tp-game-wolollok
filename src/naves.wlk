@@ -8,14 +8,12 @@ import randomizer.*
 const factories = [naveConFuegoFactory, nave3PatasFactory, nave2PatasFactory]
 const ovnis = []
 
-const ovnis2Patas = []
-
 object movimiento {
 
 	var property direccion = derecha
 
 	method mover(ovnis) {
-		game.onTick(2000, "moverOvnis", {=>
+		game.onTick(200, "moverOvnis", {=>
 			if (not self.hayAlgunOvniAlBorde()) {
 				self.moverOvnisDePosicion(direccion)
 			} else {
@@ -38,7 +36,6 @@ class Nave {
 
 	var property image
 	var property position
-	const property puntaje
 
 	method mover(_posicion) {
 		if (self.puedeMover(_posicion)) {
@@ -56,7 +53,7 @@ class Nave {
 		game.schedule(200, {=> self.image("explosion2.png")})
 		game.schedule(400, {=> self.image("explosion3.png")})
 		game.schedule(600, {=> game.removeVisual(self)})
-		score.scorear(puntaje)
+		score.scorear(self.puntaje())
 	}
 
 	method disparar() {
@@ -65,59 +62,56 @@ class Nave {
 			balaNave.disparar(self)
 		}
 	}
-
-}
-
-class NaveConFuego inherits Nave(image = "nave1.png", puntaje = 200) {
-
-}
-
-class Nave3Patas inherits Nave(image = "nave2.png", puntaje = 500) {
-
-}
-
-class Nave2Patas inherits Nave(image = "nave3.png", puntaje = 1000) {
-
-}
-
-object naveConFuegoFactory{
 	
-	method construir(x){
+	method puntaje()
+
+}
+
+class NaveConFuego inherits Nave(image = "nave1.png") {
+	override method puntaje() {
+		return 200
+	}
+}
+
+class Nave3Patas inherits Nave(image = "nave2.png") {
+	override method puntaje() {
+		return 500
+	}
+}
+
+class Nave2Patas inherits Nave(image = "nave3.png") {
+	override method puntaje() {
+		return 1000
+	}
+}
+
+class Factory {
+	method construirNaves(){
+		const columnas = new Range(start = 0, end=20, step=2)
+		columnas.forEach{posicionX => ovnis.add(self.construir(posicionX))}
+	}
+	method construir(parametro)
+}
+object naveConFuegoFactory inherits Factory{
+	
+	override method construir(x){
 		return new NaveConFuego(position = game.at(x,14) )
 	}
-
-	method construirNaves(){
-		const columnas = new Range(start = 0, end=20, step=2)
-		columnas.forEach{posicionX => ovnis.add(self.construir(posicionX))}
-	}
 }
 
-object nave3PatasFactory{
+object nave3PatasFactory inherits Factory{
 	
-	method construir(x){
+	override method construir(x){
 		return new Nave3Patas(position = game.at(x,16) )
 	}
-
-	method construirNaves(){
-		const columnas = new Range(start = 0, end=20, step=2)
-		columnas.forEach{posicionX => ovnis.add(self.construir(posicionX))}
-	}
 }
 
-object nave2PatasFactory{
+object nave2PatasFactory inherits Factory{
 	
-	method construir(x){
+	override method construir(x){
 		return new Nave3Patas(position = game.at(x,18) )
 	}
-
-	method construirNaves(){
-		const columnas = new Range(start = 0, end=20, step=2)
-		columnas.forEach{posicionX => ovnis.add(self.construir(posicionX))}
-	}
 }
-
-
-
 
 object naveAleatoria inherits Nave(position = game.at(0, 18), image = "navecita.png") {
 
@@ -144,15 +138,6 @@ object naveAleatoria inherits Nave(position = game.at(0, 18), image = "navecita.
 		position = posicion
 	}
 
-	override method serDestruido() {
-		game.sound("explosion1.mp3").play()
-		self.image("explosion1.png")
-		game.schedule(200, {=> self.image("explosion2.png")})
-		game.schedule(400, {=> self.image("explosion3.png")})
-		game.schedule(600, {=> game.removeVisual(self)})
-		score.scorear(self.puntaje())
-	}
-
 	override method disparar() {
 	}
 
@@ -176,8 +161,4 @@ object movimientoNaveAleatoria {
 	method nuevaPosicion(nave) {
 		return nave.direccionamiento().nuevaPosicion(nave)
 	}
-
 }
-
-const direcAleatorias = [ derecha, izquierda ]
-

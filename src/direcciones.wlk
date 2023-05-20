@@ -14,7 +14,6 @@ object abajo {
 	method estaEnElBorde(objeto) {
 		return objeto.position().y() == 0
 	}
-
 }
 
 object arriba {
@@ -28,7 +27,6 @@ object arriba {
 	method estaEnElBorde(objeto) {
 		return objeto.position().y() == game.height()
 	}
-
 }
 
 object izquierda {
@@ -47,7 +45,6 @@ object izquierda {
 		const y = objeto.position().y()
 		return game.at(x, y)
 	}
-
 }
 
 object derecha {
@@ -67,6 +64,7 @@ object derecha {
 		const y = objeto.position().y()
 		return game.at(x, y)
 	}
-
 }
+
+const direcAleatorias = [ derecha, izquierda ]
 

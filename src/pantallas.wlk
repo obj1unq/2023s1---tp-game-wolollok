@@ -45,7 +45,7 @@ object nivel1 {
 		scoreCompleto.forEach{puntaje => game.addVisual(puntaje)}
 		
 		// HECHOS CASUALES
-		game.onTick(20000, "Agregar nave aleatoria", {naveAleatoria.aparecer()})
+		game.onTick(10000, "Agregar nave aleatoria", {naveAleatoria.aparecer()})
 		
 		//  CONTROLES
 
