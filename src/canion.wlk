@@ -28,46 +28,63 @@ object canion {
 	
 
 	method serDestruido() {
-		vidas.perderVida()
+		gestorDeVidas.perderVida()
 	}
 
 }
 
-object vidas {
+
+const vidas = #{uno, dos, tres}
+
+object gestorDeVidas {
+	
+	method perderVida() {
+		if (vidas.size() == 3) {
+			vidas.remove(tres)
+			game.sound("dos-vida.mp3").play()
+			tres.perderVida()
+		} else if (vidas.size() == 2) {
+			vidas.remove(dos)
+			game.sound("una-vida.mp3").play()
+			dos.perderVida()
+		} else if (vidas.size() == 1) {
+			ultimaVida.gameOver()			
+		}
+	}
+	
+}
+
+object ultimaVida {
+	
+	const ultimaVida = uno
+	const ultimaVidaDe = canion
+	
+	var property image = "dos-vida.png"
+	
 	const property position = game.at(1,0)
-	var property cantidad = tres
+	
+	method gameOver() {
+		game.removeVisual(ultimaVida)
+		game.addVisual(self)
+		game.schedule(600, {=> self.image("una-vida.png")})
+		game.schedule(1000, {=> self.image("calavera.png")})
+	}
+}
+
+class Vida {
+	const property position //= game.at(1,0)
 
 	method image() {
-		return cantidad.toString() + "-vida.png"
+		return "vida.png"
 	}
-
+	
 	method perderVida() {
-		cantidad = cantidad.restarVida()
-		game.sound(cantidad.toString() + "-vida.mp3").play()
+		game.removeVisual(self)
 	}
-
+	
+	
 }
 
-object tres {
-
-	method restarVida() {
-		return dos
-	}
-
-}
-
-object dos {
-
-	method restarVida() {
-		return una
-	}
-
-}
-
-object una {
-
-	method restarVida() {
-	}
-
-}
-
+const tres = new Vida (position = game.at(3,0) )
+const dos = new Vida (position = game.at(2,0) )
+const uno = new Vida (position = game.at(1,0) )

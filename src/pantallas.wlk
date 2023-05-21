@@ -39,8 +39,8 @@ object nivel1 {
 		//	VISUALES
 		
 		game.addVisual(canion)
-		game.addVisual(vidas)
 		game.addVisual(nombre)
+		vidas.forEach {vida => game.addVisual(vida)}
 		ovnis.forEach{ovni => game.addVisual(ovni) }
 		scoreCompleto.forEach{puntaje => game.addVisual(puntaje)}
 		
