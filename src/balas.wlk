@@ -62,12 +62,9 @@ object balaNave inherits Bala(direccionamiento = abajo, position = game.origin()
 	}
 	
 	method daniarCanion(){
-		game.onCollideDo(self, { objetivo =>
-			if (objetivo == canion){
-				self.serDestruido()
-				objetivo.serDestruido()
-			}
-		})
+		game.onCollideDo(self, { objetivo => objetivo.serDaniado(self)
+
+						})
 	}
 	
 	method nuevoDisparo(){

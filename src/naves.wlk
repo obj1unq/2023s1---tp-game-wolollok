@@ -64,7 +64,9 @@ class Nave {
 	}
 	
 	method puntaje()
-
+	method serDaniado(objeto) {
+	
+	}
 }
 
 class NaveConFuego inherits Nave(image = "nave1.png") {
