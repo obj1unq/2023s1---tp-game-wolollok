@@ -33,7 +33,7 @@ object nivel1 {
 		
 		game.addVisual(self)
 		factories.forEach{factory => factory.construirNaves()}
-		game.schedule(500, {balaNave.nuevoDisparo()})
+//		game.schedule(500, {balaNave.nuevoDisparo()})
 		movimiento.mover(ovnis)
 		
 		//	VISUALES
@@ -45,7 +45,7 @@ object nivel1 {
 		scoreCompleto.forEach{puntaje => game.addVisual(puntaje)}
 		
 		// HECHOS CASUALES
-		game.onTick(10000, "Agregar nave aleatoria", {naveAleatoria.aparecer()})
+//		game.onTick(10000, "Agregar nave aleatoria", {naveAleatoria.aparecer()})
 		
 		//  CONTROLES
 

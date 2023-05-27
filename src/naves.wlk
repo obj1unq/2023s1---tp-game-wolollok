@@ -13,7 +13,7 @@ object movimiento {
 	var property direccion = derecha
 
 	method mover(ovnis) {
-		game.onTick(200, "moverOvnis", {=>
+		game.onTick(500, "moverOvnis", {=>
 			if (not self.hayAlgunOvniAlBorde()) {
 				self.moverOvnisDePosicion(direccion)
 			} else {

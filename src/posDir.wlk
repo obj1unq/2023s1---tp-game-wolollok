@@ -23,6 +23,11 @@ class Posicion{
 	method left(){
 		x -= 1
 	}
+	
+	method clonar(objeto){
+		x = objeto.position().x()
+		y = objeto.position().y()
+	}
 }
 
 object abajo {

@@ -11,13 +11,14 @@ class Bala {
 	method image() = self.toString() + ".png"
 	
 	method disparar(objeto) {
-		position = direccionamiento.nuevaPosicion(objeto)
+		position.clonar(objeto)
+		direccionamiento.nuevaPosicion(position)
 		game.addVisual(self)
 		self.moverAuto()
 	}
 	
 	method mover() {
-		position = direccionamiento.nuevaPosicion(self)
+		direccionamiento.nuevaPosicion(position)
 	}
 	method serDestruido() {
 		game.removeVisual(self)
@@ -25,10 +26,10 @@ class Bala {
 	}
 	method moverAuto()
 }
-object balaCanion inherits Bala(direccionamiento = arriba, position = new Posicion(x=0, y=0), tick = "subir bala") {
+object balaCanion inherits Bala(direccionamiento = arriba, position = new Posicion (x = 0, y = 0), tick = "subir bala") {
 
 	override method moverAuto() {
-		game.onTick(10, tick, {=>
+		game.onTick(25, tick, {=>
 			self.mover()
 			if (direccionamiento.estaEnElBorde(self)) self.serDestruido() else self.eliminarEnemigo()
 		})
@@ -44,7 +45,7 @@ object balaCanion inherits Bala(direccionamiento = arriba, position = new Posici
 
 }
 
-object balaNave inherits Bala(direccionamiento = abajo, position = game.origin(), tick = "bajar bala") {
+object balaNave inherits Bala(direccionamiento = abajo, position = new Posicion (x = 0, y = 0), tick = "bajar bala") {
 	
 	
 	override method moverAuto(){
