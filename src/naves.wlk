@@ -113,28 +113,23 @@ object nave2PatasFactory inherits Factory{
 	}
 }
 
-object naveAleatoria inherits Nave(position = new Posicion(x = 0, y = 18), image = "navecita.png") {
+object naveAleatoria inherits Nave(position = new Posicion(x = 0, y = 0), image = "navecita.png") {
 
 	var property direccionamiento = null
 	
 	method aparecer() {
-		self.image("navecita.png")
 		self.generarPosicion()
 		game.addVisual(self)
 		self.generarAccionar()
 	}
 
 	method generarAccionar() {
-		movimientoNaveAleatoria.mover(self)
-	}
-
-	method direccion() {
-		direccionamiento = direcAleatorias.anyOne()
+		movimientoNaveAleatoria.mover(p)
 	}
 
 	method generarPosicion() {
-		self.direccion()
-		position = randomizer.position(self)
+		direccionamiento = direcAleatorias.anyOne()
+		randomizer.position(direccionamiento, position)
 	}
 
 	override method disparar() {

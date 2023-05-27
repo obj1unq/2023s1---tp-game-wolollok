@@ -21,7 +21,6 @@ program spaceInvaders {
 	pantallaNombre.iniciar()
 
 
-
 //	START
 
 	game.start()

@@ -5,11 +5,11 @@ import balas.*
 
 object randomizer {
 	
-	method position(nave) {
-		return game.at(	
-			nave.direccionamiento().x(),
-			game.height().randomUpTo(self.positionDeY() + 1)
-		)
+	method position(direccionamiento, position) {
+		position.x(direccionamiento.x())
+		position.y(game.height().randomUpTo(self.positionDeY() + 1))
+			
+			//
 	}	
 	
 	method positionDeY() {
