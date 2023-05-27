@@ -1,6 +1,7 @@
 import wollok.game.*
 import canion.*
 import pantallas.*
+import posDir.*
 
 
 //FALTA DESARROLLAR UNA PANTALLA PARA USAR ESTO
@@ -10,7 +11,7 @@ object nombre {
 	const property nombre = []
 	
 	method position(){
-		return game.at(canion.position().x(), 0)
+		return new Posicion (x = canion.position().x(), y = 0)
 	}
 	
 	method text() = nombre.join("")

@@ -1,7 +1,7 @@
 import wollok.game.*
 import canion.*
 import balas.*
-import direcciones.*
+import posDir.*
 import score.*
 import randomizer.*
 
@@ -27,7 +27,7 @@ object movimiento {
 	}
 
 	method moverOvnisDePosicion(dir) {
-		ovnis.forEach{ nave => nave.mover(dir.nuevaPosicion(nave))}
+		ovnis.forEach{ nave => nave.mover(dir)}
 	}
 
 }
@@ -37,14 +37,14 @@ class Nave {
 	var property image
 	var property position
 
-	method mover(_posicion) {
-		if (self.puedeMover(_posicion)) {
-			position = _posicion
+	method mover(direccion) {
+		if (self.puedeMover(direccion)) {
+			direccion.nuevaPosicion(position)
 		}
 	}
 
-	method puedeMover(_posicion) {
-		return _posicion.x().between(0, game.width() - 1)
+	method puedeMover(direccion) {
+		return not (direccion.estaEnElBorde(self))
 	}
 
 	method serDestruido() {
@@ -94,26 +94,26 @@ class Factory {
 }
 object naveConFuegoFactory inherits Factory{
 	
-	override method construir(x){
-		return new NaveConFuego(position = game.at(x,14) )
+	override method construir(posX){
+		return new NaveConFuego(position = new Posicion(x = posX, y = 14) )
 	}
 }
 
 object nave3PatasFactory inherits Factory{
 	
-	override method construir(x){
-		return new Nave3Patas(position = game.at(x,16) )
+	override method construir(posX){
+		return new Nave3Patas(position = new Posicion(x = posX, y = 16) )
 	}
 }
 
 object nave2PatasFactory inherits Factory{
 	
-	override method construir(x){
-		return new Nave2Patas(position = game.at(x,18) )
+	override method construir(posX){
+		return new Nave2Patas(position = new Posicion(x = posX, y = 18) )
 	}
 }
 
-object naveAleatoria inherits Nave(position = game.at(0, 18), image = "navecita.png") {
+object naveAleatoria inherits Nave(position = new Posicion(x = 0, y = 18), image = "navecita.png") {
 
 	var property direccionamiento = null
 	

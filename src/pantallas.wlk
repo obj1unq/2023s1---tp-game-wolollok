@@ -2,18 +2,18 @@ import wollok.game.*
 import canion.*
 import naves.*
 import balas.*
-import direcciones.*
+import posDir.*
 import score.*
 import nombre.*
 
 object pantallaNombre {
 	
 	const property image = "fondoNombre.jpg"
-	const property position = game.at(0,0)
+	const property position = new Posicion ( x = 0, y = 0)
 	
 	method iniciar(){
 		game.addVisual(self)
-		game.addVisualIn(nombre, game.at(14,13))
+		game.addVisualIn(nombre, new Posicion ( x = 14, y = 13))
 		nombre.iniciarTeclas()
 	}
 	
@@ -27,7 +27,7 @@ object pantallaNombre {
 object nivel1 {
 	
 	const property image = "fondo1.jpg"
-	const property position = game.at(0,0)
+	const property position = new Posicion ( x = 0, y = 0)
 	
 	method iniciar(){
 		

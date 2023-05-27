@@ -2,7 +2,7 @@ import wollok.game.*
 import canion.*
 import naves.*
 import balas.*
-import direcciones.*
+import posDir.*
 import score.*
 import pantallas.*
 

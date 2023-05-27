@@ -1,7 +1,7 @@
 import wollok.game.*
 import canion.*
 import naves.*
-import direcciones.*
+import posDir.*
 
 class Bala {
 	const tick 
@@ -25,7 +25,7 @@ class Bala {
 	}
 	method moverAuto()
 }
-object balaCanion inherits Bala(direccionamiento = arriba, position = game.origin(), tick = "subir bala") {
+object balaCanion inherits Bala(direccionamiento = arriba, position = new Posicion(x=0, y=0), tick = "subir bala") {
 
 	override method moverAuto() {
 		game.onTick(10, tick, {=>
