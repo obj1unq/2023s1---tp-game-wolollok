@@ -2,6 +2,7 @@ import wollok.game.*
 import naves.*
 import balas.*
 import canion.*
+import posDir.*
 
 object score {
 	var property puntaje = 100000
@@ -26,15 +27,15 @@ class Digito {
 	method serDestruido(){}
 }
 
-object unidad    inherits Digito (position = game.at(29, 19), posicionDigito = 5 ) {}
+object unidad    inherits Digito (position = new Posicion (x = 29, y = 19), posicionDigito = 5 ) {}
 
-object decena    inherits Digito (position = game.at(28, 19), posicionDigito = 4 ) {}
+object decena    inherits Digito (position = new Posicion (x = 28, y = 19), posicionDigito = 4 ) {}
 
-object centena   inherits Digito (position = game.at(27, 19), posicionDigito = 3 ){}
+object centena   inherits Digito (position = new Posicion (x = 27, y = 19), posicionDigito = 3 ){}
 
-object mil       inherits Digito (position = game.at(26, 19), posicionDigito = 2 ) {}
+object mil       inherits Digito (position = new Posicion (x = 26, y = 19), posicionDigito = 2 ) {}
 
-object decenaMil inherits Digito (position = game.at(25, 19), posicionDigito = 1 ){}
+object decenaMil inherits Digito (position = new Posicion (x = 25, y = 19), posicionDigito = 1 ){}
 
 const scoreCompleto = [ unidad, decena, centena, mil, decenaMil ]
 
