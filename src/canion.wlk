@@ -46,6 +46,8 @@ object vidas {
 		cantidad = cantidad.restarVida()
 		game.sound(cantidad.toString() + "-vida.mp3").play()
 	}
+	
+	method serDaniado(objeto) {}
 
 }
 
