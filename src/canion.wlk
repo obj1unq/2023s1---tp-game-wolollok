@@ -27,8 +27,9 @@ object canion {
 	}
 	
 
-	method serDestruido() {
+	method serDaniado(objeto) {
 		vidas.perderVida()
+		objeto.serDestruido()
 	}
 
 }
