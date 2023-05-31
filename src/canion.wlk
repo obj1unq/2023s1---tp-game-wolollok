@@ -2,6 +2,7 @@ import wollok.game.*
 import naves.*
 import balas.*
 import posDir.*
+import pantallas.*
 
 
 
@@ -54,12 +55,10 @@ object gestorDeVidas {
 	method ultimaVida() {
 		return vidas.last()
 	}
-	
 }
 
-
 class Vida {
-	const property position //= game.at(1,0)
+	const property position
 
 	method image() {
 		return "vida.png"
@@ -72,15 +71,16 @@ class Vida {
 	method eliminarse() {
 		game.removeVisual(self)
 	}
+  
+  method serDaniado(objeto) {}
 }
 
 object uno inherits Vida(position = new Posicion(x = 1, y = 0)) {
 	override method eliminarse() {
 		super()
 		gameOver.iniciar()
-	}
+  }
 }
-
 object dos inherits Vida(position = new Posicion(x = 2, y = 0)) {}
 object tres inherits Vida(position = new Posicion(x = 3, y = 0)) {}
 
