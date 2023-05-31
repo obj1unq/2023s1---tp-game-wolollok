@@ -3,6 +3,8 @@ import naves.*
 import balas.*
 import posDir.*
 
+
+
 object canion {
 
 	var property position = new Posicion(x = game.center().x(), y = 1)
@@ -30,9 +32,11 @@ object canion {
 	method serDestruido() {
 		gestorDeVidas.perderVida()
 
+	}
 }
 
 const vidas = []
+
 
 object gestorDeVidas {
 	
