@@ -29,4 +29,4 @@ Es probable que el cañón, además de tu arma, sea también tu tumba así que..
 
 - Programación con Objetos I - Universidad Nacional de Quilmes
 - Wollok Programming Language and IDE Version 3.0.0
-- Una vez terminado, no tenemos problemas en que el repositorio sea público / queremos manternerlo privado
+- Una vez terminado, no tenemos problemas en que el repositorio sea público
