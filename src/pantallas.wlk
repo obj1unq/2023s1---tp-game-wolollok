@@ -33,7 +33,7 @@ object nivel1 {
 		
 		game.addVisual(self)
 		factories.forEach{factory => factory.construirNaves()}
-		factoryDeVidas.inicializarVidas()
+		gestorDeVidas.inicializarVidas()
 		game.schedule(500, {balaNave.nuevoDisparo()})
 		movimiento.mover(ovnis)
 		
