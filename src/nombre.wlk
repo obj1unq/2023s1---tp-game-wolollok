@@ -3,12 +3,9 @@ import canion.*
 import pantallas.*
 import posDir.*
 
-
-//FALTA DESARROLLAR UNA PANTALLA PARA USAR ESTO
-
 object nombre {
 	
-	const property nombre = []
+	var property nombre = []
 	
 	method position(){
 		return new Posicion (x = canion.position().x(), y = 0)
@@ -23,10 +20,10 @@ object nombre {
 	}
 	
 	method borrarUltima(){
-		if (nombre.size() > 0){
-			nombre.remove(nombre.last())
-		}
+			nombre = nombre.take(nombre.size()-1)
 	}
+	
+	method serDaniado(objeto){}
 	
 		
 	method iniciarTeclas(){
