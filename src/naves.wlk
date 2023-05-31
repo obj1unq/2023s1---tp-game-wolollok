@@ -151,7 +151,7 @@ object movimientoNaveAleatoria {
 				game.removeTickEvent("moverNaveAleatoria")
 				game.removeVisual(nave)
 			}
-		})
+	 	})
 	}
 
 	method nuevaPosicion(nave) {
