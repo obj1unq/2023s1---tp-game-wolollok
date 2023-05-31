@@ -34,37 +34,39 @@ object canion {
 }
 
 
-const vidas = #{uno, dos, tres}
+const vidas = []
 
 object gestorDeVidas {
 	
 	method perderVida() {
 		if (vidas.size() == 3) {
-			vidas.remove(tres)
+			vidas.last().perderVida()
+			vidas.remove(vidas.last())
 			game.sound("dos-vida.mp3").play()
-			tres.perderVida()
 		} else if (vidas.size() == 2) {
-			vidas.remove(dos)
+			vidas.last().perderVida()
+			vidas.remove(vidas.last())
 			game.sound("una-vida.mp3").play()
-			dos.perderVida()
 		} else if (vidas.size() == 1) {
-			ultimaVida.gameOver()			
+			vidas.last().perderVida()
+			gameOver.sinVidas()			
 		}
 	}
 	
 }
 
-object ultimaVida {
+object gameOver {
 	
-	const ultimaVida = uno
-	const ultimaVidaDe = canion
 	
 	var property image = "dos-vida.png"
 	
 	const property position = game.at(1,0)
 	
-	method gameOver() {
-		game.removeVisual(ultimaVida)
+	method sinVidas() {
+		game.removeTickEvent("moverOvnis")
+		game.removeTickEvent("moverNaveAleatoria")
+		game.removeTickEvent("Agregar nave aleatoria")
+		vidas.last()
 		game.addVisual(self)
 		game.schedule(600, {=> self.image("una-vida.png")})
 		game.schedule(1000, {=> self.image("calavera.png")})
@@ -85,6 +87,21 @@ class Vida {
 	
 }
 
-const tres = new Vida (position = game.at(3,0) )
-const dos = new Vida (position = game.at(2,0) )
-const uno = new Vida (position = game.at(1,0) )
+object factoryDeVidas {
+	
+	method inicializarVidas () {
+		self.creadorDeVidas()
+		vidas.forEach {vida => game.addVisual(vida)}
+	}
+	
+	 method creadorDeVidas() {
+		 	vidas.add(self.construir (1))
+		 	vidas.add(self.construir (2))
+		 	vidas.add(self.construir (3))
+	}
+	
+	 method construir(x){
+		return new Vida (position = game.at(x,0) )
+	}
+}
+
