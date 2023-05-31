@@ -43,6 +43,7 @@ object gestorDeVidas {
 	
 	method perderVida() {
 		self.ultimaVida().eliminarse()
+		vidas.remove(self.ultimaVida())
 	}
 	
 	method inicializarVidas() {
@@ -75,13 +76,13 @@ class Vida {
   method serDaniado(objeto) {}
 }
 
-object uno inherits Vida(position = new Posicion(x = 1, y = 0)) {
+object uno inherits Vida(position = new Posicion(x = 0, y = 0)) {
 	override method eliminarse() {
 		super()
 		gameOver.iniciar()
   }
 }
-object dos inherits Vida(position = new Posicion(x = 2, y = 0)) {}
-object tres inherits Vida(position = new Posicion(x = 3, y = 0)) {}
+object dos inherits Vida(position = new Posicion(x = 1, y = 0)) {}
+object tres inherits Vida(position = new Posicion(x = 2, y = 0)) {}
 
 
