@@ -1,17 +1,17 @@
 import wollok.game.*
 import naves.*
 import balas.*
-import direcciones.*
+import posDir.*
 
 object canion {
 
-	var property position = game.at(game.center().x(), 1)
+	var property position = new Posicion(x = game.center().x(), y = 1)
 
 	method image() = "canion.png"
 
 	method mover(direccion) {
 		if (self.puedeMover(direccion)) {
-			position = direccion.nuevaPosicion(self)
+			direccion.nuevaPosicion(position)
 		}
 	}
 
@@ -29,10 +29,8 @@ object canion {
 
 	method serDestruido() {
 		gestorDeVidas.perderVida()
-	}
 
 }
-
 
 const vidas = []
 
@@ -52,7 +50,6 @@ object gestorDeVidas {
 			gameOver.sinVidas()			
 		}
 	}
-	
 }
 
 object gameOver {
