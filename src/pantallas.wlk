@@ -55,3 +55,21 @@ object nivel1 {
 		keyboard.space().onPressDo {canion.disparar()}
 	}
 }
+
+object gameOver {
+	
+	const property image = "gameOver.jpg"
+	const property position = new Posicion ( x = 0, y = 0)
+	
+	method iniciar(){
+		game.removeTickEvent("moverOvnis")
+		game.removeTickEvent("Agregar nave aleatoria")
+		game.clear()
+		ovnis.clear()
+		game.addVisual(self)
+		scoreCompleto.forEach{puntaje => puntaje.puntajeFinal()}
+		
+		keyboard.r().onPressDo { pantallaNombre.siguientePantalla() }
+		keyboard.e().onPressDo { game.stop() }
+	}
+}

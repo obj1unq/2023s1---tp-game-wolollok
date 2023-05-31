@@ -2,6 +2,7 @@ import wollok.game.*
 import naves.*
 import balas.*
 import posDir.*
+import pantallas.*
 
 
 
@@ -29,7 +30,8 @@ object canion {
 	}
 	
 
-	method serDestruido() {
+	method serDaniado(objeto) {
+		objeto.serDestruido()
 		gestorDeVidas.perderVida()
 
 	}
@@ -51,31 +53,31 @@ object gestorDeVidas {
 			game.sound("una-vida.mp3").play()
 		} else if (vidas.size() == 1) {
 			vidas.last().perderVida()
-			gameOver.sinVidas()			
+			gameOver.iniciar()			
 		}
 	}
 }
 
-object gameOver {
-	
-	
-	var property image = "dos-vida.png"
-	
-	const property position = game.at(1,0)
-	
-	method sinVidas() {
-		game.removeTickEvent("moverOvnis")
-		game.removeTickEvent("moverNaveAleatoria")
-		game.removeTickEvent("Agregar nave aleatoria")
-		vidas.last()
-		game.addVisual(self)
-		game.schedule(600, {=> self.image("una-vida.png")})
-		game.schedule(1000, {=> self.image("calavera.png")})
-	}
-}
+//object gameOverFEO {
+//	
+//	
+//	var property image = "dos-vida.png"
+//	
+//	const property position = game.at(1,0)
+//	
+//	method sinVidas() {
+//		game.removeTickEvent("moverOvnis")
+//		game.removeTickEvent("moverNaveAleatoria")
+//		game.removeTickEvent("Agregar nave aleatoria")
+//		vidas.last()
+//		game.addVisual(self)
+//		game.schedule(600, {=> self.image("una-vida.png")})
+//		game.schedule(1000, {=> self.image("calavera.png")})
+//	}
+//}
 
 class Vida {
-	const property position //= game.at(1,0)
+	const property position
 
 	method image() {
 		return "vida.png"
@@ -96,13 +98,11 @@ object factoryDeVidas {
 	}
 	
 	 method creadorDeVidas() {
-		 	vidas.add(self.construir (1))
-		 	vidas.add(self.construir (2))
-		 	vidas.add(self.construir (3))
+	 		(0..2).forEach{corazon => vidas.add(self.construir(corazon))}
 	}
 	
-	 method construir(x){
-		return new Vida (position = game.at(x,0) )
+	 method construir(posX){
+		return new Vida (position = new Posicion (x = posX, y = 0) )
 	}
 }
 
