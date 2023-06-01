@@ -6,62 +6,140 @@ import posDir.*
 import score.*
 import nombre.*
 
+object actual {
+
+	var property pantalla = null
+
+}
+
 object pantallaNombre {
-	
+
 	const property image = "fondoNombre.jpg"
-	const property position = new Posicion ( x = 0, y = 0)
-	
-	method iniciar(){
+	const property position = new Posicion(x = 0, y = 0)
+
+	method iniciar() {
 		game.addVisual(self)
-		game.addVisualIn(nombre, new Posicion ( x = 14, y = 13))
+		game.addVisualIn(nombre, new Posicion(x = 14, y = 13))
 		nombre.iniciarTeclas()
 	}
-	
-	method siguientePantalla(){
+
+	method siguientePantalla() {
 		game.clear()
 		nivel1.iniciar()
 	}
-	
+
 }
 
 object nivel1 {
-	
+
 	const property image = "fondo1.jpg"
-	const property position = new Posicion ( x = 0, y = 0)
-	
-	method iniciar(){
-		
+	const property position = new Posicion(x = 0, y = 0)
+	const property siguienteNivel = nivel2
+
+	method iniciar() {
+		actual.pantalla(self)
 		game.addVisual(self)
-		factories.forEach{factory => factory.construirNaves()}
+		factories.forEach{ factory => factory.construirNaves()}
 		gestorDeVidas.inicializarVidas()
-		game.schedule(500, {balaNave.nuevoDisparo()})
+		game.schedule(1000, { balaNave.nuevoDisparo()})
 		movimiento.mover(ovnis)
-		
-		//	VISUALES
-		
+			// VISUALES
 		game.addVisual(canion)
 		game.addVisual(nombre)
-		ovnis.forEach{ovni => game.addVisual(ovni) }
-		scoreCompleto.forEach{puntaje => game.addVisual(puntaje)}
-
-		
-		// HECHOS CASUALES
-		game.onTick(10000, "Agregar nave aleatoria", {naveAleatoria.aparecer()})
-		
-		//  CONTROLES
-
-		keyboard.left().onPressDo { canion.mover(izquierda) }
-		keyboard.right().onPressDo { canion.mover(derecha) }
-		keyboard.space().onPressDo {canion.disparar()}
+		ovnis.forEach{ ovni => game.addVisual(ovni)}
+		scoreCompleto.forEach{ puntaje => game.addVisual(puntaje)}
+			// HECHOS CASUALES
+		game.onTick(10000, "Agregar nave aleatoria", { naveAleatoria.aparecer()})
+			// CONTROLES
+		keyboard.left().onPressDo{ canion.mover(izquierda)}
+		keyboard.right().onPressDo{ canion.mover(derecha)}
+		keyboard.space().onPressDo{ canion.disparar()}
 	}
+
+	method siguientePantalla() {
+		game.clear()
+		siguienteNivel.iniciar()
+	}
+
+}
+
+object nivel2 {
+
+	const property image = "fondo2.png"
+	const property position = new Posicion(x = 0, y = 0)
+	const property siguienteNivel = nivel3
+
+	method iniciar() {
+		actual.pantalla(self)
+		game.addVisual(self)
+		factories.forEach{ factory => factory.construirNaves()}
+		gestorDeVidas.inicializarVidas()
+		game.schedule(1000, { balaNave.nuevoDisparo()})
+		movimiento.mover(ovnis)
+			// VISUALES
+		game.addVisual(canion)
+		game.addVisual(nombre)
+		ovnis.forEach{ ovni => game.addVisual(ovni)}
+		scoreCompleto.forEach{ puntaje => game.addVisual(puntaje)}
+			// HECHOS CASUALES
+		game.onTick(10000, "Agregar nave aleatoria", { naveAleatoria.aparecer()})
+			// CONTROLES
+		keyboard.left().onPressDo{ canion.mover(izquierda)}
+		keyboard.right().onPressDo{ canion.mover(derecha)}
+		keyboard.space().onPressDo{ canion.disparar()}
+	}
+
+	method siguientePantalla() {
+		game.clear()
+		siguienteNivel.iniciar()
+	}
+
+}
+
+object nivel3 {
+
+	const property image = "fondo3.png"
+	const property position = new Posicion(x = 0, y = 0)
+	const property siguienteNivel = pantallaGanaste
+
+	method iniciar() {
+		actual.pantalla(self)
+		game.addVisual(self)
+		factories.forEach{ factory => factory.construirNaves()}
+		gestorDeVidas.inicializarVidas()
+		game.schedule(1000, { balaNave.nuevoDisparo()})
+		movimiento.mover(ovnis)
+			// VISUALES
+		game.addVisual(canion)
+		game.addVisual(nombre)
+		ovnis.forEach{ ovni => game.addVisual(ovni)}
+		scoreCompleto.forEach{ puntaje => game.addVisual(puntaje)}
+			// HECHOS CASUALES
+		game.onTick(10000, "Agregar nave aleatoria", { naveAleatoria.aparecer()})
+			// CONTROLES
+		keyboard.left().onPressDo{ canion.mover(izquierda)}
+		keyboard.right().onPressDo{ canion.mover(derecha)}
+		keyboard.space().onPressDo{ canion.disparar()}
+	}
+
+	method siguientePantalla() {
+		game.clear()
+		siguienteNivel.iniciar()
+	}
+
+}
+
+object pantallaGanaste {
+
 }
 
 object gameOver {
-	
+
 	const property image = "gameOver.jpg"
+
 	const property position = new Posicion ( x = 0, y = 0)
-	
 	method iniciar(){
+		
 		balaCanion.eliminarse()
 		balaNave.eliminarse()
 		game.removeTickEvent("moverOvnis")
@@ -69,9 +147,10 @@ object gameOver {
 		game.clear()
 		ovnis.clear()
 		game.addVisual(self)
-		scoreCompleto.forEach{puntaje => puntaje.puntajeFinal()}
-		
-		keyboard.r().onPressDo { pantallaNombre.siguientePantalla() }
-		keyboard.e().onPressDo { game.stop() }
+		scoreCompleto.forEach{ puntaje => puntaje.puntajeFinal()}
+		keyboard.r().onPressDo{ pantallaNombre.siguientePantalla()}
+		keyboard.e().onPressDo{ game.stop()}
 	}
+
 }
+
