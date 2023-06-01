@@ -40,7 +40,7 @@ object nivel1 {
 		actual.pantalla(self)
 		game.addVisual(self)
 		factories.forEach{ factory => factory.construirNaves()}
-		factoryDeVidas.inicializarVidas()
+		gestorDeVidas.inicializarVidas()
 		game.schedule(1000, { balaNave.nuevoDisparo()})
 		movimiento.mover(ovnis)
 			// VISUALES
@@ -73,7 +73,7 @@ object nivel2 {
 		actual.pantalla(self)
 		game.addVisual(self)
 		factories.forEach{ factory => factory.construirNaves()}
-		factoryDeVidas.inicializarVidas()
+		gestorDeVidas.inicializarVidas()
 		game.schedule(1000, { balaNave.nuevoDisparo()})
 		movimiento.mover(ovnis)
 			// VISUALES
@@ -106,7 +106,7 @@ object nivel3 {
 		actual.pantalla(self)
 		game.addVisual(self)
 		factories.forEach{ factory => factory.construirNaves()}
-		factoryDeVidas.inicializarVidas()
+		gestorDeVidas.inicializarVidas()
 		game.schedule(1000, { balaNave.nuevoDisparo()})
 		movimiento.mover(ovnis)
 			// VISUALES
