@@ -31,8 +31,8 @@ object canion {
 	
 
 	method serDaniado(objeto) {
-		gestorDeVidas.perderVida()
 		objeto.serDestruido()
+		gestorDeVidas.perderVida()
 	}
 }
 
@@ -47,7 +47,7 @@ object gestorDeVidas {
 	}
 	
 	method inicializarVidas() {
-		vidas.add(uno)
+		vidas.add(una)
 		vidas.add(dos)
 		vidas.add(tres)
 		vidas.forEach{vida => game.addVisual(vida)}
@@ -67,6 +67,7 @@ class Vida {
 	
 	method perderVida() {
 		game.removeVisual(self)
+		game.sound(self.toString() + "-vida.mp3").play()
 	}	
 	
 	method eliminarse() {
@@ -76,7 +77,7 @@ class Vida {
   method serDaniado(objeto) {}
 }
 
-object uno inherits Vida(position = new Posicion(x = 0, y = 0)) {
+object una inherits Vida(position = new Posicion(x = 0, y = 0)) {
 	override method eliminarse() {
 		super()
 		gameOver.iniciar()

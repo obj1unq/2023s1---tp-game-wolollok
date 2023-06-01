@@ -62,6 +62,8 @@ object gameOver {
 	const property position = new Posicion ( x = 0, y = 0)
 	
 	method iniciar(){
+		balaCanion.eliminarse()
+		balaNave.eliminarse()
 		game.removeTickEvent("moverOvnis")
 		game.removeTickEvent("Agregar nave aleatoria")
 		game.clear()

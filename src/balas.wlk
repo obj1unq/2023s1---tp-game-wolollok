@@ -25,6 +25,12 @@ class Bala {
 		game.removeTickEvent(tick)
 	}
 	method moverAuto()
+	
+	method eliminarse() {
+		if (game.hasVisual(self)) {
+			game.removeTickEvent(tick)
+		}
+	}
 }
 object balaCanion inherits Bala(direccionamiento = arriba, position = new Posicion (x = 0, y = 0), tick = "subir bala") {
 
@@ -42,7 +48,6 @@ object balaCanion inherits Bala(direccionamiento = arriba, position = new Posici
 			ovnis.remove(enemigo)
 		})
 	}
-
 }
 
 object balaNave inherits Bala(direccionamiento = abajo, position = new Posicion (x = 0, y = 0), tick = "bajar bala") {
