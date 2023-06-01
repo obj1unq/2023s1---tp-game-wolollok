@@ -31,9 +31,8 @@ object canion {
 	
 
 	method serDaniado(objeto) {
-		objeto.serDestruido()
 		gestorDeVidas.perderVida()
-
+		objeto.serDestruido()
 	}
 }
 
@@ -43,38 +42,21 @@ const vidas = []
 object gestorDeVidas {
 	
 	method perderVida() {
-		if (vidas.size() == 3) {
-			vidas.last().perderVida()
-			vidas.remove(vidas.last())
-			game.sound("dos-vida.mp3").play()
-		} else if (vidas.size() == 2) {
-			vidas.last().perderVida()
-			vidas.remove(vidas.last())
-			game.sound("una-vida.mp3").play()
-		} else if (vidas.size() == 1) {
-			vidas.last().perderVida()
-			gameOver.iniciar()			
-		}
+		self.ultimaVida().eliminarse()
+		vidas.remove(self.ultimaVida())
+	}
+	
+	method inicializarVidas() {
+		vidas.add(uno)
+		vidas.add(dos)
+		vidas.add(tres)
+		vidas.forEach{vida => game.addVisual(vida)}
+	}
+	
+	method ultimaVida() {
+		return vidas.last()
 	}
 }
-
-//object gameOverFEO {
-//	
-//	
-//	var property image = "dos-vida.png"
-//	
-//	const property position = game.at(1,0)
-//	
-//	method sinVidas() {
-//		game.removeTickEvent("moverOvnis")
-//		game.removeTickEvent("moverNaveAleatoria")
-//		game.removeTickEvent("Agregar nave aleatoria")
-//		vidas.last()
-//		game.addVisual(self)
-//		game.schedule(600, {=> self.image("una-vida.png")})
-//		game.schedule(1000, {=> self.image("calavera.png")})
-//	}
-//}
 
 class Vida {
 	const property position
@@ -85,24 +67,22 @@ class Vida {
 	
 	method perderVida() {
 		game.removeVisual(self)
+	}	
+	
+	method eliminarse() {
+		game.removeVisual(self)
 	}
-	
-	
+  
+  method serDaniado(objeto) {}
 }
 
-object factoryDeVidas {
-	
-	method inicializarVidas () {
-		self.creadorDeVidas()
-		vidas.forEach {vida => game.addVisual(vida)}
-	}
-	
-	 method creadorDeVidas() {
-	 		(0..2).forEach{corazon => vidas.add(self.construir(corazon))}
-	}
-	
-	 method construir(posX){
-		return new Vida (position = new Posicion (x = posX, y = 0) )
-	}
+object uno inherits Vida(position = new Posicion(x = 0, y = 0)) {
+	override method eliminarse() {
+		super()
+		gameOver.iniciar()
+  }
 }
+object dos inherits Vida(position = new Posicion(x = 1, y = 0)) {}
+object tres inherits Vida(position = new Posicion(x = 2, y = 0)) {}
+
 
