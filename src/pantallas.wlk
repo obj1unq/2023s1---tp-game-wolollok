@@ -12,6 +12,26 @@ object actual {
 
 }
 
+
+object pantallaInicial {
+	 const property image 
+	 const property position = new Posicion(x = 0, y = 0)
+	
+	method iniciar() {
+		game.addVisual(self)
+		game.addVisualIn(iniciarJuego, new Posicion (x = 0, y = 0))
+		game.addVisualIn(comoJugar, new Posicion (x = 0, y = 0))
+		game.addVisualIn(wolollok, new Posicion (x = 0, y = 0))
+		game.addVisualIn(puntero, iniciarJuego.position() )
+		puntero.iniciarTeclas()
+	}
+	
+	method siguientePantalla() {
+		game.clear()
+		pantallaNombre.iniciar()
+	}	
+}
+
 object pantallaNombre {
 
 	const property image = "fondoNombre.jpg"
