@@ -5,6 +5,7 @@ import balas.*
 import posDir.*
 import score.*
 import nombre.*
+import pantallaInicial.*
 
 object actual {
 
@@ -19,10 +20,10 @@ object pantallaInicial {
 	
 	method iniciar() {
 		game.addVisual(self)
-		game.addVisualIn(iniciarJuego, new Posicion (x = 0, y = 0))
-		game.addVisualIn(comoJugar, new Posicion (x = 0, y = 0))
-		game.addVisualIn(wolollok, new Posicion (x = 0, y = 0))
-		game.addVisualIn(puntero, iniciarJuego.position() )
+		game.addVisualIn(iniciarJuego, new Posicion (x = 10, y = 16))
+		game.addVisualIn(comoJugar, new Posicion (x = 10, y = 14))
+		game.addVisualIn(wolollok, new Posicion (x = 10, y = 12))
+		game.addVisual(puntero)
 		puntero.iniciarTeclas()
 	}
 	

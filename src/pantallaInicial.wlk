@@ -47,7 +47,7 @@ object wolollok {
 
 object puntero {
 	const image
-	var property position = new Position (x = 0, y = 0)
+	var property position = new Position (x = 10, y = 16)
 	
 	method iniciarPantalla(pantalla) {
 		pantalla.iniciar()
