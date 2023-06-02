@@ -15,7 +15,7 @@ object actual {
 
 
 object pantallaInicial {
-	 const property image 
+	 const property image = "fondoPantallaInicial.jpg"
 	 const property position = new Posicion(x = 0, y = 0)
 	
 	method iniciar() {

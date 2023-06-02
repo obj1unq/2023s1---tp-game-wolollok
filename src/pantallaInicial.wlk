@@ -5,35 +5,11 @@ import balas.*
 import posDir.*
 import score.*
 import pantallas.*
-object iniciarJuego {
-	const property image 
-	const property position = new Position(x = 0, y = 0)
-	method iniciarPantalla() {
-		game.clear()
-		game.addVisual(self)
-	}
-	
-	method iniciarTeclas() {
-		keyboard.backspace().onPressDo({pantallaInicial.iniciar()})
-	}
-}
 
-object comoJugar {
-	const property image 
-	const property position = new Position(x = 0, y = 0)
-	method iniciarPantalla() {
-		game.clear()
-		game.addVisual(self)
-	}
+class ObjetoPantallaInicial {
+	const property image = self.toString() + ".png"
+	const property position
 	
-	method iniciarTeclas() {
-		keyboard.backspace().onPressDo({pantallaInicial.iniciar()})
-	}
-}
-
-object wolollok {
-	const property image 
-	const property position = new Position(x = 0, y = 0)	
 	method iniciarPantalla() {
 		game.clear()
 		game.addVisual(self)
@@ -44,9 +20,14 @@ object wolollok {
 		keyboard.backspace().onPressDo({pantallaInicial.iniciar()})
 	}
 }
+object iniciarJuego inherits ObjetoPantallaInicial(position = new Position(x = 10, y = 16)) {	}
+
+object comoJugar inherits ObjetoPantallaInicial(position = new Position(x = 10, y = 14))  {}
+
+object wolollok inherits ObjetoPantallaInicial(position = new Position(x = 10, y = 12))  {}
 
 object puntero {
-	const image
+	const property image = "puntero.png"
 	var property position = new Position (x = 10, y = 16)
 	
 	method iniciarPantalla(pantalla) {
