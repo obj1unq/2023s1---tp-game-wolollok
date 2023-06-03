@@ -85,6 +85,13 @@ object nivel1 {
 		game.clear()
 		siguienteNivel.iniciar()
 	}
+	
+	method reiniciarJuego() {
+		game.clear()
+		gestorDeVidas.vidas([uno, dos, tres])
+		score.puntaje(100000)
+		self.iniciar()
+	}
 
 }
 
@@ -173,7 +180,7 @@ object gameOver {
 		ovnis.clear()
 		game.addVisual(self)
 		scoreCompleto.forEach{ puntaje => puntaje.puntajeFinal()}
-		keyboard.r().onPressDo{ pantallaNombre.siguientePantalla()}
+		keyboard.r().onPressDo{ nivel1.reiniciarJuego()}
 		keyboard.e().onPressDo{ game.stop()}
 	}
 

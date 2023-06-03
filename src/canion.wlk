@@ -36,7 +36,7 @@ object canion {
 
 object gestorDeVidas {
 
-	const vidas = [ uno, dos, tres ]
+	var property vidas = [ uno, dos, tres ]
 
 	method perderVida() {
 		self.ultimaVida().eliminarse()

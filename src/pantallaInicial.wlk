@@ -43,7 +43,7 @@ object wolollok inherits ObjetoPantallaInicial(position = new Position(x = 14, y
 
 object puntero {
 	const property image = "puntero.png"
-	var property position = new Position (x = 10, y = 12)
+	var property position = new Position (x = 9, y = 12)
 	const apuntables = [iniciarJuego, comoJugar, wolollok]
 	var property apuntado = 0
 	
