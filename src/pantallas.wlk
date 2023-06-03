@@ -25,7 +25,10 @@ object pantallaInicial {
 		game.addVisual(comoJugar)
 		game.addVisual(wolollok)
 		game.addVisual(puntero)
-		puntero.iniciarTeclas()
+	
+		keyboard.up().onPressDo({puntero.subir()})
+		keyboard.down().onPressDo({puntero.bajar()})
+		keyboard.right().onPressDo({puntero.iniciarPantalla(game.uniqueCollider(puntero))})
 	}
 	
 	method siguientePantalla() {

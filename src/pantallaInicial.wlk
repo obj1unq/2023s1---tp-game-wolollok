@@ -24,7 +24,8 @@ object spaceInvaders {
 }
 object iniciarJuego inherits ObjetoPantallaInicial(position = new Position(x = 10, y = 12)) {
 	override method iniciar() {
-		pantallaInicial.siguientePantalla()
+		game.clear()
+		pantallaNombre.iniciar()
 	}
 }
 
@@ -48,12 +49,6 @@ object puntero {
 	
 	method iniciarPantalla(pantalla) {
 		pantalla.iniciar()
-	}
-	
-	method iniciarTeclas() {
-		keyboard.up().onPressDo({self.subir()})
-		keyboard.down().onPressDo({self.bajar()})
-		keyboard.enter().onPressDo({self.iniciarPantalla(game.uniqueCollider(self))})
 	}
 	
 	method subir() {
