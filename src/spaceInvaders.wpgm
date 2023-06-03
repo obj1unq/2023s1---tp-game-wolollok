@@ -5,6 +5,7 @@ import balas.*
 import posDir.*
 import score.*
 import pantallas.*
+import pantallaInicial.*
 
 
 
@@ -17,7 +18,7 @@ program spaceInvaders {
 	game.width(30)
 	game.cellSize(35)
 	
-	pantallaNombre.iniciar()
+	pantallaInicial.iniciar()
 
 //	START
 

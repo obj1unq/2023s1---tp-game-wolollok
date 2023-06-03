@@ -5,6 +5,7 @@ import balas.*
 import posDir.*
 import score.*
 import nombre.*
+import pantallaInicial.*
 
 object actual {
 
@@ -12,9 +13,33 @@ object actual {
 
 }
 
+
+object pantallaInicial {
+	 const property image = "fondoPantallaInicial.jpg"
+	 const property position = new Posicion(x = 0, y = 0)
+	
+	method iniciar() {
+		game.addVisual(self)
+		game.addVisual(spaceInvaders)
+		game.addVisual(iniciarJuego)
+		game.addVisual(comoJugar)
+		game.addVisual(wolollok)
+		game.addVisual(puntero)
+	
+		keyboard.up().onPressDo({puntero.subir()})
+		keyboard.down().onPressDo({puntero.bajar()})
+		keyboard.right().onPressDo({puntero.iniciarPantalla(game.uniqueCollider(puntero))})
+	}
+	
+	method siguientePantalla() {
+		game.clear()
+		pantallaNombre.iniciar()
+	}	
+}
+
 object pantallaNombre {
 
-	const property image = "fondoNombre.jpg"
+	const property image = "fondoNombre.png"
 	const property position = new Posicion(x = 0, y = 0)
 
 	method iniciar() {
