@@ -24,7 +24,7 @@ object spaceInvaders {
 }
 object iniciarJuego inherits ObjetoPantallaInicial(position = new Position(x = 10, y = 12)) {
 	override method iniciar() {
-		pantallaNombre.iniciar()
+		pantallaInicial.siguientePantalla()
 	}
 }
 
@@ -73,7 +73,7 @@ object puntero {
 
 object pantallaWolollok {
 	const property position = new Position (x = 0, y= 0)
-	const property image = "pantallaWolollok.jpg"
+	const property image = "pantallaWolollok.png"
 	method iniciar() {
 		game.clear()
 		game.addVisual(self)
@@ -84,7 +84,7 @@ object pantallaWolollok {
 
 object pantallaComoJugar {
 	const property position = new Position (x = 0, y= 0)
-	const property image = "pantallaWolollok.jpg"
+	const property image = "pantallaComoJugar.png"
 	method iniciar() {
 		game.clear()
 		game.addVisual(self)
