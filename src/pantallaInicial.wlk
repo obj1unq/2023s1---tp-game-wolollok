@@ -19,17 +19,17 @@ class ObjetoPantallaInicial {
 }
 
 object spaceInvaders {
-	const property position = new Position(x = 7, y = 14)
+	const property position = new Position(x = 7, y = 15)
 	const property image = "spaceInvaders.png"
 }
-object iniciarJuego inherits ObjetoPantallaInicial(position = new Position(x = 10, y = 12)) {
+object iniciarJuego inherits ObjetoPantallaInicial(position = new Position(x = 9, y = 12)) {
 	override method iniciar() {
 		game.clear()
 		pantallaNombre.iniciar()
 	}
 }
 
-object comoJugar inherits ObjetoPantallaInicial(position = new Position(x = 11, y = 9))  {
+object comoJugar inherits ObjetoPantallaInicial(position = new Position(x = 10, y = 9))  {
 	override method iniciar() {
 		pantallaComoJugar.iniciar()
 	}

@@ -39,7 +39,7 @@ object pantallaInicial {
 
 object pantallaNombre {
 
-	const property image = "fondoNombre.jpg"
+	const property image = "fondoNombre.png"
 	const property position = new Posicion(x = 0, y = 0)
 
 	method iniciar() {
