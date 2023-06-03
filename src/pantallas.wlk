@@ -20,9 +20,10 @@ object pantallaInicial {
 	
 	method iniciar() {
 		game.addVisual(self)
-		game.addVisualIn(iniciarJuego, new Posicion (x = 10, y = 16))
-		game.addVisualIn(comoJugar, new Posicion (x = 10, y = 14))
-		game.addVisualIn(wolollok, new Posicion (x = 10, y = 12))
+		game.addVisual(spaceInvaders)
+		game.addVisual(iniciarJuego)
+		game.addVisual(comoJugar)
+		game.addVisual(wolollok)
 		game.addVisual(puntero)
 		puntero.iniciarTeclas()
 	}
