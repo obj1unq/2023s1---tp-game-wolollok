@@ -7,8 +7,9 @@ import pantallas.*
 object canion {
 
 	var property position = new Posicion(x = game.center().x(), y = 1)
+	var property estado = normal
 
-	method image() = "canion.png"
+	method image() = estado.image()
 
 	method mover(direccion) {
 		if (self.puedeMover(direccion)) {
@@ -21,14 +22,15 @@ object canion {
 	}
 
 	method disparar() {
-		if (not game.hasVisual(balaCanion)) {
-			game.sound("disparoCanion.mp3").play()
-			balaCanion.disparar(self)
-		}
+		estado.disparar()
 	}
 
 	method serDaniado() {
-		gestorDeVidas.perderVida()
+		estado.serDaniado()
+	}
+	
+	method ganarBeneficio() {
+		gestorDeBeneficios.asignar(self)
 	}
 
 }
@@ -97,23 +99,47 @@ object tres inherits Vida(position = new Posicion(x = 2, y = 0)) {
 
 
 class Estado {
-	method disparar()
-	method serDaniado()
+	method disparar() {
+		if (not game.hasVisual(balaCanion)) {
+			game.sound("disparoCanion.mp3").play()
+			balaCanion.disparar(self)
+		}
+	}
+	method serDaniado() {
+		gestorDeVidas.perderVida()
+	}
 }
 
 object normal inherits Estado {
-	override method disparar() {}
-	override method serDaniado() {}	
+	method image() = "canion.png"
 }
 
 object inmune inherits Estado {
-	override method disparar() {}
+	method image() = "" //Falta imagen de un canion inmune
+
 	override method serDaniado() {
 		
 	}
 }
 
-object disparoPotente inherits Estado {
-	override method disparar() {}
-	override method serDaniado() {}
+object disparoPotente inherits Estado { /*Este objeto mata una columna de naves */
+	method image() = "" //Falta imagen para un disparo potente
+	override method disparar() {
+		if (not game.hasVisual(balaCanion)) {
+			game.sound("disparoCanion.mp3").play()
+			balaCanion.dispararPotente(self)
+		}
+	}
 }
+
+object disparoRapido inherits Estado {} //La bala debe tener una velocidad como constante / variable, para que pueda ser mas rapida
+
+ 
+ object gestorDeBeneficios {
+ 	const beneficios = [inmune, disparoPotente, disparoRapido]
+ 	
+ 	method asignar(objeto) {
+ 		objeto.estado(beneficios.anyOne())
+ 		game.schedule(10000, objeto.asignar(normal))
+ 	}
+ }

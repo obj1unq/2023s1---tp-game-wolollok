@@ -137,7 +137,12 @@ object naveAleatoria inherits Nave(position = new Posicion(x = 0, y = 0), image 
 	override method disparar() {
 	}
 
-	override method puntaje() = 1000.randomUpTo(1500)
+	override method puntaje() = 1000.randomUpTo(2000)
+	
+	override method serDestruido() {
+		super()
+		canion.ganarBeneficio()
+	}
 
 }
 
