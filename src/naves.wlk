@@ -64,7 +64,7 @@ class Nave {
 	}
 	
 	method puntaje()
-	method serDaniado(objeto) {
+	method serDaniado() {
 	
 	}
 }

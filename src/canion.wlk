@@ -27,8 +27,7 @@ object canion {
 		}
 	}
 
-	method serDaniado(objeto) {
-		objeto.serDestruido()
+	method serDaniado() {
 		gestorDeVidas.perderVida()
 	}
 
@@ -71,7 +70,7 @@ class Vida {
 		game.removeVisual(self)
 	}
 
-	method serDaniado(objeto) {
+	method serDaniado() {
 	}
 
 }
@@ -96,3 +95,25 @@ object tres inherits Vida(position = new Posicion(x = 2, y = 0)) {
 
 }
 
+
+class Estado {
+	method disparar()
+	method serDaniado()
+}
+
+object normal inherits Estado {
+	override method disparar() {}
+	override method serDaniado() {}	
+}
+
+object inmune inherits Estado {
+	override method disparar() {}
+	override method serDaniado() {
+		
+	}
+}
+
+object disparoPotente inherits Estado {
+	override method disparar() {}
+	override method serDaniado() {}
+}
