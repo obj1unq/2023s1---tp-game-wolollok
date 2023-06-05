@@ -56,6 +56,24 @@ object balaCanion inherits Bala(direccionamiento = arriba, position = new Posici
 			}
 		})
 	}
+	
+	method eliminarEnemigoPotente() {
+		game.onCollideDo(self, {enemigo => 
+			self.serDestruido()       
+			enemigo.serDestruido()
+			self.destruirPotente(enemigo)
+			if (ovnis.isEmpty()) {
+			actual.pantalla().siguientePantalla()
+			}
+		})
+	}
+	
+	method destruirPotente(ovni) {
+		game.getObjectsIn(ovni.position() ) 
+	}
+	method dispararPotente() {
+		
+	}
 }
 
 object balaNave inherits Bala(direccionamiento = abajo, position = new Posicion(x = 0, y = 0), tick = "bajar bala") {
@@ -83,6 +101,4 @@ object balaNave inherits Bala(direccionamiento = abajo, position = new Posicion(
 		const naveAlAzar = ovnis.anyOne()
 		naveAlAzar.disparar()
 	}
-
 }
-

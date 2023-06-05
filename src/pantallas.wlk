@@ -79,6 +79,8 @@ object nivel1 {
 		keyboard.left().onPressDo{ canion.mover(izquierda)}
 		keyboard.right().onPressDo{ canion.mover(derecha)}
 		keyboard.space().onPressDo{ canion.disparar()}
+		
+	
 	}
 
 	method siguientePantalla() {

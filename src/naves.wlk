@@ -29,7 +29,6 @@ object movimiento {
 	method moverOvnisDePosicion(dir) {
 		ovnis.forEach{ nave => nave.mover(dir)}
 	}
-
 }
 
 class Nave {
@@ -64,14 +63,20 @@ class Nave {
 	}
 	
 	method puntaje()
-	method serDaniado() {
-	
-	}
+	method serDaniado() {}
 }
 
 class NaveConFuego inherits Nave(image = "nave1.png") {
 	override method puntaje() {
 		return 200
+	}
+	
+	method elDeArriba() {
+		return game.getObjectsIn(game.at(self.position().x(), self.position().y() + 1))
+	}
+	
+	method elDeDosArriba() {
+		game.getObjectsIn(game.at(self.position().x(), self.position().y() + 2))
 	}
 }
 
@@ -79,12 +84,20 @@ class Nave3Patas inherits Nave(image = "nave2.png") {
 	override method puntaje() {
 		return 500
 	}
+	
+	method elDeArriba() {
+		return game.getObjectsIn(game.at(self.position().x(), self.position().y() + 1))
+	}
+	method elDeDosArriba() {}
 }
 
 class Nave2Patas inherits Nave(image = "nave3.png") {
 	override method puntaje() {
 		return 1000
 	}
+	
+	method elDeArriba() {}
+	method elDeDosArriba() {}
 }
 
 class Factory {
@@ -143,7 +156,6 @@ object naveAleatoria inherits Nave(position = new Posicion(x = 0, y = 0), image 
 		super()
 		canion.ganarBeneficio()
 	}
-
 }
 
 object movimientoNaveAleatoria {
