@@ -7,7 +7,7 @@ import pantallas.*
 object canion {
 
 	var property position = new Posicion(x = game.center().x(), y = 1)
-	var property estado = normal
+	var property estado = inmune
 
 	method image() = estado.image()
 
@@ -22,7 +22,7 @@ object canion {
 	}
 
 	method disparar() {
-		estado.disparar()
+		estado.disparar(self)
 	}
 
 	method serDaniado() {
@@ -99,10 +99,10 @@ object tres inherits Vida(position = new Posicion(x = 2, y = 0)) {
 
 
 class Estado {
-	method disparar() {
+	method disparar(canion) {
 		if (not game.hasVisual(balaCanion)) {
 			game.sound("disparoCanion.mp3").play()
-			balaCanion.disparar(self)
+			balaCanion.disparar(canion)
 		}
 	}
 	method serDaniado() {
@@ -115,7 +115,7 @@ object normal inherits Estado {
 }
 
 object inmune inherits Estado {
-	method image() = "" //Falta imagen de un canion inmune
+	method image() = "canionInmune.png" //Falta imagen de un canion inmune
 
 	override method serDaniado() {
 		
