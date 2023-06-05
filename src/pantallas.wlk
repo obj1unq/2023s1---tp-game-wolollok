@@ -116,7 +116,7 @@ object nivel2 {
 		ovnis.forEach{ ovni => game.addVisual(ovni)}
 		scoreCompleto.forEach{ puntaje => game.addVisual(puntaje)}
 			// HECHOS CASUALES
-		game.onTick(10000, "Agregar nave aleatoria", { naveAleatoria.aparecer()})
+		game.schedule(10000, { naveAleatoria.aparecer()})
 			// CONTROLES
 		keyboard.left().onPressDo{ canion.mover(izquierda)}
 		keyboard.right().onPressDo{ canion.mover(derecha)}
