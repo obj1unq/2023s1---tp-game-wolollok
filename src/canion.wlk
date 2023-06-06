@@ -22,7 +22,7 @@ object canion {
 	}
 
 	method disparar() {
-		estado.disparar()
+		estado.disparar(self)
 	}
 
 	method serDaniado() {
@@ -99,10 +99,10 @@ object tres inherits Vida(position = new Posicion(x = 2, y = 0)) {
 
 
 class Estado {
-	method disparar() {
+	method disparar(canion) {
 		if (not game.hasVisual(balaCanion)) {
 			game.sound("disparoCanion.mp3").play()
-			balaCanion.disparar(self)
+			balaCanion.disparar(canion)
 		}
 	}
 	method serDaniado() {
@@ -114,20 +114,18 @@ object normal inherits Estado {
 	method image() = "canion.png"
 }
 
-object inmune inherits Estado {
-	method image() = "" //Falta imagen de un canion inmune
+object inmune inherits Estado { /*Este estado no recibe danio de las balas */
+	method image() = "canionInmune.png" 
 
-	override method serDaniado() {
-		
-	}
+	override method serDaniado() {}
 }
 
-object disparoPotente inherits Estado { /*Este objeto mata una columna de naves */
-	method image() = "" //Falta imagen para un disparo potente
-	override method disparar() {
+object disparoPotente inherits Estado { /*Este estado mata una columna de naves */
+	method image() = "canionPotente.png" 
+	override method disparar(canion) {
 		if (not game.hasVisual(balaCanion)) {
 			game.sound("disparoCanion.mp3").play()
-			balaCanion.dispararPotente(self)
+			balaPotente.disparar()
 		}
 	}
 }
