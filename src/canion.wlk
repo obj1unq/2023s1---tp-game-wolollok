@@ -125,7 +125,7 @@ object disparoPotente inherits Estado { /*Este estado mata una columna de naves 
 	override method disparar(canion) {
 		if (not game.hasVisual(balaCanion)) {
 			game.sound("disparoCanion.mp3").play()
-			balaPotente.disparar()
+			balaPotente.disparar(canion)
 		}
 	}
 }

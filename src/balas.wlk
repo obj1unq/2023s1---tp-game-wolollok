@@ -37,16 +37,20 @@ class Bala {
 	}
 }
 
-object balaCanion inherits Bala(direccionamiento = arriba, position = new Posicion(x = 0, y = 0), tick = "subir bala") {
-
+class EstadoDeBalaCanion inherits Bala(direccionamiento = arriba, position = new Posicion(x = 0, y = 0), tick = "subir bala"){
 	override method moverAuto() {
 		game.onTick(25, tick, {=>
 			self.mover()
 			if (direccionamiento.estaEnElBorde(self)) self.serDestruido() else self.eliminarEnemigo()
 		})
 	}
+	
+	method eliminarEnemigo()
+}
 
-	method eliminarEnemigo() {
+object balaCanion inherits EstadoDeBalaCanion {
+
+	override method eliminarEnemigo() {
 		game.onCollideDo(self, { enemigo =>
 			self.serDestruido()
 			enemigo.serDestruido()
@@ -57,7 +61,9 @@ object balaCanion inherits Bala(direccionamiento = arriba, position = new Posici
 		})
 	}
 	
-	method eliminarEnemigoPotente() {
+}
+object balaPotente inherits EstadoDeBalaCanion {
+	override method eliminarEnemigo() {
 		game.onCollideDo(self, {enemigo => 
 			self.serDestruido() 
 			self.destruirPotente(enemigo)      
@@ -72,11 +78,14 @@ object balaCanion inherits Bala(direccionamiento = arriba, position = new Posici
 		game.getObjectsIn(ovni.elDeArriba()).forEach{nave => nave.serDestruido()}
 		game.getObjectsIn(ovni.elDe2Arriba()).forEach{nave => nave.serDestruido()}  
 	}
-	method dispararPotente() {
-		
-	}
+	
+	override method moverAuto() {
+		game.onTick(25, tick, {=>
+			self.mover()
+			if (direccionamiento.estaEnElBorde(self)) self.serDestruido() else self.eliminarEnemigo()
+		})
+	}	
 }
-
 object balaNave inherits Bala(direccionamiento = abajo, position = new Posicion(x = 0, y = 0), tick = "bajar bala") {
 
 	override method moverAuto() {
