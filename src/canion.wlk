@@ -7,7 +7,8 @@ import pantallas.*
 object canion {
 
 	var property position = new Posicion(x = game.center().x(), y = 1)
-	var property estado = disparoRapido
+	var property estado = normal
+
 
 	method image() = estado.image()
 
@@ -113,9 +114,11 @@ object normal inherits Estado {
 	method image() = "canion.png"
 }
 
-object inmune inherits Estado { /*Este estado no recibe danio de las balas */
-	method image() = "canionInmune.png" 
 
+
+object inmune inherits Estado {
+	method image() = "canionInmune.png" //Falta imagen de un canion inmune
+	
 	override method serDaniado() {}
 }
 
