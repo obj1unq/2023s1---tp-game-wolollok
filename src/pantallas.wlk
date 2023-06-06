@@ -127,7 +127,6 @@ object nivel2 {
 		game.clear()
 		siguienteNivel.iniciar()
 	}
-
 }
 
 object nivel3 {

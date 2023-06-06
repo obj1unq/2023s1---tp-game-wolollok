@@ -32,7 +32,6 @@ object canion {
 	method ganarBeneficio() {
 		gestorDeBeneficios.asignar(self)
 	}
-
 }
 
 object gestorDeVidas {

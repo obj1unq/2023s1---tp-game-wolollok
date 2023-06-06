@@ -69,7 +69,7 @@ object balaPotente inherits EstadoDeBalaCanion {
 			}
 		})
 	}
-	
+
 	method destruirPotente(ovni) {
 		game.getObjectsIn(ovni.elDeArriba()).forEach{nave => nave.serDestruido()}
 		game.getObjectsIn(ovni.elDe2Arriba()).forEach{nave => nave.serDestruido()}  

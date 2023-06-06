@@ -74,7 +74,6 @@ class NaveConFuego inherits Nave(image = "nave1.png") {
 	method elDeArriba() {
 		return game.getObjectsIn(game.at(self.position().x(), self.position().y() + 1))
 	}
-	
 	method elDeDosArriba() {
 		return game.getObjectsIn(game.at(self.position().x(), self.position().y() + 2))
 	}
