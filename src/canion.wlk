@@ -7,7 +7,7 @@ import pantallas.*
 object canion {
 
 	var property position = new Posicion(x = game.center().x(), y = 1)
-	var property estado = normal
+	var property estado = disparoRapido
 
 	method image() = estado.image()
 
@@ -130,7 +130,16 @@ object disparoPotente inherits Estado { /*Este estado mata una columna de naves 
 	}
 }
 
-object disparoRapido inherits Estado {} //La bala debe tener una velocidad como constante / variable, para que pueda ser mas rapida
+object disparoRapido inherits Estado {
+	method image() = "canionVeloz.png"
+	
+	override method disparar(canion) {
+		if (not game.hasVisual(balaCanion)) {
+			game.sound("disparoCanion.mp3").play()
+			balaVeloz.disparar(canion)
+		}
+	}
+} 
 
  
  object gestorDeBeneficios {

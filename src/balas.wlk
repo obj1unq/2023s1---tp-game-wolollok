@@ -85,7 +85,7 @@ object balaPotente inherits EstadoDeBalaCanion {
 
 object balaVeloz inherits EstadoDeBalaCanion {
 	override method moverAuto() {
-		game.onTick(10, tick, {=>
+		game.onTick(5, tick, {=>
 			self.mover()
 			if (direccionamiento.estaEnElBorde(self)) self.serDestruido() else self.eliminarEnemigo()
 		})
