@@ -45,12 +45,7 @@ class EstadoDeBalaCanion inherits Bala(direccionamiento = arriba, position = new
 		})
 	}
 	
-	method eliminarEnemigo()
-}
-
-object balaCanion inherits EstadoDeBalaCanion {
-
-	override method eliminarEnemigo() {
+	method eliminarEnemigo() {
 		game.onCollideDo(self, { enemigo =>
 			self.serDestruido()
 			enemigo.serDestruido()
@@ -60,8 +55,9 @@ object balaCanion inherits EstadoDeBalaCanion {
 			}
 		})
 	}
-	
 }
+
+object balaCanion inherits EstadoDeBalaCanion {	 }
 object balaPotente inherits EstadoDeBalaCanion {
 	override method eliminarEnemigo() {
 		game.onCollideDo(self, {enemigo => 
@@ -81,6 +77,15 @@ object balaPotente inherits EstadoDeBalaCanion {
 	
 	override method moverAuto() {
 		game.onTick(25, tick, {=>
+			self.mover()
+			if (direccionamiento.estaEnElBorde(self)) self.serDestruido() else self.eliminarEnemigo()
+		})
+	}	
+}
+
+object balaVeloz inherits EstadoDeBalaCanion {
+	override method moverAuto() {
+		game.onTick(10, tick, {=>
 			self.mover()
 			if (direccionamiento.estaEnElBorde(self)) self.serDestruido() else self.eliminarEnemigo()
 		})
