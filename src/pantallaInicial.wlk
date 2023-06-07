@@ -22,20 +22,20 @@ object spaceInvaders {
 	const property position = new Position(x = 7, y = 15)
 	const property image = "spaceInvaders.png"
 }
-object iniciarJuego inherits ObjetoPantallaInicial(position = new Position(x = 9, y = 12)) {
+object iniciarJuego inherits ObjetoPantallaInicial(position = new Position(x = 8, y = 12)) {
 	override method iniciar() {
 		game.clear()
 		pantallaNombre.iniciar()
 	}
 }
 
-object comoJugar inherits ObjetoPantallaInicial(position = new Position(x = 10, y = 9))  {
+object comoJugar inherits ObjetoPantallaInicial(position = new Position(x = 9, y = 9))  {
 	override method iniciar() {
 		pantallaComoJugar.iniciar()
 	}
 }
 
-object wolollok inherits ObjetoPantallaInicial(position = new Position(x = 14, y = 6))  {
+object wolollok inherits ObjetoPantallaInicial(position = new Position(x = 13, y = 6))  {
 	override method iniciar() {
 		pantallaWolollok.iniciar()
 	}
@@ -43,7 +43,7 @@ object wolollok inherits ObjetoPantallaInicial(position = new Position(x = 14, y
 
 object puntero {
 	const property image = "puntero.png"
-	var property position = new Position (x = 9, y = 12)
+	var property position = new Position (x = 8, y = 12)
 	const apuntables = [iniciarJuego, comoJugar, wolollok]
 	var property apuntado = 0
 	

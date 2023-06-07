@@ -7,7 +7,7 @@ import pantallas.*
 object canion {
 
 	var property position = new Posicion(x = game.center().x(), y = 1)
-	var property estado = normal
+	var property estado = inmune
 
 
 	method image() = estado.image()
