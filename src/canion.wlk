@@ -99,10 +99,11 @@ object tres inherits Vida(position = new Posicion(x = 2, y = 0)) {
 
 
 class Estado {
+	const tipoDeBala
 	method disparar(canion) {
-		if (not game.hasVisual(balaCanion)) {
+		if (not game.hasVisual(tipoDeBala)) {
 			game.sound("disparoCanion.mp3").play()
-			balaCanion.disparar(canion)
+			tipoDeBala.disparar(canion)
 		}
 	}
 	method serDaniado() {
@@ -110,37 +111,24 @@ class Estado {
 	}
 }
 
-object normal inherits Estado {
+object normal inherits Estado(tipoDeBala = balaCanion) {
 	method image() = "canion.png"
 }
 
 
 
-object inmune inherits Estado {
+object inmune inherits Estado(tipoDeBala = balaCanion) {
 	method image() = "canionInmune.png" //Falta imagen de un canion inmune
 	
 	override method serDaniado() {}
 }
 
-object disparoPotente inherits Estado { /*Este estado mata una columna de naves */
+object disparoPotente inherits Estado(tipoDeBala = balaPotente) { /*Este estado mata una columna de naves */
 	method image() = "canionPotente.png" 
-	override method disparar(canion) {
-		if (not game.hasVisual(balaCanion)) {
-			game.sound("disparoCanion.mp3").play()
-			balaPotente.disparar(canion)
-		}
-	}
 }
 
-object disparoRapido inherits Estado {
+object disparoRapido inherits Estado(tipoDeBala = balaVeloz) {
 	method image() = "canionVeloz.png"
-	
-	override method disparar(canion) {
-		if (not game.hasVisual(balaCanion)) {
-			game.sound("disparoCanion.mp3").play()
-			balaVeloz.disparar(canion)
-		}
-	}
 } 
 
  
