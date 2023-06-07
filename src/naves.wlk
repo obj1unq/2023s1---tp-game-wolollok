@@ -13,7 +13,7 @@ object movimiento {
 	var property direccion = derecha
 
 	method mover(ovnis) {
-		game.onTick(500, "moverOvnis", {=>
+		game.onTick(1000, "moverOvnis", {=>
 			if (not self.hayAlgunOvniAlBorde()) {
 				self.moverOvnisDePosicion(direccion)
 			} else {
@@ -84,10 +84,9 @@ class Nave3Patas inherits Nave(image = "nave2.png") {
 		return 500
 	}
 	
-	method elDeArriba() {
-		return game.getObjectsIn(game.at(self.position().x(), self.position().y() + 1))
-	}
-	method elDeDosArriba() {}
+	method elDeArriba() = game.getObjectsIn(game.at(self.position().x(), self.position().y() + 1))
+	
+	method elDeDosArriba() = []
 }
 
 class Nave2Patas inherits Nave(image = "nave3.png") {
@@ -95,8 +94,8 @@ class Nave2Patas inherits Nave(image = "nave3.png") {
 		return 1000
 	}
 	
-	method elDeArriba() {}
-	method elDeDosArriba() {}
+	method elDeArriba() = []
+	method elDeDosArriba() = []
 }
 
 class Factory {

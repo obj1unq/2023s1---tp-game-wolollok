@@ -91,6 +91,7 @@ object balaVeloz inherits EstadoDeBalaCanion {
 		})
 	}	
 }
+//BALA DE LA NAVE
 object balaNave inherits Bala(direccionamiento = abajo, position = new Posicion(x = 0, y = 0), tick = "bajar bala") {
 
 	override method moverAuto() {

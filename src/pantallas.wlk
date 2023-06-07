@@ -95,6 +95,7 @@ object nivel1 {
 		self.iniciar()
 	}
 
+	method serDaniado() {}
 }
 
 object nivel2 {
@@ -127,6 +128,8 @@ object nivel2 {
 		game.clear()
 		siguienteNivel.iniciar()
 	}
+	
+	method serDaniado() {}
 }
 
 object nivel3 {
@@ -159,7 +162,8 @@ object nivel3 {
 		game.clear()
 		siguienteNivel.iniciar()
 	}
-
+	
+	method serDaniado() {}
 }
 
 object pantallaGanaste {
