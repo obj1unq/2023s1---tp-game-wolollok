@@ -116,4 +116,7 @@ object balaNave inherits Bala(direccionamiento = abajo, position = new Posicion(
 		const naveAlAzar = ovnis.anyOne()
 		naveAlAzar.disparar()
 	}
+	
+	method elDeArriba() = game.getObjectsIn(game.at(self.position().x(), self.position().y() + 2))
+	method elDeDosArria() {}
 }
