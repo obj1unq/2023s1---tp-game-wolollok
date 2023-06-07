@@ -9,7 +9,6 @@ const factories = [naveConFuegoFactory, nave3PatasFactory, nave2PatasFactory]
 const ovnis = []
 
 object movimiento {
-
 	var property direccion = derecha
 
 	method mover(ovnis) {

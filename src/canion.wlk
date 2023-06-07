@@ -5,10 +5,8 @@ import posDir.*
 import pantallas.*
 
 object canion {
-
 	var property position = new Posicion(x = game.center().x(), y = 1)
 	var property estado = normal
-
 
 	method image() = estado.image()
 
@@ -36,7 +34,6 @@ object canion {
 }
 
 object gestorDeVidas {
-
 	var property vidas = [ uno, dos, tres ]
 
 	method perderVida() {
@@ -46,17 +43,14 @@ object gestorDeVidas {
 
 	method inicializarVidas() {
 		vidas.forEach{ vida => game.addVisual(vida)}
-
 	}
 
 	method ultimaVida() {
 		return vidas.last()
 	}
-
 }
 
 class Vida {
-
 	const property position
 
 	method image() {
@@ -74,25 +68,17 @@ class Vida {
 
 	method serDaniado() {
 	}
-
 }
 
-
-
-
 object uno inherits Vida(position = new Posicion(x = 0, y = 0)) {
-
 	override method eliminarse() {
 		super()
 		gameOver.iniciar()
 	}
-
 }
-
 object dos inherits Vida(position = new Posicion(x = 1, y = 0)) {}
 
 object tres inherits Vida(position = new Posicion(x = 2, y = 0)) {}
-
 
 class Estado {
 	const tipoDeBala
@@ -111,8 +97,6 @@ object normal inherits Estado(tipoDeBala = balaCanion) {
 	method image() = "canion.png"
 }
 
-
-
 object inmune inherits Estado(tipoDeBala = balaCanion) {
 	method image() = "canionInmune.png" //Falta imagen de un canion inmune
 	
@@ -127,7 +111,6 @@ object disparoRapido inherits Estado(tipoDeBala = balaVeloz) {
 	method image() = "canionVeloz.png"
 } 
 
- 
  object gestorDeBeneficios {
  	const beneficios = [inmune, disparoPotente, disparoRapido]
  	
