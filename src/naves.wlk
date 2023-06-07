@@ -13,7 +13,7 @@ object movimiento {
 	var property direccion = derecha
 
 	method mover(ovnis) {
-		game.onTick(500, "moverOvnis", {=>
+		game.onTick(1000, "moverOvnis", {=>
 			if (not self.hayAlgunOvniAlBorde()) {
 				self.moverOvnisDePosicion(direccion)
 			} else {
@@ -29,7 +29,6 @@ object movimiento {
 	method moverOvnisDePosicion(dir) {
 		ovnis.forEach{ nave => nave.mover(dir)}
 	}
-
 }
 
 class Nave {
@@ -64,27 +63,35 @@ class Nave {
 	}
 	
 	method puntaje()
-	method serDaniado(objeto) {
-	
-	}
+	method serDaniado() {}
 }
 
 class NaveConFuego inherits Nave(image = "nave1.png") {
 	override method puntaje() {
 		return 200
 	}
+	
+	method elDeArriba() = game.getObjectsIn(game.at(self.position().x(), self.position().y() + 2))
+	
+	method elDeDosArriba() = game.getObjectsIn(game.at(self.position().x(), self.position().y() + 4))
 }
 
 class Nave3Patas inherits Nave(image = "nave2.png") {
 	override method puntaje() {
 		return 500
 	}
+	
+	method elDeArriba() = game.getObjectsIn(game.at(self.position().x(), self.position().y() + 2))
+	method elDeDosArriba() = []
 }
 
 class Nave2Patas inherits Nave(image = "nave3.png") {
 	override method puntaje() {
 		return 1000
 	}
+	
+	method elDeArriba() = []
+	method elDeDosArriba() = []
 }
 
 class Factory {
@@ -137,8 +144,12 @@ object naveAleatoria inherits Nave(position = new Posicion(x = 0, y = 0), image 
 	override method disparar() {
 	}
 
-	override method puntaje() = 1000.randomUpTo(1500)
-
+	override method puntaje() = 1000.randomUpTo(2000)
+	
+	override method serDestruido() {
+		super()
+		canion.ganarBeneficio()
+	}
 }
 
 object movimientoNaveAleatoria {

@@ -74,11 +74,13 @@ object nivel1 {
 		ovnis.forEach{ ovni => game.addVisual(ovni)}
 		scoreCompleto.forEach{ puntaje => game.addVisual(puntaje)}
 			// HECHOS CASUALES
-		game.onTick(10000, "Agregar nave aleatoria", { naveAleatoria.aparecer()})
+		game.schedule(30000, { naveAleatoria.aparecer()})
 			// CONTROLES
 		keyboard.left().onPressDo{ canion.mover(izquierda)}
 		keyboard.right().onPressDo{ canion.mover(derecha)}
 		keyboard.space().onPressDo{ canion.disparar()}
+		
+	
 	}
 
 	method siguientePantalla() {
@@ -93,6 +95,7 @@ object nivel1 {
 		self.iniciar()
 	}
 
+	method serDaniado() {}
 }
 
 object nivel2 {
@@ -114,7 +117,7 @@ object nivel2 {
 		ovnis.forEach{ ovni => game.addVisual(ovni)}
 		scoreCompleto.forEach{ puntaje => game.addVisual(puntaje)}
 			// HECHOS CASUALES
-		game.onTick(10000, "Agregar nave aleatoria", { naveAleatoria.aparecer()})
+		game.schedule(10000, { naveAleatoria.aparecer()})
 			// CONTROLES
 		keyboard.left().onPressDo{ canion.mover(izquierda)}
 		keyboard.right().onPressDo{ canion.mover(derecha)}
@@ -125,7 +128,8 @@ object nivel2 {
 		game.clear()
 		siguienteNivel.iniciar()
 	}
-
+	
+	method serDaniado() {}
 }
 
 object nivel3 {
@@ -158,7 +162,8 @@ object nivel3 {
 		game.clear()
 		siguienteNivel.iniciar()
 	}
-
+	
+	method serDaniado() {}
 }
 
 object pantallaGanaste {
