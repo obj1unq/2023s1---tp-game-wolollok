@@ -53,21 +53,21 @@ object puntero {
 	
 	method subir() {
 		position = apuntables.get(0).position()
-		self.cicloArriba()
+		apuntables = [apuntables.last()] + apuntables.take(2)
 	}
 	
 	method bajar() {
 		position = apuntables.get(2).position()
-		self.cicloAbajo()
+		apuntables = apuntables .drop(1).add(apuntables.first())
 	}
-	method cicloAbajo() {
-		apuntables.add(apuntables.first())
-		apuntables.remove(apuntables.first())
-	}
-	method cicloArriba() {
-		apuntables = [apuntables.last()] + apuntables
-		apuntables = apuntables.take(3)
-	}
+	
+		
+		
+	
+	
+		
+		
+	
 }
 
 object pantallaWolollok {
