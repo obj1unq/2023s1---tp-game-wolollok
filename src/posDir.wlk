@@ -7,13 +7,22 @@ class Posicion{
 	
 	var property x
 	var property y
+	const duenio
 	
 	method up(){
-		y += 1
+		if (y + 1 > 19){
+			y += 1
+		} else {
+			duenio.serDestruido()
+		}
 	}
 	
 	method down(){
-		y -= 1
+		if (y - 1 <0){
+			y -= 1
+		} else {
+			duenio.serDestruido()
+		}
 	}
 	
 	method right(){
