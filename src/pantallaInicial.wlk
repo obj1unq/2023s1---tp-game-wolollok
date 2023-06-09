@@ -58,16 +58,9 @@ object puntero {
 	
 	method bajar() {
 		position = apuntables.get(2).position()
-		apuntables = apuntables.drop(1).add(apuntables.first())
+		apuntables = apuntables.drop(1) + [apuntables.first()]
 	}
-	
-		
-		
-	
-	
-		
-		
-	
+
 }
 
 object pantallaWolollok {
