@@ -43,27 +43,24 @@ object wolollok inherits ObjetoPantallaInicial(position = new Position(x = 13, y
 
 object puntero {
 	const property image = "puntero.png"
-	var property position = new Position (x = 8, y = 12)
-	const apuntables = [iniciarJuego, comoJugar, wolollok]
-	var property apuntado = 0
+	var property position = iniciarJuego.position()
+	var apuntables = [wolollok, iniciarJuego, comoJugar]
+	
 	
 	method iniciarPantalla(pantalla) {
 		pantalla.iniciar()
 	}
 	
 	method subir() {
-		if (position != iniciarJuego.position() ) {
-			apuntado = apuntado - 1
-			self.position(apuntables.get(apuntado).position() )
-		}
+		position = apuntables.get(0).position()
+		apuntables = [apuntables.last()] + apuntables.take(2)
 	}
 	
 	method bajar() {
-		if ( position != wolollok.position() ) {
-			apuntado = apuntado + 1
-			self.position(apuntables.get(apuntado).position() )
-		}
+		position = apuntables.get(2).position()
+		apuntables = apuntables.drop(1) + [apuntables.first()]
 	}
+
 }
 
 object pantallaWolollok {

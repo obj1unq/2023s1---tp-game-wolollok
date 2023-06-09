@@ -28,7 +28,7 @@ object pantallaInicial {
 	
 		keyboard.up().onPressDo({puntero.subir()})
 		keyboard.down().onPressDo({puntero.bajar()})
-		keyboard.right().onPressDo({puntero.iniciarPantalla(game.uniqueCollider(puntero))})
+		keyboard.space().onPressDo({puntero.iniciarPantalla(game.uniqueCollider(puntero))})
 	}
 	
 	method siguientePantalla() {
