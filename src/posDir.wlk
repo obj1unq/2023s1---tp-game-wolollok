@@ -7,22 +7,13 @@ class Posicion{
 	
 	var property x
 	var property y
-	const duenio
 	
 	method up(){
-		if (y + 1 > 19){
-			y += 1
-		} else {
-			duenio.serDestruido()
-		}
+		y += 1
 	}
 	
 	method down(){
-		if (y - 1 <0){
-			y -= 1
-		} else {
-			duenio.serDestruido()
-		}
+		y -= 1
 	}
 	
 	method right(){
@@ -96,4 +87,5 @@ object derecha {
 }
 
 const direcAleatorias = [ derecha, izquierda ]
+
 
