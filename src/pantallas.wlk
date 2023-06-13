@@ -95,7 +95,7 @@ object nivel1 {
 		self.iniciar()
 	}
 
-	method serDaniado() {}
+	method serDaniado(objeto) {}
 }
 
 object nivel2 {
@@ -129,7 +129,7 @@ object nivel2 {
 		siguienteNivel.iniciar()
 	}
 	
-	method serDaniado() {}
+	method serDaniado(objeto) {}
 }
 
 object nivel3 {
@@ -163,7 +163,7 @@ object nivel3 {
 		siguienteNivel.iniciar()
 	}
 	
-	method serDaniado() {}
+	method serDaniado(objeto) {}
 }
 
 object pantallaGanaste {
