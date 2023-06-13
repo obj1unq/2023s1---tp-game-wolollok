@@ -24,8 +24,10 @@ class Bala {
 	}
 
 	method serDestruido() {
+		if (game.hasVisual(self)) {
 		game.removeVisual(self)
 		game.removeTickEvent(tick)
+		}
 	}
 
 	method moverAuto()
@@ -33,6 +35,7 @@ class Bala {
 	method eliminarse() {
 		if (game.hasVisual(self)) {
 			game.removeTickEvent(tick)
+			game.removeVisual(self)
 		}
 	}
 }

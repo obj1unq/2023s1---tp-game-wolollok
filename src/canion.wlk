@@ -6,7 +6,7 @@ import pantallas.*
 
 object canion {
 	var property position = new Posicion(x = game.center().x(), y = 1)
-	var property estado = normal
+	var property estado = disparoPotente
 
 	method image() = estado.image()
 
@@ -74,7 +74,7 @@ class Vida {
 object uno inherits Vida(position = new Posicion(x = 0, y = 0)) {
 	override method eliminarse() {
 		super()
-		gameOver.iniciar()
+		fondoPerder1.iniciar()
 	}
 	
 	method serDaniado(objeto) {}

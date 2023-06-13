@@ -167,8 +167,30 @@ object nivel3 {
 }
 
 object pantallaGanaste {
-
+	
 }
+object fondoPerder1 {
+	var property image = "fondoPantallaInicial.jpg"
+	const property position = new Position(x = 0, y = 0)
+	method iniciar() {
+		balaCanion.eliminarse()
+		balaNave.eliminarse()
+		game.removeTickEvent("moverOvnis")
+		game.clear()
+		game.addVisual(self)	
+		game.sound("perder.mp3").play()
+		self.iniciarAnimacion()
+	}
+	
+	method iniciarAnimacion() {
+		game.schedule(400, {=> self.image("fondoPerder1.jpg")})
+		game.schedule(700, {=> self.image("fondoPerder2.jpg")})
+		game.schedule(100, {=> self.image("fondoPerder3.jpg")})
+		game.schedule(1300, {=> game.removeVisual(self)})
+		game.schedule(1300, {=> gameOver.iniciar()})
+	}
+}
+	
 
 object gameOver {
 
@@ -176,11 +198,6 @@ object gameOver {
 
 	const property position = new Posicion ( x = 0, y = 0)
 	method iniciar(){
-		
-		balaCanion.eliminarse()
-		balaNave.eliminarse()
-		game.removeTickEvent("moverOvnis")
-		game.removeTickEvent("Agregar nave aleatoria")
 		game.clear()
 		ovnis.clear()
 		game.addVisual(self)
