@@ -58,18 +58,12 @@ class Vida {
 		return "vida.png"
 	}
 
-	method perderVida() {
-		const sonido = self.toString() + "-vida.mp3"
-		game.sound(sonido).play()
-		game.removeVisual(self)
-	}	
-
 	method eliminarse() {
+		game.sound("dos-vida.mp3").play()
 		game.removeVisual(self)
 	}
 
-	method serDaniado() {
-	}
+	method serDaniado(objeto) {}
 }
 
 object uno inherits Vida(position = new Posicion(x = 0, y = 0)) {
@@ -77,16 +71,10 @@ object uno inherits Vida(position = new Posicion(x = 0, y = 0)) {
 		super()
 		fondoPerder1.iniciar()
 	}
-	
-	method serDaniado(objeto) {}
-}
-object dos inherits Vida(position = new Posicion(x = 1, y = 0)) {
-	method serDaniado(objeto) {}
-}
+ }
+object dos inherits Vida(position = new Posicion(x = 1, y = 0)) {}
 
-object tres inherits Vida(position = new Posicion(x = 2, y = 0)) {
-	method serDaniado(objeto) {}
-}
+object tres inherits Vida(position = new Posicion(x = 2, y = 0)) {}
 
 class Estado {
 	const tipoDeBala

@@ -188,7 +188,6 @@ object fondoPerder1 {
 		})
 		game.schedule(700, {=> self.image("fondoPerder2.jpg")})
 		game.schedule(1000, {=> self.image("fondoPerder3.jpg")})
-		game.schedule(1300, {=> game.removeVisual(self)})
 		game.schedule(1300, {=> gameOver.iniciar()})
 	}
 }
