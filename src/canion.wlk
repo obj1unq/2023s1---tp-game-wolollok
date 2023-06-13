@@ -6,7 +6,7 @@ import pantallas.*
 
 object canion {
 	var property position = new Posicion(x = game.center().x(), y = 1)
-	var property estado = disparoPotente
+	var property estado = normal
 
 	method image() = estado.image()
 
@@ -25,8 +25,8 @@ object canion {
 	}
 
 	method serDaniado(objeto) {
-		estado.serDaniado()
 		objeto.serDestruido()
+		estado.serDaniado()
 	}
 	
 	method ganarBeneficio() {

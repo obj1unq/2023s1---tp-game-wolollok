@@ -173,6 +173,7 @@ object fondoPerder1 {
 	var property image = "fondoPantallaInicial.jpg"
 	const property position = new Position(x = 0, y = 0)
 	method iniciar() {
+		ovnis.clear()
 		balaCanion.eliminarse()
 		balaNave.eliminarse()
 		game.removeTickEvent("moverOvnis")
