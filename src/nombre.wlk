@@ -23,7 +23,7 @@ object nombre {
 			nombre = nombre.take(nombre.size()-1)
 	}
 	
-	method serDaniado(){}
+	method serDaniado(objeto){}
 	
 		
 	method iniciarTeclas(){
