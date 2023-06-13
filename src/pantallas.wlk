@@ -179,14 +179,15 @@ object fondoPerder1 {
 		game.removeTickEvent("moverOvnis")
 		game.clear()
 		game.addVisual(self)	
-		game.sound("perder.mp3").play()
 		self.iniciarAnimacion()
 	}
 	
 	method iniciarAnimacion() {
-		game.schedule(400, {=> self.image("fondoPerder1.jpg")})
+		game.schedule(400, {=> self.image("fondoPerder1.jpg")
+							game.sound("perder.mp3").play()
+		})
 		game.schedule(700, {=> self.image("fondoPerder2.jpg")})
-		game.schedule(100, {=> self.image("fondoPerder3.jpg")})
+		game.schedule(1000, {=> self.image("fondoPerder3.jpg")})
 		game.schedule(1300, {=> game.removeVisual(self)})
 		game.schedule(1300, {=> gameOver.iniciar()})
 	}

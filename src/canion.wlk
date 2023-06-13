@@ -59,8 +59,9 @@ class Vida {
 	}
 
 	method perderVida() {
+		const sonido = self.toString() + "-vida.mp3"
+		game.sound(sonido).play()
 		game.removeVisual(self)
-		game.sound(self.toString() + "-vida.mp3").play()
 	}	
 
 	method eliminarse() {
