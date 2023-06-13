@@ -25,8 +25,8 @@ object canion {
 	}
 
 	method serDaniado(objeto) {
-		estado.serDaniado()
 		objeto.serDestruido()
+		estado.serDaniado()
 	}
 	
 	method ganarBeneficio() {
@@ -58,34 +58,23 @@ class Vida {
 		return "vida.png"
 	}
 
-	method perderVida() {
-		game.removeVisual(self)
-		game.sound(self.toString() + "-vida.mp3").play()
-	}	
-
 	method eliminarse() {
+		game.sound("dos-vida.mp3").play()
 		game.removeVisual(self)
 	}
 
-	method serDaniado() {
-	}
+	method serDaniado(objeto) {}
 }
 
 object uno inherits Vida(position = new Posicion(x = 0, y = 0)) {
 	override method eliminarse() {
 		super()
-		gameOver.iniciar()
+		fondoPerder1.iniciar()
 	}
-	
-	method serDaniado(objeto) {}
-}
-object dos inherits Vida(position = new Posicion(x = 1, y = 0)) {
-	method serDaniado(objeto) {}
-}
+ }
+object dos inherits Vida(position = new Posicion(x = 1, y = 0)) {}
 
-object tres inherits Vida(position = new Posicion(x = 2, y = 0)) {
-	method serDaniado(objeto) {}
-}
+object tres inherits Vida(position = new Posicion(x = 2, y = 0)) {}
 
 class Estado {
 	const tipoDeBala
