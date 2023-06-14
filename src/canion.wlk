@@ -90,8 +90,23 @@ class Estado {
 }
 
 object normal inherits Estado(tipoDeBala = balaCanion) {
-	method image() = "canion.png"
+	var property image = "canion.png"
 }
+
+class ColorDeCanion {
+	 var property image = self.toString() + ".png"
+	 
+	 method serElegido() {
+	 	normal.image( self.image() )
+	 }
+}
+object canionNormal inherits ColorDeCanion {}
+
+object canionRosa inherits ColorDeCanion {}
+
+object canionAzul inherits ColorDeCanion {}
+
+object canionCeleste inherits ColorDeCanion {}
 
 object inmune inherits Estado(tipoDeBala = balaCanion) {
 	method image() = "canionInmune.png" //Falta imagen de un canion inmune

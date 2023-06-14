@@ -34,10 +34,20 @@ object pantallaInicial {
 	
 	method siguientePantalla() {
 		game.clear()
-		pantallaNombre.iniciar()
+		pantallaEleccion.iniciar()
 	}	
 }
 
+object pantallaEleccion {
+	method iniciar() {
+		game.addVisual(self)
+		game.addVisual(puntero2)
+		game.addVisualIn(canionNormal, game.at(2, 10))
+		game.addVisualIn(canionRosa, game.at(5, 20))
+		game.addVisualIn(canionAzul, game.at(8, 20))
+		game.addVisualIn(canionCeleste, game.at(11, 20))
+	}
+}
 object pantallaNombre {
 
 	const property image = "fondoNombre.png"
