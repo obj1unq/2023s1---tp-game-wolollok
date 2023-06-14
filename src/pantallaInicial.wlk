@@ -79,13 +79,13 @@ object pantallaWolollok {
 
 object pantallaComoJugar {
 	const property position = new Position (x = 0, y= 0)
-	const property image = "pantallaComoJugar1.png"
+	var property image = "pantallaComoJugar1.png"
+	
 	method iniciar() {
 		game.clear()
 		game.addVisual(self)
-		
 		keyboard.backspace().onPressDo({pantallaInicial.iniciar()})
+		keyboard.right().onPressDo({self.image("pantallaComoJugar2.png")})
+		keyboard.left().onPressDo({self.image("pantallaComoJugar1.png")})
 	}
 }
-
-
