@@ -25,7 +25,7 @@ object spaceInvaders {
 object iniciarJuego inherits ObjetoPantallaInicial(position = new Position(x = 8, y = 12)) {
 	override method iniciar() {
 		game.clear()
-		pantallaNombre.iniciar()
+		pantallaEleccion.iniciar()
 	}
 }
 

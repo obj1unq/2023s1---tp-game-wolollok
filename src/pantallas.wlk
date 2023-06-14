@@ -6,6 +6,7 @@ import posDir.*
 import score.*
 import nombre.*
 import pantallaInicial.*
+import pantallaEleccion.*
 
 object actual {
 
@@ -39,13 +40,19 @@ object pantallaInicial {
 }
 
 object pantallaEleccion {
+	const property image = "fondoPantallaInicial.jpg"
+	const property position = new Posicion(x = 0, y = 0)
 	method iniciar() {
 		game.addVisual(self)
 		game.addVisual(puntero2)
-		game.addVisualIn(canionNormal, game.at(2, 10))
-		game.addVisualIn(canionRosa, game.at(5, 20))
-		game.addVisualIn(canionAzul, game.at(8, 20))
-		game.addVisualIn(canionCeleste, game.at(11, 20))
+		game.addVisual(canionNormal)
+		game.addVisual(canionRosa)
+		game.addVisual(canionAzul)
+		game.addVisual(canionCeleste)
+		
+		keyboard.left().onPressDo({ puntero2.moverIzquierda() })
+		keyboard.right().onPressDo({ puntero2.moverDerecha() })
+		keyboard.enter().onPressDo({puntero2.iniciar(game.uniqueCollider(puntero2))})
 	}
 }
 object pantallaNombre {
