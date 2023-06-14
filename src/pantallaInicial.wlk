@@ -48,17 +48,20 @@ object puntero {
 	
 	
 	method iniciarPantalla(pantalla) {
+		game.sound("entrar.mp3").play()
 		pantalla.iniciar()
 	}
 	
 	method subir() {
 		position = apuntables.get(0).position()
 		apuntables = [apuntables.last()] + apuntables.take(2)
+		game.sound("mover.mp3").play()
 	}
 	
 	method bajar() {
 		position = apuntables.get(2).position()
 		apuntables = apuntables.drop(1) + [apuntables.first()]
+		game.sound("mover.mp3").play()
 	}
 
 }
@@ -76,7 +79,7 @@ object pantallaWolollok {
 
 object pantallaComoJugar {
 	const property position = new Position (x = 0, y= 0)
-	const property image = "pantallaComoJugar.png"
+	const property image = "pantallaComoJugar1.png"
 	method iniciar() {
 		game.clear()
 		game.addVisual(self)
