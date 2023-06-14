@@ -19,6 +19,7 @@ object pantallaInicial {
 	 const property position = new Posicion(x = 0, y = 0)
 	
 	method iniciar() {
+		game.clear()
 		game.addVisual(self)
 		game.addVisual(spaceInvaders)
 		game.addVisual(iniciarJuego)

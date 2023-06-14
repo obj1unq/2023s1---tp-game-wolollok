@@ -84,7 +84,7 @@ object pantallaComoJugar {
 	method iniciar() {
 		game.clear()
 		game.addVisual(self)
-		keyboard.backspace().onPressDo({pantallaInicial.iniciar()})
+		keyboard.backspace().onPressDo({ pantallaInicial.iniciar() })
 		keyboard.right().onPressDo({self.image("pantallaComoJugar2.png")})
 		keyboard.left().onPressDo({self.image("pantallaComoJugar1.png")})
 	}
