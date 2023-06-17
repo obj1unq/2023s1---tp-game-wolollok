@@ -9,17 +9,17 @@ import pantallaInicial.*
 object puntero2 {
 	const property image = "puntero2.png"
 	var property position = canionNormal.position()
-	var property apuntables = [canionNormal, canionRosa, canionAzul, canionCeleste]
+	var property apuntables = [canionRosa, canionAzul, canionCeleste, canionNormal]
 	
 	method moverDerecha() {
 		position = apuntables.get(0).position()
-		apuntables = [apuntables.last()] + apuntables.take(3)
+		apuntables =  apuntables.drop(1) + [apuntables.first()]
 		game.sound("mover.mp3").play()
 	}
 	
 	method moverIzquierda() {
-		position = apuntables.get(3).position()
-		apuntables = apuntables.drop(1) + [apuntables.first()]
+		position = apuntables.get(2).position()
+		apuntables = [apuntables.last()] + apuntables.take(3)
 		game.sound("mover.mp3").play()
 	}
 	
@@ -33,10 +33,10 @@ object puntero2 {
 
 
 class ColorDeCanion {
-	 var property image = self.toString() + ".png"
+	 var property image = self.toString() + "Eleccion.png"
 	 
 	 method serElegido() {
-	 	normal.image( self.image() )
+	 	normal.image( self.toString() +"Jugar.png" )
 	 }
 }
 object canionNormal inherits ColorDeCanion {
