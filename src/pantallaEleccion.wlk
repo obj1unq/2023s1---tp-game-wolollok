@@ -34,23 +34,35 @@ object puntero2 {
 
 class ColorDeCanion {
 	 var property image = self.toString() + "Eleccion.png"
+	 const property nivelDeDesbloqueo
 	 
 	 method serElegido() {
+	 	self.validarEleccion()
 	 	normal.image( self.toString() +"Jugar.png" )
 	 }
+	 
+	 method validarEleccion() {
+		if (not self.estaDesbloqueado()) {
+			self.error("Este canion se desbloquea en el nivel" + nivelDeDesbloqueo)
+		}
+	}
+	
+	method estaDesbloqueado() {
+		return nivelDeDesbloqueo <= actual.nivelActual()
+	}
 }
-object canionNormal inherits ColorDeCanion {
+object canionNormal inherits ColorDeCanion(nivelDeDesbloqueo = 1) {
 	const property position = new Position (x = 8, y = 10)
 }
 
-object canionRosa inherits ColorDeCanion {
+object canionRosa inherits ColorDeCanion(nivelDeDesbloqueo = 2) {
 	const property position = new Position (x = 10, y = 10)
 }
 
-object canionAzul inherits ColorDeCanion {
+object canionAzul inherits ColorDeCanion(nivelDeDesbloqueo = 2) {
 	const property position = new Position (x = 12, y = 10)
 }
 
-object canionCeleste inherits ColorDeCanion {
+object canionCeleste inherits ColorDeCanion(nivelDeDesbloqueo = 3) {
 	const property position = new Position (x = 14, y = 10)
 }

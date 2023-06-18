@@ -10,7 +10,11 @@ import pantallaEleccion.*
 
 object actual {
 
-	var property pantalla = null
+	var property pantalla = nivel1
+	
+	method nivelActual() {
+		return pantalla.numero()
+	}
 
 }
 
@@ -78,6 +82,7 @@ object nivel1 {
 	const property image = "fondo1.jpg"
 	const property position = new Posicion(x = 0, y = 0)
 	const property siguienteNivel = nivel2
+	const property numero = 1
 
 	method iniciar() {
 		actual.pantalla(self)
@@ -121,6 +126,7 @@ object nivel2 {
 	const property image = "fondo2.png"
 	const property position = new Posicion(x = 0, y = 0)
 	const property siguienteNivel = nivel3
+	const property numero = 2
 
 	method iniciar() {
 		actual.pantalla(self)
@@ -155,6 +161,7 @@ object nivel3 {
 	const property image = "fondo3.png"
 	const property position = new Posicion(x = 0, y = 0)
 	const property siguienteNivel = pantallaGanaste
+	const property numero = 3
 
 	method iniciar() {
 		actual.pantalla(self)
