@@ -10,11 +10,6 @@ class ObjetoPantallaInicial {
 	const property image = self.toString() + ".png"
 	const property position
 	
-	method iniciarPantalla() {
-		game.clear()
-		self.iniciar()
-	}
-	
 	method iniciar()
 }
 
@@ -24,7 +19,6 @@ object spaceInvaders {
 }
 object iniciarJuego inherits ObjetoPantallaInicial(position = new Position(x = 8, y = 12)) {
 	override method iniciar() {
-		game.clear()
 		pantallaEleccion.iniciar()
 	}
 }
@@ -47,7 +41,7 @@ object puntero {
 	var apuntables = [wolollok, iniciarJuego, comoJugar]
 	
 	
-	method iniciarPantalla(pantalla) {
+	method iniciar(pantalla) {
 		game.sound("entrar.mp3").play()
 		pantalla.iniciar()
 	}
@@ -70,7 +64,6 @@ object pantallaWolollok {
 	const property position = new Position (x = 0, y= 0)
 	const property image = "pantallaWolollok.png"
 	method iniciar() {
-		game.clear()
 		game.addVisual(self)
 		
 		keyboard.backspace().onPressDo({pantallaInicial.iniciar()})
@@ -82,7 +75,6 @@ object pantallaComoJugar {
 	var property image = "pantallaComoJugar1.png"
 	
 	method iniciar() {
-		game.clear()
 		game.addVisual(self)
 		keyboard.backspace().onPressDo({ pantallaInicial.iniciar() })
 		keyboard.right().onPressDo({self.image("pantallaComoJugar2.png")})

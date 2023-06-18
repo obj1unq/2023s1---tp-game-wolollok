@@ -10,10 +10,15 @@ import pantallaEleccion.*
 
 object actual {
 
-	var property pantalla = nivel1
+	var property pantalla = null
+	var property nivel = nivel1
 	
 	method nivelActual() {
-		return pantalla.numero()
+		return nivel.numero()
+	}
+	
+	method indicador() {
+		return pantalla.indicador()
 	}
 
 }
@@ -22,9 +27,11 @@ object actual {
 object pantallaInicial {
 	 const property image = "fondoPantallaInicial.jpg"
 	 const property position = new Posicion(x = 0, y = 0)
+	 const property indicador = puntero
 	
 	method iniciar() {
 		game.clear()
+		actual.pantalla(self)
 		game.addVisual(self)
 		game.addVisual(spaceInvaders)
 		game.addVisual(iniciarJuego)
@@ -34,7 +41,7 @@ object pantallaInicial {
 	
 		keyboard.up().onPressDo({puntero.subir()})
 		keyboard.down().onPressDo({puntero.bajar()})
-		keyboard.space().onPressDo({puntero.iniciarPantalla(game.uniqueCollider(puntero))})
+		keyboard.enter().onPressDo({actual.indicador().iniciar(game.uniqueCollider(actual.indicador()))})
 	}
 	
 	method siguientePantalla() {
@@ -46,7 +53,9 @@ object pantallaInicial {
 object pantallaEleccion {
 	const property image = "fondoPantallaInicial.jpg"
 	const property position = new Posicion(x = 0, y = 0)
+	const property indicador = puntero2
 	method iniciar() {
+		actual.pantalla(self)
 		game.addVisual(self)
 		game.addVisual(puntero2)
 		game.addVisual(canionNormal)
@@ -56,7 +65,7 @@ object pantallaEleccion {
 		
 		keyboard.left().onPressDo({ puntero2.moverIzquierda() })
 		keyboard.right().onPressDo({ puntero2.moverDerecha() })
-		keyboard.enter().onPressDo({puntero2.iniciar(game.uniqueCollider(puntero2))})
+		
 	}
 }
 object pantallaNombre {
@@ -65,6 +74,8 @@ object pantallaNombre {
 	const property position = new Posicion(x = 0, y = 0)
 
 	method iniciar() {
+		game.clear()
+		actual.pantalla(self)
 		game.addVisual(self)
 		game.addVisualIn(nombre, new Posicion(x = 14, y = 13))
 		nombre.iniciarTeclas()
@@ -85,6 +96,7 @@ object nivel1 {
 	const property numero = 1
 
 	method iniciar() {
+		actual.nivel(self)
 		actual.pantalla(self)
 		game.addVisual(self)
 		factories.forEach{ factory => factory.construirNaves()}
@@ -129,6 +141,7 @@ object nivel2 {
 	const property numero = 2
 
 	method iniciar() {
+		actual.nivel(self)
 		actual.pantalla(self)
 		game.addVisual(self)
 		factories.forEach{ factory => factory.construirNaves()}
@@ -164,6 +177,7 @@ object nivel3 {
 	const property numero = 3
 
 	method iniciar() {
+		actual.nivel(self)
 		actual.pantalla(self)
 		game.addVisual(self)
 		factories.forEach{ factory => factory.construirNaves()}

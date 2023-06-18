@@ -25,7 +25,6 @@ object puntero2 {
 	
 	method iniciar(colorDeCanion) {
 		colorDeCanion.serElegido()
-		game.clear()
 		pantallaNombre.iniciar()
 	}
 	

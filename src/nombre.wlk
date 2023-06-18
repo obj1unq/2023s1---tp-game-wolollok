@@ -73,7 +73,5 @@ object nombre {
 	//CONTROL
 	
 	keyboard.backspace().onPressDo{self.borrarUltima()}
-	keyboard.enter().onPressDo{pantallaNombre.siguientePantalla()}
-
 	}
 }
