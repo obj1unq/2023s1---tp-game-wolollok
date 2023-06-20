@@ -90,7 +90,7 @@ class Estado {
 }
 
 object normal inherits Estado(tipoDeBala = balaCanion) {
-	method image() = "canion.png"
+	var property image = "canion.png"
 }
 
 object inmune inherits Estado(tipoDeBala = balaCanion) {

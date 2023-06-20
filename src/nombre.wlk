@@ -73,7 +73,14 @@ object nombre {
 	//CONTROL
 	
 	keyboard.backspace().onPressDo{self.borrarUltima()}
-	keyboard.enter().onPressDo{pantallaNombre.siguientePantalla()}
+	}
+}
 
+object punteroNombre {
+	const property position = new Position (x = 0, y = 0)
+	const property image = "punteroNombre.png"
+	
+	method iniciar(pantalla) {
+		nivel1.iniciar()
 	}
 }
