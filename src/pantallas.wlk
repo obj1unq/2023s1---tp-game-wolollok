@@ -72,9 +72,11 @@ object pantallaNombre {
 
 	const property image = "fondoNombre.png"
 	const property position = new Posicion(x = 0, y = 0)
+	const property indicador = punteroNombre
 
 	method iniciar() {
-		game.clear()
+		game.removeVisual(pantallaInicial)
+		game.addVisual(punteroNombre)
 		actual.pantalla(self)
 		game.addVisual(self)
 		game.addVisualIn(nombre, new Posicion(x = 14, y = 13))
@@ -96,6 +98,7 @@ object nivel1 {
 	const property numero = 1
 
 	method iniciar() {
+		game.clear()
 		actual.nivel(self)
 		actual.pantalla(self)
 		game.addVisual(self)

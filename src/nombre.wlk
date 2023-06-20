@@ -75,3 +75,12 @@ object nombre {
 	keyboard.backspace().onPressDo{self.borrarUltima()}
 	}
 }
+
+object punteroNombre {
+	const property position = new Position (x = 0, y = 0)
+	const property image = "punteroNombre.png"
+	
+	method iniciar(pantalla) {
+		nivel1.iniciar()
+	}
+}

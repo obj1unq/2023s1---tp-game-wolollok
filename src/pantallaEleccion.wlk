@@ -25,6 +25,12 @@ object puntero2 {
 	
 	method iniciar(colorDeCanion) {
 		colorDeCanion.serElegido()
+		game.removeVisual(pantallaEleccion)
+		game.removeVisual(self)
+		game.removeVisual(canionNormal)
+		game.removeVisual(canionRosa)
+		game.removeVisual(canionAzul)
+		game.removeVisual(canionCeleste)
 		pantallaNombre.iniciar()
 	}
 	
