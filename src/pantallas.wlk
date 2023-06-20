@@ -75,7 +75,6 @@ object pantallaNombre {
 	const property indicador = punteroNombre
 
 	method iniciar() {
-		game.removeVisual(pantallaInicial)
 		game.addVisual(punteroNombre)
 		actual.pantalla(self)
 		game.addVisual(self)
