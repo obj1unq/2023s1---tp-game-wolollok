@@ -244,7 +244,7 @@ object gameOver {
 		ovnis.clear()
 		game.addVisual(self)
 		scoreCompleto.forEach{ puntaje => puntaje.puntajeFinal()}
-		keyboard.r().onPressDo{ nivel1.reiniciarJuego()}
+		keyboard.r().onPressDo{ actual.nivel().reiniciarJuego()}
 		keyboard.e().onPressDo{ game.stop()}
 	}
 
