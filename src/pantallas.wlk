@@ -51,7 +51,7 @@ object pantallaInicial {
 }
 
 object pantallaEleccion {
-	const property image = "fondoPantallaInicial.jpg"
+	const property image = "fondoEleccion.png"
 	const property position = new Posicion(x = 0, y = 0)
 	const property indicador = puntero2
 	method iniciar() {

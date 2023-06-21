@@ -61,13 +61,13 @@ object canionNormal inherits ColorDeCanion(nivelDeDesbloqueo = 1) {
 }
 
 object canionRosa inherits ColorDeCanion(nivelDeDesbloqueo = 2) {
-	const property position = new Position (x = 10, y = 10)
+	const property position = new Position (x = 11, y = 10)
 }
 
 object canionAzul inherits ColorDeCanion(nivelDeDesbloqueo = 2) {
-	const property position = new Position (x = 12, y = 10)
+	const property position = new Position (x = 14, y = 10)
 }
 
 object canionCeleste inherits ColorDeCanion(nivelDeDesbloqueo = 3) {
-	const property position = new Position (x = 14, y = 10)
+	const property position = new Position (x = 17, y = 10)
 }
