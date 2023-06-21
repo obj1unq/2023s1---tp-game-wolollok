@@ -97,8 +97,10 @@ object nivel1 {
 	const property position = new Posicion(x = 0, y = 0)
 	const property siguienteNivel = nivel2
 	const property numero = 1
+	
 
 	method iniciar() {
+		game.sound("musicaInGame.mp3").play()
 		game.clear()
 		actual.nivel(self)
 		actual.pantalla(self)
