@@ -147,6 +147,7 @@ object nivel2 {
 	const property numero = 2
 
 	method iniciar() {
+		game.sound("musicaInGame.mp3").play()
 		actual.nivel(self)
 		actual.pantalla(self)
 		game.addVisual(self)
@@ -183,6 +184,7 @@ object nivel3 {
 	const property numero = 3
 
 	method iniciar() {
+		game.sound("musicaInGame.mp3").play()
 		actual.nivel(self)
 		actual.pantalla(self)
 		game.addVisual(self)
