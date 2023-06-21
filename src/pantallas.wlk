@@ -7,6 +7,7 @@ import score.*
 import nombre.*
 import pantallaInicial.*
 import pantallaEleccion.*
+import pantallaPerder.*
 
 object actual {
 
@@ -20,7 +21,6 @@ object actual {
 	method indicador() {
 		return pantalla.indicador()
 	}
-
 }
 
 
@@ -44,12 +44,28 @@ object pantallaInicial {
 		keyboard.enter().onPressDo({actual.indicador().iniciar(game.uniqueCollider(actual.indicador()))})
 	}
 	
-	method siguientePantalla() {
+	method reiniciarJuego() {
 		game.clear()
-		pantallaEleccion.iniciar()
-	}	
+		gestorDeVidas.vidas([uno, dos, tres])
+		score.puntaje(100000)
+		self.iniciar()
+	}
 }
 
+object pantallaNombre {
+
+	const property image = "fondoNombre.png"
+	const property position = new Posicion(x = 0, y = 0)
+	const property indicador = punteroNombre
+
+	method iniciar() {
+		game.addVisual(punteroNombre)
+		actual.pantalla(self)
+		game.addVisual(self)
+		game.addVisualIn(nombre, new Posicion(x = 14, y = 13))
+		nombre.iniciarTeclas()
+	}
+}
 object pantallaEleccion {
 	const property image = "fondoEleccion.png"
 	const property position = new Posicion(x = 0, y = 0)
@@ -67,29 +83,9 @@ object pantallaEleccion {
 		
 		keyboard.left().onPressDo({ puntero2.moverIzquierda() })
 		keyboard.right().onPressDo({ puntero2.moverDerecha() })
-		
 	}
 }
-object pantallaNombre {
 
-	const property image = "fondoNombre.png"
-	const property position = new Posicion(x = 0, y = 0)
-	const property indicador = punteroNombre
-
-	method iniciar() {
-		game.addVisual(punteroNombre)
-		actual.pantalla(self)
-		game.addVisual(self)
-		game.addVisualIn(nombre, new Posicion(x = 14, y = 13))
-		nombre.iniciarTeclas()
-	}
-
-	method siguientePantalla() {
-		game.clear()
-		nivel1.iniciar()
-	}
-
-}
 
 object nivel1 {
 
@@ -125,13 +121,6 @@ object nivel1 {
 	method siguientePantalla() {
 		game.clear()
 		siguienteNivel.iniciar()
-	}
-	
-	method reiniciarJuego() {
-		game.clear()
-		gestorDeVidas.vidas([uno, dos, tres])
-		score.puntaje(100000)
-		self.iniciar()
 	}
 
 	method serDaniado(objeto) {}
@@ -212,7 +201,7 @@ object nivel3 {
 object pantallaGanaste {
 	
 }
-object fondoPerder1 {
+object fondoPerder {
 	var property image = "fondoPantallaInicial.jpg"
 	const property position = new Position(x = 0, y = 0)
 	method iniciar() {
@@ -221,18 +210,9 @@ object fondoPerder1 {
 		balaNave.eliminarse()
 		game.removeTickEvent("moverOvnis")
 		game.clear()
-		game.addVisual(self)	
-		self.iniciarAnimacion()
-	}
-	
-	method iniciarAnimacion() {
-		game.schedule(400, {=> self.image("fondoPerder1.jpg")
-							game.sound("perder.mp3").play()
-		})
-		game.schedule(700, {=> self.image("fondoPerder2.jpg")})
-		game.schedule(1000, {=> self.image("fondoPerder3.jpg")})
-		game.schedule(1300, {=> gameOver.iniciar()})
-	}
+		game.addVisual(self)
+		corazonPerder.animacion()
+	}	
 }
 	
 
@@ -246,7 +226,7 @@ object gameOver {
 		ovnis.clear()
 		game.addVisual(self)
 		scoreCompleto.forEach{ puntaje => puntaje.puntajeFinal()}
-		keyboard.r().onPressDo{ actual.nivel().reiniciarJuego()}
+		keyboard.r().onPressDo{ pantallaInicial.reiniciarJuego()}
 		keyboard.e().onPressDo{ game.stop()}
 	}
 

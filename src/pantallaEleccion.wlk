@@ -33,7 +33,7 @@ object puntero2 {
 		game.removeVisual(canionRosa)
 		game.removeVisual(canionAzul)
 		game.removeVisual(canionDorado)
-		pantallaNombre.iniciar()
+		actual.nivel().iniciar()
 		} catch error {
 			game.say(colorDeCanion, "Este canion se desbloquea en el nivel" + colorDeCanion.nivelDeDesbloqueo())
 		}
