@@ -24,20 +24,33 @@ object actual {
 }
 
 
-object pantallaInicial {
-	 const property image = "fondoPantallaInicial.jpg"
-	 const property position = new Posicion(x = 0, y = 0)
-	 const property indicador = puntero
+class Pantalla {
+	const property position = new Posicion(x = 0, y = 0)
 	
 	method iniciar() {
-		game.clear()
 		actual.pantalla(self)
 		game.addVisual(self)
+	}
+}
+
+class Fondo inherits Pantalla {
+	const property indicador
+	const property image
+	
+	override method iniciar() {
+		super()
+		game.addVisual(indicador)
+	}
+}
+object pantallaInicial inherits Fondo(indicador = puntero, image = "fondoPantallaInicial.jpg"){
+	
+	override method iniciar() {
+		game.clear()
+		super()
 		game.addVisual(spaceInvaders)
 		game.addVisual(iniciarJuego)
 		game.addVisual(comoJugar)
 		game.addVisual(wolollok)
-		game.addVisual(puntero)
 	
 		keyboard.up().onPressDo({puntero.subir()})
 		keyboard.down().onPressDo({puntero.bajar()})
@@ -52,28 +65,18 @@ object pantallaInicial {
 	}
 }
 
-object pantallaNombre {
+object pantallaNombre inherits Fondo(indicador = punteroNombre, image = "fondoPantallaInicial.jpg"){
 
-	const property image = "fondoNombre.png"
-	const property position = new Posicion(x = 0, y = 0)
-	const property indicador = punteroNombre
-
-	method iniciar() {
-		game.addVisual(punteroNombre)
-		actual.pantalla(self)
-		game.addVisual(self)
+	override method iniciar() {
+		super()
 		game.addVisualIn(nombre, new Posicion(x = 14, y = 13))
 		nombre.iniciarTeclas()
 	}
 }
-object pantallaEleccion {
-	const property image = "fondoEleccion.png"
-	const property position = new Posicion(x = 0, y = 0)
-	const property indicador = puntero2
-	method iniciar() {
-		actual.pantalla(self)
-		game.addVisual(self)
-		game.addVisual(puntero2)
+object pantallaEleccion inherits Fondo(indicador = puntero2, image = "fondoEleccion.jpg") {
+	
+	override method iniciar() {
+		super()
 		game.addVisual(canionNormal)
 		game.addVisual(canionRosa)
 		game.addVisual(canionDorado)
@@ -86,19 +89,14 @@ object pantallaEleccion {
 	}
 }
 
-
-object nivel1 {
-
-	const property image = "fondo1.jpg"
-	const property position = new Posicion(x = 0, y = 0)
-	const property siguienteNivel = nivel2
-	const property numero = 1
-
-	method iniciar() {
+class Nivel inherits Pantalla {
+	const property numero
+	const property image = "fondo" + numero + ".png"
+	
+	override method iniciar() {
 		game.clear()
+		super()
 		actual.nivel(self)
-		actual.pantalla(self)
-		game.addVisual(self)
 		factories.forEach{ factory => factory.construirNaves()}
 		gestorDeVidas.inicializarVidas()
 		game.schedule(1000, { balaNave.nuevoDisparo()})
@@ -114,89 +112,15 @@ object nivel1 {
 		keyboard.left().onPressDo{ canion.mover(izquierda)}
 		keyboard.right().onPressDo{ canion.mover(derecha)}
 		keyboard.space().onPressDo{ canion.disparar()}
-		
-	
-	}
-
-	method siguientePantalla() {
-		game.clear()
-		siguienteNivel.iniciar()
-	}
-
-	method serDaniado(objeto) {}
-}
-
-object nivel2 {
-
-	const property image = "fondo2.png"
-	const property position = new Posicion(x = 0, y = 0)
-	const property siguienteNivel = nivel3
-	const property numero = 2
-
-	method iniciar() {
-		actual.nivel(self)
-		actual.pantalla(self)
-		game.addVisual(self)
-		factories.forEach{ factory => factory.construirNaves()}
-		gestorDeVidas.inicializarVidas()
-		game.schedule(1000, { balaNave.nuevoDisparo()})
-		movimiento.mover(ovnis)
-			// VISUALES
-		game.addVisual(canion)
-		game.addVisual(nombre)
-		ovnis.forEach{ ovni => game.addVisual(ovni)}
-		scoreCompleto.forEach{ puntaje => game.addVisual(puntaje)}
-			// HECHOS CASUALES
-		game.schedule(10000, { naveAleatoria.aparecer()})
-			// CONTROLES
-		keyboard.left().onPressDo{ canion.mover(izquierda)}
-		keyboard.right().onPressDo{ canion.mover(derecha)}
-		keyboard.space().onPressDo{ canion.disparar()}
-	}
-
-	method siguientePantalla() {
-		game.clear()
-		siguienteNivel.iniciar()
 	}
 	
 	method serDaniado(objeto) {}
 }
+object nivel1 inherits Nivel(numero = 1) {	}
 
-object nivel3 {
+object nivel2 inherits Nivel(numero = 2){}
 
-	const property image = "fondo3.png"
-	const property position = new Posicion(x = 0, y = 0)
-	const property siguienteNivel = pantallaGanaste
-	const property numero = 3
-
-	method iniciar() {
-		actual.nivel(self)
-		actual.pantalla(self)
-		game.addVisual(self)
-		factories.forEach{ factory => factory.construirNaves()}
-		gestorDeVidas.inicializarVidas()
-		game.schedule(1000, { balaNave.nuevoDisparo()})
-		movimiento.mover(ovnis)
-			// VISUALES
-		game.addVisual(canion)
-		game.addVisual(nombre)
-		ovnis.forEach{ ovni => game.addVisual(ovni)}
-		scoreCompleto.forEach{ puntaje => game.addVisual(puntaje)}
-			// HECHOS CASUALES
-		game.onTick(10000, "Agregar nave aleatoria", { naveAleatoria.aparecer()})
-			// CONTROLES
-		keyboard.left().onPressDo{ canion.mover(izquierda)}
-		keyboard.right().onPressDo{ canion.mover(derecha)}
-		keyboard.space().onPressDo{ canion.disparar()}
-	}
-
-	method siguientePantalla() {
-		game.clear()
-		siguienteNivel.iniciar()
-	}
-	
-	method serDaniado(objeto) {}
-}
+object nivel3 inherits Nivel(numero = 3) {}
 
 object pantallaGanaste {
 	
