@@ -60,8 +60,10 @@ object pantallaEleccion {
 		game.addVisual(puntero2)
 		game.addVisual(canionNormal)
 		game.addVisual(canionRosa)
+		game.addVisual(canionDorado)
+		game.addVisual(canionVerde)
+		game.addVisual(canionNaranja)
 		game.addVisual(canionAzul)
-		game.addVisual(canionCeleste)
 		
 		keyboard.left().onPressDo({ puntero2.moverIzquierda() })
 		keyboard.right().onPressDo({ puntero2.moverDerecha() })
