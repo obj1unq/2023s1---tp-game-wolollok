@@ -1,5 +1,5 @@
 import wollok.game.*
-import canionNormal.*
+import canion.*
 
 object easterEgg {
 	
