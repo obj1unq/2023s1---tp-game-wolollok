@@ -99,7 +99,6 @@ class Nivel inherits Pantalla {
 		game.sound("musicaInGame.mp3").play()
 		game.clear()
     	super()
-		actual.nivel(self)
 		factories.forEach{ factory => factory.construirNaves()}
 		gestorDeVidas.inicializarVidas()
 		game.schedule(1000, { balaNave.nuevoDisparo()})
@@ -117,12 +116,22 @@ class Nivel inherits Pantalla {
 		keyboard.space().onPressDo{ canion.disparar()}
 		
 }
+	method siguienteNivelSetear() {
+			actual.nivel( self.siguienteNivel() )
+			pantallaEleccion.iniciar()
+		}
+		
+	method siguienteNivel()
 	method serDaniado(objeto) {}
 }
 
-object nivel1 inherits Nivel(numero = 1, tiempoMover = 2500) {}
+object nivel1 inherits Nivel(numero = 1, tiempoMover = 2500) {
+	override method siguienteNivel() = nivel2
+}
 
-object nivel2 inherits Nivel(numero = 2, tiempoMover = 1750){}
+object nivel2 inherits Nivel(numero = 2, tiempoMover = 1750){
+	override method siguienteNivel() = nivel3
+}
 
 
 object nivel3 inherits Nivel(numero = 3, tiempoMover = 1000) {
@@ -130,10 +139,15 @@ object nivel3 inherits Nivel(numero = 3, tiempoMover = 1000) {
 		super()
 		game.schedule(50000, { naveAleatoria.aparecer()})
 	  }
+	
+	override method siguienteNivelSetear() {
+		pantallaGanaste.iniciar()
+	} 
+	override method siguienteNivel() {}
 }
 
 object pantallaGanaste {
-	
+	method iniciar() {}
 }
 object fondoPerder {
 	var property image = "fondoPantallaInicial.jpg"
@@ -161,6 +175,4 @@ object gameOver inherits Pantalla {
 		keyboard.r().onPressDo{ pantallaInicial.reiniciarJuego()}
 		keyboard.e().onPressDo{ game.stop()}
 	}
-
 }
-

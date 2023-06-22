@@ -1,0 +1,30 @@
+import wollok.game.*
+import canion.*
+import naves.*
+import balas.*
+import posDir.*
+import score.*
+import pantallas.*
+import pantallaInicial.*
+import score.*
+import pantallaPerder.*
+import nombre.*
+import pantallaEleccion.*
+
+
+describe "Test de niveles" {
+	test "Pasar de nivel implica que el objeto actual tenga el nuevo nivel" {
+		// SETEO DE CONSTANTES Y POSICIONES
+		const ovniPrueba = new NaveConFuego(position = new Position (x = 1, y = 2))
+		ovnis.add(ovniPrueba)
+		game.addVisual(balaPotente)
+		game.addVisual(ovniPrueba)
+		balaPotente.position(new Position (x = 1, y = 1) ) 
+		// Muevo la bala para que conlisione
+		balaPotente.direccionamiento().nuevaPosicion(balaPotente.position())
+		//Deberia haberse ejecutado el game on collide
+		assert.equals(game.uniqueCollider(balaPotente), ovniPrueba)
+		
+		
+	}
+}
