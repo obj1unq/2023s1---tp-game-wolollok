@@ -12,7 +12,7 @@ import pantallaPerder.*
 object actual {
 
 	var property pantalla = null
-	var property nivel = nivel1
+	var property nivel = nivel2
 	
 	method nivelActual() {
 		return nivel.numero()
@@ -65,7 +65,7 @@ object pantallaInicial inherits Fondo(indicador = puntero, image = "fondoPantall
 	}
 }
 
-object pantallaNombre inherits Fondo(indicador = punteroNombre, image = "fondoPantallaInicial.jpg"){
+object pantallaNombre inherits Fondo(indicador = punteroNombre, image = "fondoNombre.png"){
 
 	override method iniciar() {
 		super()
@@ -73,7 +73,7 @@ object pantallaNombre inherits Fondo(indicador = punteroNombre, image = "fondoPa
 		nombre.iniciarTeclas()
 	}
 }
-object pantallaEleccion inherits Fondo(indicador = puntero2, image = "fondoEleccion.jpg") {
+object pantallaEleccion inherits Fondo(indicador = puntero2, image = "fondoEleccion.png") {
 	
 	override method iniciar() {
 		super()
@@ -91,7 +91,8 @@ object pantallaEleccion inherits Fondo(indicador = puntero2, image = "fondoElecc
 
 class Nivel inherits Pantalla {
 	const property numero
-	const property image = "fondo" + numero + ".png"
+	const property image = "fondo" + numero + ".jpg"
+	const tiempoMover
 	
 	override method iniciar() {
 		game.clear()
@@ -100,7 +101,7 @@ class Nivel inherits Pantalla {
 		factories.forEach{ factory => factory.construirNaves()}
 		gestorDeVidas.inicializarVidas()
 		game.schedule(1000, { balaNave.nuevoDisparo()})
-		movimiento.mover(ovnis)
+		movimiento.mover(ovnis, tiempoMover)
 			// VISUALES
 		game.addVisual(canion)
 		game.addVisual(nombre)
@@ -116,11 +117,16 @@ class Nivel inherits Pantalla {
 	
 	method serDaniado(objeto) {}
 }
-object nivel1 inherits Nivel(numero = 1) {	}
+object nivel1 inherits Nivel(numero = 1, tiempoMover = 2500) {}
 
-object nivel2 inherits Nivel(numero = 2){}
+object nivel2 inherits Nivel(numero = 2, tiempoMover = 1750){}
 
-object nivel3 inherits Nivel(numero = 3) {}
+object nivel3 inherits Nivel(numero = 3, tiempoMover = 1000) {
+	override method iniciar() {
+		super()
+		game.schedule(50000, { naveAleatoria.aparecer()})
+	}
+}
 
 object pantallaGanaste {
 	
