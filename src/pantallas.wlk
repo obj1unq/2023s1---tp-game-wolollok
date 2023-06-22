@@ -130,19 +130,18 @@ class Nivel inherits Pantalla {
 		keyboard.left().onPressDo{ canion.mover(izquierda)}
 		keyboard.right().onPressDo{ canion.mover(derecha)}
 		keyboard.space().onPressDo{ canion.disparar()}
-	}
-
-	method serDaniado(objeto) {
-	}
-
+}
+	method siguienteNivel()
+	method siguienteNivelSetear() {}
+	method serDaniado(objeto) {}
 }
 
 object nivel1 inherits Nivel(numero = 1, tiempoMover = 2500) {
-
+	override method siguienteNivel() = nivel2
 }
 
-object nivel2 inherits Nivel(numero = 2, tiempoMover = 1750) {
-
+object nivel2 inherits Nivel(numero = 2, tiempoMover = 1750){
+	override method siguienteNivel() = nivel3
 }
 
 object nivel3 inherits Nivel(numero = 3, tiempoMover = 1000) {
@@ -150,12 +149,18 @@ object nivel3 inherits Nivel(numero = 3, tiempoMover = 1000) {
 	override method iniciar() {
 		super()
 		game.schedule(50000, { naveAleatoria.aparecer()})
+	  }
+	
+	override method siguienteNivelSetear() {
+		pantallaGanaste.iniciar()
+	} 
+	override method siguienteNivel() {}
 	}
 
-}
 
 object pantallaGanaste {
 
+	method iniciar() {}
 }
 
 object fondoPerder {
@@ -186,6 +191,4 @@ object gameOver inherits Pantalla {
 		keyboard.r().onPressDo{ pantallaInicial.reiniciarJuego()}
 		keyboard.e().onPressDo{ game.stop()}
 	}
-
 }
-
