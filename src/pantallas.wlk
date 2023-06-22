@@ -12,7 +12,7 @@ import pantallaPerder.*
 object actual {
 
 	var property pantalla = null
-	var property nivel = nivel2
+	var property nivel = nivel3
 	
 	method nivelActual() {
 		return nivel.numero()
@@ -146,14 +146,12 @@ object fondoPerder {
 }
 	
 
-object gameOver {
+object gameOver inherits Pantalla {
 
 	const property image = "gameOver.jpg"
 
-	const property position = new Posicion ( x = 0, y = 0)
-	method iniciar(){
+	override method iniciar(){
 		game.clear()
-		ovnis.clear()
 		game.addVisual(self)
 		scoreCompleto.forEach{ puntaje => puntaje.puntajeFinal()}
 		keyboard.r().onPressDo{ pantallaInicial.reiniciarJuego()}

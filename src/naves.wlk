@@ -29,7 +29,6 @@ object movimiento {
 		ovnis.forEach{ nave => nave.mover(dir)}
 	}
 }
-
 class Nave {
 
 	var property image
