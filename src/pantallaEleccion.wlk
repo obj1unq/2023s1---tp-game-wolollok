@@ -33,9 +33,10 @@ object puntero2 {
 		game.removeVisual(canionRosa)
 		game.removeVisual(canionAzul)
 		game.removeVisual(canionDorado)
-		pantallaNombre.iniciar()
+		actual.nivel().iniciar()
 		} catch error {
-			game.say(colorDeCanion, "Este canion se desbloquea en el nivel" + colorDeCanion.nivelDeDesbloqueo())
+			game.say(colorDeCanion, "Este canion se desbloquea en el nivel" + colorDeCanion.nivelDeDesbloqueo()) 
+			// No mostramos el mensaje de error porque nos parece feo el mensaje en rojo
 		}
 		}
 	} 
@@ -46,12 +47,8 @@ class ColorDeCanion {
 	 
 	 method image() = self.estado().image(self)
 	 method serElegido() {
-//	 	try {
 	 	self.validarEleccion()
 	 	normal.image(imagenJugar)
-//	 	} catch error {
-//	 		game.say(self, )
-//	 	}
 	 } 
 	 
 	 method validarEleccion() {

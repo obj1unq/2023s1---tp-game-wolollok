@@ -11,8 +11,8 @@ const ovnis = []
 object movimiento {
 	var property direccion = derecha
 
-	method mover(ovnis) {
-		game.onTick(1000, "moverOvnis", {=>
+	method mover(ovnis, tiempo) {
+		game.onTick(tiempo, "moverOvnis", {=>
 			if (not self.hayAlgunOvniAlBorde()) {
 				self.moverOvnisDePosicion(direccion)
 			} else {
@@ -29,7 +29,6 @@ object movimiento {
 		ovnis.forEach{ nave => nave.mover(dir)}
 	}
 }
-
 class Nave {
 
 	var property image

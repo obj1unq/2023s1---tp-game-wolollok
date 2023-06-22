@@ -81,6 +81,6 @@ object punteroNombre {
 	const property image = "punteroNombre.png"
 	
 	method iniciar(pantalla) {
-		nivel1.iniciar()
+		pantallaEleccion.iniciar()
 	}
 }

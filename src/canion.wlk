@@ -69,7 +69,7 @@ class Vida {
 object uno inherits Vida(position = new Posicion(x = 0, y = 0)) {
 	override method eliminarse() {
 		super()
-		fondoPerder1.iniciar()
+		fondoPerder.iniciar()
 	}
  }
 object dos inherits Vida(position = new Posicion(x = 1, y = 0)) {}
