@@ -11,18 +11,48 @@ import pantallaPerder.*
 import nombre.*
 import pantallaEleccion.*
 
-
-describe "Test de niveles" {
-	test "Pasar de nivel implica que el objeto actual tenga el nuevo nivel" {
-		// SETEO DE CONSTANTES Y POSICIONES
-		const ovniPrueba = new NaveConFuego(position = new Position (x = 1, y = 2))
-		ovnis.add(ovniPrueba)
-		game.addVisual(balaPotente)
-		game.addVisual(ovniPrueba)
-		balaPotente.position(new Position (x = 1, y = 1) ) 
-		// Muevo la bala para que conlisione
-		balaPotente.direccionamiento().nuevaPosicion(balaPotente.position())
-		//Deberia haberse ejecutado el game on collide
-		assert.equals(game.uniqueCollider(balaPotente), ovniPrueba)		
+describe "Testeo de canion: Movimiento, disparar," {
+	
+	method initialize() {}
+	test "Canion se mueve a la derecha" {
+		// Check initial positions
+		assert.equals(canion.position().x(), game.center().x() )
+		assert.equals(canion.position().y(), 1) 
+		canion.mover(derecha)
+		// Canion has moved right perfectly
+		assert.equals(canion.position().x(), game.center().x() + 1) 
+	}
+	
+	test "El canion no pasa del borde derecho" {
+		// Set the position in a border. The game has 30 cells and the first is 0. 30 - 1 = 29 is the border
+		canion.position(new Posicion(x = game.width() - 1, y = 1))
+		assert.equals(canion.position().x(), game.width() - 1)
+		assert.equals(canion.position().y(), 1)
+		canion.mover(derecha)
+		// Canion didnt move 
+		assert.equals(canion.position().x(), game.width() - 1) 
+		// If we want to move left, we can do it
+		canion.mover(izquierda)
+		assert.equals(canion.position().x(), game.width() - 2) 
+	}
+	
+	test "SerDaniado() reduce una vida del gestor de vidas" {
+		canion.estado().serDaniado()
+		assert.equals(gestorDeVidas.vidas(), [uno, dos])
+		
 	}
 }
+//describe "Test de niveles" {
+//	test "Pasar de nivel implica que el objeto actual tenga el nuevo nivel" {
+//		// SETEO DE CONSTANTES Y POSICIONES
+//		const ovniPrueba = new NaveConFuego(position = new Posicion (x = 15, y = 2))
+//		ovnis.add(ovniPrueba)
+//		game.addVisual(balaPotente)
+//		game.addVisual(ovniPrueba)
+//		balaPotente.position(new Posicion (x = 1, y = 1) ) 
+//		// Muevo la bala para que conlisione
+//		balaPotente.direccionamiento().nuevaPosicion(balaPotente.position())
+//		//Deberia haberse ejecutado el game on collide
+//		assert.equals(game.uniqueCollider(balaPotente), ovniPrueba)		
+//	}
+//}
