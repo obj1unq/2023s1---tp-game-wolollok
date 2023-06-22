@@ -89,19 +89,21 @@ object pantallaEleccion inherits Fondo(indicador = puntero2, image = "fondoElecc
 	}
 }
 
+
 class Nivel inherits Pantalla {
 	const property numero
 	const property image = "fondo" + numero + ".jpg"
-	const tiempoMover
-	
-	override method iniciar() {
+	const tiempoMover	
+
+	method iniciar() {
+		game.sound("musicaInGame.mp3").play()
 		game.clear()
-		super()
+    super()
 		actual.nivel(self)
 		factories.forEach{ factory => factory.construirNaves()}
 		gestorDeVidas.inicializarVidas()
 		game.schedule(1000, { balaNave.nuevoDisparo()})
-		movimiento.mover(ovnis, tiempoMover)
+		movimiento.mover(ovnis)
 			// VISUALES
 		game.addVisual(canion)
 		game.addVisual(nombre)
@@ -113,19 +115,21 @@ class Nivel inherits Pantalla {
 		keyboard.left().onPressDo{ canion.mover(izquierda)}
 		keyboard.right().onPressDo{ canion.mover(derecha)}
 		keyboard.space().onPressDo{ canion.disparar()}
-	}
-	
+		
+}
 	method serDaniado(objeto) {}
 }
+
 object nivel1 inherits Nivel(numero = 1, tiempoMover = 2500) {}
 
 object nivel2 inherits Nivel(numero = 2, tiempoMover = 1750){}
+
 
 object nivel3 inherits Nivel(numero = 3, tiempoMover = 1000) {
 	override method iniciar() {
 		super()
 		game.schedule(50000, { naveAleatoria.aparecer()})
-	}
+	  }
 }
 
 object pantallaGanaste {
