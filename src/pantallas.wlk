@@ -95,15 +95,15 @@ class Nivel inherits Pantalla {
 	const property image = "fondo" + numero + ".jpg"
 	const tiempoMover	
 
-	method iniciar() {
+	override method iniciar() {
 		game.sound("musicaInGame.mp3").play()
 		game.clear()
-    super()
+    	super()
 		actual.nivel(self)
 		factories.forEach{ factory => factory.construirNaves()}
 		gestorDeVidas.inicializarVidas()
 		game.schedule(1000, { balaNave.nuevoDisparo()})
-		movimiento.mover(ovnis)
+		movimiento.mover(ovnis, tiempoMover)
 			// VISUALES
 		game.addVisual(canion)
 		game.addVisual(nombre)
