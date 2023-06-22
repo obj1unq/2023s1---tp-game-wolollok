@@ -23,8 +23,6 @@ describe "Test de niveles" {
 		// Muevo la bala para que conlisione
 		balaPotente.direccionamiento().nuevaPosicion(balaPotente.position())
 		//Deberia haberse ejecutado el game on collide
-		assert.equals(game.uniqueCollider(balaPotente), ovniPrueba)
-		
-		
+		assert.equals(game.uniqueCollider(balaPotente), ovniPrueba)		
 	}
 }
