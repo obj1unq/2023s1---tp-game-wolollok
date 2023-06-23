@@ -63,7 +63,7 @@ class Vida {
 	}
 
 	method eliminarse() {
-		game.sound("dos-vida.mp3").play()
+		soundProducer.sound("dos-vida.mp3").play()
 		game.removeVisual(self)
 	}
 
@@ -84,7 +84,7 @@ class Estado {
 	const tipoDeBala
 	method disparar(canion) {
 		if (not game.hasVisual(tipoDeBala)) {
-			game.sound("disparoCanion.mp3").play()
+			soundProducer.sound("disparoCanion.mp3").play()
 			tipoDeBala.disparar(canion)
 		}
 	}

@@ -9,17 +9,21 @@ import pantallaInicial.*
 import pantallaEleccion.*
 import pantallaPerder.*
 
-object settings {
-	var property sonidos = true
+object soundProducer {
+	
+	var provider = game
+	
+	method provider(_provider){
+		provider = _provider
+	}
+	
+	method sound(audioFile) = provider.sound(audioFile)
+	
 }
 
-object sonidos {
-	var property encendido = false
-	method correr(sonido) {
-		if (not settings.sonidos()) {
-			game.sound(sonido).play()
-		}
-	}
+object soundProviderMock {
+	
+	method sound(audioFile) = soundMock
 }
 
 object actual {
@@ -137,10 +141,11 @@ object pantallaSiguienteNivel inherits Fondo(indicador = punteroSigNivel, image 
 		keyboard.enter().onPressDo({ actual.indicador().iniciar(game.uniqueCollider(actual.indicador()))})
 	}
 	
-	method eliminarse() {
+	override method eliminarse() {
+		super()
 		game.removeVisual(indicador)
 		game.removeVisual(iniciarJuego)
-		game.removeVisual(self)
+		
 		game.removeVisual(seleccionarNave)
 	}
 }
@@ -152,7 +157,7 @@ class Nivel inherits Pantalla {
 	const tiempoMover
 
 	override method iniciar() {
-		sonidos.correr("musicaInGame.mp3")
+		soundProducer.sound("musicaInGame.mp3").play()
 		game.clear()
 		super()
 		actual.nivel(self)

@@ -14,13 +14,13 @@ object puntero2 {
 	method moverDerecha() {
 		position = apuntables.get(0).position()
 		apuntables =  apuntables.drop(1) + [apuntables.first()]
-		game.sound("mover.mp3").play()
+		soundProducer.sound("mover.mp3").play()
 	}
 	
 	method moverIzquierda() {
 		position = apuntables.get(4).position()
 		apuntables = [apuntables.last()] + apuntables.take(5)
-		game.sound("mover.mp3").play()
+		soundProducer.sound("mover.mp3").play()
 	}
 	
 	method iniciar(colorDeCanion) {
@@ -111,7 +111,7 @@ object punteroSigNivel {
 	var property position = iniciarJuego.position()
 	var property apuntables = [iniciarJuego, seleccionarNave]
 	method iniciar(pantalla) {
-		game.sound("entrar.mp3").play()
+		soundProducer.sound("entrar.mp3").play()
 		pantalla.continuarJuego()
 	}
 
@@ -119,7 +119,7 @@ object punteroSigNivel {
 		if (self.puedeMover()) {
 			position = apuntables.get(1).position()
 			apuntables = apuntables.reverse()
-			game.sound("mover.mp3").play()
+			soundProducer.sound("mover.mp3").play()
 		}
 	}
 

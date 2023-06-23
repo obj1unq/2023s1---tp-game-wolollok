@@ -19,7 +19,6 @@ describe "Testeo de canion: Movimiento, disparar," {
 		game.height(20)
 		game.width(30)
 		game.cellSize(35)
-		settings.modoTest(true)
 		
 		nivel1.iniciar()
 			

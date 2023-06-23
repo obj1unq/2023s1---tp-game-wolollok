@@ -60,7 +60,7 @@ object puntero {
 	var apuntables = [ wolollok, iniciarJuego, comoJugar ]
 
 	method iniciar(pantalla) {
-		game.sound("entrar.mp3").play()
+		soundProducer.sound("entrar.mp3").play()
 		pantalla.iniciar()
 	}
 
@@ -68,7 +68,7 @@ object puntero {
 		if (self.puedeMover()) {
 			position = apuntables.get(0).position()
 			apuntables = [ apuntables.last() ] + apuntables.take(2)
-			game.sound("mover.mp3").play()
+			soundProducer.sound("mover.mp3").play()
 		}
 	}
 
@@ -76,7 +76,7 @@ object puntero {
 		if (self.puedeMover()) {
 			position = apuntables.get(2).position()
 			apuntables = apuntables.drop(1) + [ apuntables.first() ]
-			game.sound("mover.mp3").play()
+			soundProducer.sound("mover.mp3").play()
 		}
 	}
 

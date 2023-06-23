@@ -11,7 +11,7 @@ object corazonPerder {
 	const property position = new Position( x = 4, y = 4)
 	
 	method animacion() {
-		game.schedule(400, {game.sound("perder.mp3").play()
+		game.schedule(400, {soundProducer.sound("perder.mp3").play()
 							self.image("corazon1.png")
 							game.addVisual(self)})
 		game.schedule(550, {self.image("corazon2.png")})

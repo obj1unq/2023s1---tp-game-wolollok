@@ -4,6 +4,7 @@ import balas.*
 import posDir.*
 import score.*
 import randomizer.*
+import pantallas.*
 
 const factories = [naveConFuegoFactory, nave3PatasFactory, nave2PatasFactory]
 const ovnis = []
@@ -45,7 +46,7 @@ class Nave {
 	}
 
 	method serDestruido() {
-		game.sound("explosion1.mp3").play()
+		soundProducer.sound("explosion1.mp3").play()
 		self.image("explosion1.png")
 		game.schedule(200, {=> self.image("explosion2.png")})
 		game.schedule(400, {=> self.image("explosion3.png")})
@@ -56,7 +57,7 @@ class Nave {
 
 	method disparar() {
 		if (not game.hasVisual(balaNave)) {
-			game.sound("disparoNave.mp3").play()
+			soundProducer.sound("disparoNave.mp3").play()
 			balaNave.disparar(self)
 		}
 	}
