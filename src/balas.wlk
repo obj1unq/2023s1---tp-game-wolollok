@@ -8,7 +8,7 @@ class Bala {
 
 	const tick
 	var property position
-	const direccionamiento
+	const property direccionamiento
 
 	method image() = self.toString() + ".png"
 
@@ -53,7 +53,7 @@ class EstadoDeBalaCanion inherits Bala(direccionamiento = arriba, position = new
 			enemigo.serDestruido()
 			ovnis.remove(enemigo)
 			if (ovnis.isEmpty()) {
-				actual.pantalla().siguientePantalla()
+				actual.nivel().siguienteNivelSetear()
 			}
 		})
 	}
@@ -67,7 +67,7 @@ object balaPotente inherits EstadoDeBalaCanion {
 			self.destruirPotente(enemigo)      
 			enemigo.serDestruido()
 			if (ovnis.isEmpty()) {
-			actual.pantalla().siguientePantalla()
+			actual.pantalla().siguienteNivelSetear()
 			}
 		})
 	}

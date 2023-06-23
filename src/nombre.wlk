@@ -82,5 +82,6 @@ object punteroNombre {
 	
 	method iniciar(pantalla) {
 		pantallaEleccion.iniciar()
+		pantallaNombre.eliminarse()
 	}
 }

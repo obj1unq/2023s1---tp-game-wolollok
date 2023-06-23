@@ -32,6 +32,10 @@ object canion {
 	method ganarBeneficio() {
 		gestorDeBeneficios.asignar(self)
 	}
+	
+	method volverANormalidad() {
+		estado = normal
+	}
 }
 
 object gestorDeVidas {
@@ -112,6 +116,6 @@ object disparoRapido inherits Estado(tipoDeBala = balaVeloz) {
  	
  	method asignar(objeto) {
  		objeto.estado(beneficios.anyOne())
- 		game.schedule(10000, objeto.estado(normal))
+ 		game.schedule(10000, objeto.volverANormalidad())
  	}
  }

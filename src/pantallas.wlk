@@ -13,96 +13,136 @@ object actual {
 
 	var property pantalla = null
 	var property nivel = nivel1
-	
+
 	method nivelActual() {
 		return nivel.numero()
 	}
-	
+
 	method indicador() {
 		return pantalla.indicador()
 	}
+
 }
 
+class Pantalla {
 
-object pantallaInicial {
-	 const property image = "fondoPantallaInicial.jpg"
-	 const property position = new Posicion(x = 0, y = 0)
-	 const property indicador = puntero
-	
+	const property position = new Posicion(x = 0, y = 0)
+
 	method iniciar() {
-		game.clear()
 		actual.pantalla(self)
 		game.addVisual(self)
+	}
+
+}
+
+class Fondo inherits Pantalla {
+
+	const property indicador
+	const property image
+
+	override method iniciar() {
+		super()
+		game.addVisual(indicador)
+	}
+
+}
+
+object pantallaInicial inherits Fondo(indicador = puntero, image = "fondoPantallaInicial.jpg") {
+
+	override method iniciar() {
+		game.clear()
+		super()
 		game.addVisual(spaceInvaders)
 		game.addVisual(iniciarJuego)
 		game.addVisual(comoJugar)
 		game.addVisual(wolollok)
-		game.addVisual(puntero)
-	
-		keyboard.up().onPressDo({puntero.subir()})
-		keyboard.down().onPressDo({puntero.bajar()})
-		keyboard.enter().onPressDo({actual.indicador().iniciar(game.uniqueCollider(actual.indicador()))})
+		indicador.iniciarTeclas()
+		keyboard.enter().onPressDo({ actual.indicador().iniciar(game.uniqueCollider(actual.indicador()))})
 	}
-	
+
+	method eliminarse() {
+		game.removeVisual(spaceInvaders)
+		game.removeVisual(iniciarJuego)
+		game.removeVisual(comoJugar)
+		game.removeVisual(wolollok)
+		game.removeVisual(indicador)
+		game.removeVisual(self)
+	}
+
 	method reiniciarJuego() {
 		game.clear()
-		gestorDeVidas.vidas([uno, dos, tres])
+		gestorDeVidas.vidas([ uno, dos, tres ])
 		score.puntaje(100000)
 		self.iniciar()
 	}
+
 }
 
-object pantallaNombre {
+object pantallaNombre inherits Fondo(indicador = punteroNombre, image = "fondoNombre.png") {
 
-	const property image = "fondoNombre.png"
-	const property position = new Posicion(x = 0, y = 0)
-	const property indicador = punteroNombre
-
-	method iniciar() {
-		game.addVisual(punteroNombre)
-		actual.pantalla(self)
-		game.addVisual(self)
+	override method iniciar() {
+		super()
 		game.addVisualIn(nombre, new Posicion(x = 14, y = 13))
 		nombre.iniciarTeclas()
 	}
+
+	method eliminarse() {
+		game.removeVisual(self)
+		game.removeVisual(nombre)
+	}
 }
-object pantallaEleccion {
-	const property image = "fondoEleccion.png"
-	const property position = new Posicion(x = 0, y = 0)
-	const property indicador = puntero2
-	method iniciar() {
-		actual.pantalla(self)
-		game.addVisual(self)
-		game.addVisual(puntero2)
+
+object pantallaEleccion inherits Fondo(indicador = puntero2, image = "fondoEleccion.png") {
+
+	override method iniciar() {
+		super()
 		game.addVisual(canionNormal)
 		game.addVisual(canionRosa)
 		game.addVisual(canionDorado)
 		game.addVisual(canionVerde)
 		game.addVisual(canionNaranja)
 		game.addVisual(canionAzul)
+		keyboard.left().onPressDo({ puntero2.moverIzquierda()})
+		keyboard.right().onPressDo({ puntero2.moverDerecha()})
+	}
+
+}
+
+object pantallaSiguienteNivel inherits Fondo(indicador = punteroSigNivel, image = "fondoPantallaInicial.jpg") {
+	override method iniciar() {
+		game.clear()
+		super()
+		game.addVisual(iniciarJuego)
+		game.addVisual(seleccionarNave)
+		game.addVisual(nivelCompletado)
+		indicador.iniciarTeclas()
 		
-		keyboard.left().onPressDo({ puntero2.moverIzquierda() })
-		keyboard.right().onPressDo({ puntero2.moverDerecha() })
+		keyboard.enter().onPressDo({ actual.indicador().iniciar(game.uniqueCollider(actual.indicador()))})
+	}
+	
+	method eliminarse() {
+		game.removeVisual(indicador)
+		game.removeVisual(iniciarJuego)
+		game.removeVisual(self)
+		game.removeVisual(seleccionarNave)
 	}
 }
 
+class Nivel inherits Pantalla {
 
-object nivel1 {
+	const property numero
+	const property image = "fondo" + numero + ".jpg"
+	const tiempoMover
 
-	const property image = "fondo1.jpg"
-	const property position = new Posicion(x = 0, y = 0)
-	const property siguienteNivel = nivel2
-	const property numero = 1
-
-	method iniciar() {
+	override method iniciar() {
+		game.sound("musicaInGame.mp3").play()
 		game.clear()
+		super()
 		actual.nivel(self)
-		actual.pantalla(self)
-		game.addVisual(self)
 		factories.forEach{ factory => factory.construirNaves()}
 		gestorDeVidas.inicializarVidas()
 		game.schedule(1000, { balaNave.nuevoDisparo()})
-		movimiento.mover(ovnis)
+		movimiento.mover(ovnis, tiempoMover)
 			// VISUALES
 		game.addVisual(canion)
 		game.addVisual(nombre)
@@ -114,96 +154,47 @@ object nivel1 {
 		keyboard.left().onPressDo{ canion.mover(izquierda)}
 		keyboard.right().onPressDo{ canion.mover(derecha)}
 		keyboard.space().onPressDo{ canion.disparar()}
-		
-	
+}
+	method siguienteNivel()
+	method siguienteNivelSetear() {
+		actual.nivel(self.siguienteNivel())
+		pantallaSiguienteNivel.iniciar()
 	}
-
-	method siguientePantalla() {
-		game.clear()
-		siguienteNivel.iniciar()
-	}
-
 	method serDaniado(objeto) {}
 }
 
-object nivel2 {
-
-	const property image = "fondo2.png"
-	const property position = new Posicion(x = 0, y = 0)
-	const property siguienteNivel = nivel3
-	const property numero = 2
-
-	method iniciar() {
-		actual.nivel(self)
-		actual.pantalla(self)
-		game.addVisual(self)
-		factories.forEach{ factory => factory.construirNaves()}
-		gestorDeVidas.inicializarVidas()
-		game.schedule(1000, { balaNave.nuevoDisparo()})
-		movimiento.mover(ovnis)
-			// VISUALES
-		game.addVisual(canion)
-		game.addVisual(nombre)
-		ovnis.forEach{ ovni => game.addVisual(ovni)}
-		scoreCompleto.forEach{ puntaje => game.addVisual(puntaje)}
-			// HECHOS CASUALES
-		game.schedule(10000, { naveAleatoria.aparecer()})
-			// CONTROLES
-		keyboard.left().onPressDo{ canion.mover(izquierda)}
-		keyboard.right().onPressDo{ canion.mover(derecha)}
-		keyboard.space().onPressDo{ canion.disparar()}
-	}
-
-	method siguientePantalla() {
-		game.clear()
-		siguienteNivel.iniciar()
-	}
-	
-	method serDaniado(objeto) {}
+object nivel1 inherits Nivel(numero = 1, tiempoMover = 2500) {
+	override method siguienteNivel() = nivel2
 }
 
-object nivel3 {
-
-	const property image = "fondo3.png"
-	const property position = new Posicion(x = 0, y = 0)
-	const property siguienteNivel = pantallaGanaste
-	const property numero = 3
-
-	method iniciar() {
-		actual.nivel(self)
-		actual.pantalla(self)
-		game.addVisual(self)
-		factories.forEach{ factory => factory.construirNaves()}
-		gestorDeVidas.inicializarVidas()
-		game.schedule(1000, { balaNave.nuevoDisparo()})
-		movimiento.mover(ovnis)
-			// VISUALES
-		game.addVisual(canion)
-		game.addVisual(nombre)
-		ovnis.forEach{ ovni => game.addVisual(ovni)}
-		scoreCompleto.forEach{ puntaje => game.addVisual(puntaje)}
-			// HECHOS CASUALES
-		game.onTick(10000, "Agregar nave aleatoria", { naveAleatoria.aparecer()})
-			// CONTROLES
-		keyboard.left().onPressDo{ canion.mover(izquierda)}
-		keyboard.right().onPressDo{ canion.mover(derecha)}
-		keyboard.space().onPressDo{ canion.disparar()}
-	}
-
-	method siguientePantalla() {
-		game.clear()
-		siguienteNivel.iniciar()
-	}
-	
-	method serDaniado(objeto) {}
+object nivel2 inherits Nivel(numero = 2, tiempoMover = 1750){
+	override method siguienteNivel() = nivel3
 }
+
+object nivel3 inherits Nivel(numero = 3, tiempoMover = 1000) {
+
+	override method iniciar() {
+		super()
+		game.schedule(50000, { naveAleatoria.aparecer()})
+	  }
+	
+	override method siguienteNivelSetear() {
+		pantallaGanaste.iniciar()
+	} 
+	override method siguienteNivel() {}
+	}
+
 
 object pantallaGanaste {
-	
+
+	method iniciar() {}
 }
+
 object fondoPerder {
+
 	var property image = "fondoPantallaInicial.jpg"
 	const property position = new Position(x = 0, y = 0)
+
 	method iniciar() {
 		ovnis.clear()
 		balaCanion.eliminarse()
@@ -212,23 +203,19 @@ object fondoPerder {
 		game.clear()
 		game.addVisual(self)
 		corazonPerder.animacion()
-	}	
-}
-	
+	}
 
-object gameOver {
+}
+
+object gameOver inherits Pantalla {
 
 	const property image = "gameOver.jpg"
 
-	const property position = new Posicion ( x = 0, y = 0)
-	method iniciar(){
+	override method iniciar() {
 		game.clear()
-		ovnis.clear()
 		game.addVisual(self)
 		scoreCompleto.forEach{ puntaje => puntaje.puntajeFinal()}
 		keyboard.r().onPressDo{ pantallaInicial.reiniciarJuego()}
 		keyboard.e().onPressDo{ game.stop()}
 	}
-
 }
-

@@ -35,7 +35,8 @@ object puntero2 {
 		game.removeVisual(canionDorado)
 		actual.nivel().iniciar()
 		} catch error {
-			game.say(colorDeCanion, "Este canion se desbloquea en el nivel" + colorDeCanion.nivelDeDesbloqueo())
+			game.say(colorDeCanion, "Este canion se desbloquea en el nivel" + colorDeCanion.nivelDeDesbloqueo()) 
+			// No mostramos el mensaje de error porque nos parece feo el mensaje en rojo
 		}
 		}
 	} 
@@ -46,12 +47,8 @@ class ColorDeCanion {
 	 
 	 method image() = self.estado().image(self)
 	 method serElegido() {
-//	 	try {
 	 	self.validarEleccion()
 	 	normal.image(imagenJugar)
-//	 	} catch error {
-//	 		game.say(self, )
-//	 	}
 	 } 
 	 
 	 method validarEleccion() {
@@ -98,4 +95,46 @@ object candado {
 
 object desbloqueado {
 	method image(color) = color.toString() + "Eleccion.png"
+}
+
+object seleccionarNave {
+	const property image = "seleccionarNave.png"
+	const property position = new Posicion(x = 9 , y = 9)
+	method continuarJuego() {
+		pantallaSiguienteNivel.eliminarse()
+		pantallaEleccion.iniciar()
+	}
+}
+
+object punteroSigNivel {
+	const property image = "puntero.png"
+	var property position = iniciarJuego.position()
+	var property apuntables = [iniciarJuego, seleccionarNave]
+	method iniciar(pantalla) {
+		game.sound("entrar.mp3").play()
+		pantalla.continuarJuego()
+	}
+
+	method mover() {
+		if (self.puedeMover()) {
+			position = apuntables.get(1).position()
+			apuntables = apuntables.reverse()
+			game.sound("mover.mp3").play()
+		}
+	}
+
+
+	method iniciarTeclas() {
+		keyboard.up().onPressDo({ self.mover()})
+		keyboard.down().onPressDo({ self.mover()})
+	}
+
+	method puedeMover() {
+		return game.hasVisual(self)
+	}
+}
+
+object nivelCompletado {
+	const property image = "nivelCompletado.png"
+	const property position = new Posicion(x = 5, y = 15)
 }
