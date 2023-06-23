@@ -9,6 +9,19 @@ import pantallaInicial.*
 import pantallaEleccion.*
 import pantallaPerder.*
 
+object settings {
+	var property sonidos = false
+}
+
+object sonidos {
+	var property encendido = false
+	method correr(sonido) {
+		if (not settings.sonidos()) {
+			game.sound(sonido).play()
+		}
+	}
+}
+
 object actual {
 
 	var property pantalla = null
@@ -44,6 +57,10 @@ class Fondo inherits Pantalla {
 		super()
 		game.addVisual(indicador)
 	}
+	
+	method eliminarse() {
+		game.removeVisual(self)
+	}
 
 }
 
@@ -60,13 +77,13 @@ object pantallaInicial inherits Fondo(indicador = puntero, image = "fondoPantall
 		keyboard.enter().onPressDo({ actual.indicador().iniciar(game.uniqueCollider(actual.indicador()))})
 	}
 
-	method eliminarse() {
+	override method eliminarse() {
 		game.removeVisual(spaceInvaders)
 		game.removeVisual(iniciarJuego)
 		game.removeVisual(comoJugar)
 		game.removeVisual(wolollok)
 		game.removeVisual(indicador)
-		game.removeVisual(self)
+		super()
 	}
 
 	method reiniciarJuego() {
@@ -86,8 +103,8 @@ object pantallaNombre inherits Fondo(indicador = punteroNombre, image = "fondoNo
 		nombre.iniciarTeclas()
 	}
 
-	method eliminarse() {
-		game.removeVisual(self)
+	override method eliminarse() {
+		super()
 		game.removeVisual(nombre)
 	}
 }
@@ -135,7 +152,7 @@ class Nivel inherits Pantalla {
 	const tiempoMover
 
 	override method iniciar() {
-		game.sound("musicaInGame.mp3").play()
+		sonidos.correr("musicaInGame.mp3")
 		game.clear()
 		super()
 		actual.nivel(self)

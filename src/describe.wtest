@@ -13,7 +13,17 @@ import pantallaEleccion.*
 
 describe "Testeo de canion: Movimiento, disparar," {
 	
-	method initialize() {}
+	method initialize() {
+		game.clear()
+		game.title("Space Invaders")
+		game.height(20)
+		game.width(30)
+		game.cellSize(35)
+		settings.modoTest(true)
+		
+		nivel1.iniciar()
+			
+	}
 	test "Canion se mueve a la derecha" {
 		// Check initial positions
 		assert.equals(canion.position().x(), game.center().x() )
@@ -38,8 +48,7 @@ describe "Testeo de canion: Movimiento, disparar," {
 	
 	test "SerDaniado() reduce una vida del gestor de vidas" {
 		canion.estado().serDaniado()
-		assert.equals(gestorDeVidas.vidas(), [uno, dos])
-		
+		assert.equals(gestorDeVidas.vidas(), [uno, dos])	
 	}
 }
 //describe "Test de niveles" {
