@@ -53,7 +53,7 @@ class EstadoDeBalaCanion inherits Bala(direccionamiento = arriba, position = new
 			enemigo.serDestruido()
 			ovnis.remove(enemigo)
 			if (ovnis.isEmpty()) {
-				actual.nivel().siguienteNivel()
+				actual.nivel().siguienteNivelSetear()
 			}
 		})
 	}
