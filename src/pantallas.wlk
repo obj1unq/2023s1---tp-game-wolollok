@@ -10,7 +10,7 @@ import pantallaEleccion.*
 import pantallaPerder.*
 
 object settings {
-	var property sonidos = false
+	var property sonidos = true
 }
 
 object sonidos {

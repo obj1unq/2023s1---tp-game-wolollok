@@ -116,6 +116,6 @@ object disparoRapido inherits Estado(tipoDeBala = balaVeloz) {
  	
  	method asignar(objeto) {
  		objeto.estado(beneficios.anyOne())
- 		game.schedule(10000, objeto.volverANormalidad())
+ 		game.schedule(10000,{ objeto.volverANormalidad()})
  	}
  }

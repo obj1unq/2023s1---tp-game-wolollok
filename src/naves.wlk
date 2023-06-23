@@ -51,6 +51,7 @@ class Nave {
 		game.schedule(400, {=> self.image("explosion3.png")})
 		game.schedule(600, {=> game.removeVisual(self)})
 		score.scorear(self.puntaje())
+		ovnis.remove(self)
 	}
 
 	method disparar() {
@@ -154,11 +155,11 @@ object movimientoNaveAleatoria {
 
 	method mover(nave) {
 		game.onTick(500, "moverNaveAleatoria", {=>
-			if (not nave.direccionamiento().estaEnElBorde(nave)) {
+			if (not nave.direccionamiento().estaEnElBorde(nave) and game.hasVisual(self)) {
 				nave.mover(nave.direccionamiento())
 			} else {
-				game.removeVisual(nave)
 				game.removeTickEvent("moverNaveAleatoria")
+				game.removeVisual(nave)
 			}
 	 	})
 	}
