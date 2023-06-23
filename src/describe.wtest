@@ -50,6 +50,18 @@ describe "Testeo de canion: Movimiento, disparar," {
 		canion.estado().serDaniado()
 		assert.equals(gestorDeVidas.vidas(), [uno, dos])	
 	}
+	
+	test "El estado del canion cambia al dispararle a la nave aleatoria" {
+		canion.estado(normal)
+		naveAleatoria.serDestruido()
+		assert.notThat(canion.estado() == normal)
+	}
+
+	test "Al poseer el canion el estado inmune, las balas que colisionen con él no le quitan vida" {
+		canion.estado(inmune)
+		canion.estado().serDaniado()
+		assert.equals(gestorDeVidas.vidas(), [ uno, dos, tres ])
+	}
 }
 //describe "Test de niveles" {
 //	test "Pasar de nivel implica que el objeto actual tenga el nuevo nivel" {
