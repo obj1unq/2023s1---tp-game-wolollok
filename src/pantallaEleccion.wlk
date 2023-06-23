@@ -96,3 +96,45 @@ object candado {
 object desbloqueado {
 	method image(color) = color.toString() + "Eleccion.png"
 }
+
+object seleccionarNave {
+	const property image = "seleccionarNave.png"
+	const property position = new Posicion(x = 9 , y = 9)
+	method continuarJuego() {
+		pantallaSiguienteNivel.eliminarse()
+		pantallaEleccion.iniciar()
+	}
+}
+
+object punteroSigNivel {
+	const property image = "puntero.png"
+	var property position = iniciarJuego.position()
+	var property apuntables = [iniciarJuego, seleccionarNave]
+	method iniciar(pantalla) {
+		game.sound("entrar.mp3").play()
+		pantalla.continuarJuego()
+	}
+
+	method mover() {
+		if (self.puedeMover()) {
+			position = apuntables.get(1).position()
+			apuntables = apuntables.reverse()
+			game.sound("mover.mp3").play()
+		}
+	}
+
+
+	method iniciarTeclas() {
+		keyboard.up().onPressDo({ self.mover()})
+		keyboard.down().onPressDo({ self.mover()})
+	}
+
+	method puedeMover() {
+		return game.hasVisual(self)
+	}
+}
+
+object nivelCompletado {
+	const property image = "nivelCompletado.png"
+	const property position = new Posicion(x = 5, y = 15)
+}

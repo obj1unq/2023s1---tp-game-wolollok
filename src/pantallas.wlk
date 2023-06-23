@@ -12,7 +12,7 @@ import pantallaPerder.*
 object actual {
 
 	var property pantalla = null
-	var property nivel = nivel3
+	var property nivel = nivel1
 
 	method nivelActual() {
 		return nivel.numero()
@@ -104,6 +104,26 @@ object pantallaEleccion inherits Fondo(indicador = puntero2, image = "fondoElecc
 
 }
 
+object pantallaSiguienteNivel inherits Fondo(indicador = punteroSigNivel, image = "fondoPantallaInicial.jpg") {
+	override method iniciar() {
+		game.clear()
+		super()
+		game.addVisual(iniciarJuego)
+		game.addVisual(seleccionarNave)
+		game.addVisual(nivelCompletado)
+		indicador.iniciarTeclas()
+		
+		keyboard.enter().onPressDo({ actual.indicador().iniciar(game.uniqueCollider(actual.indicador()))})
+	}
+	
+	method eliminarse() {
+		game.removeVisual(indicador)
+		game.removeVisual(iniciarJuego)
+		game.removeVisual(self)
+		game.removeVisual(seleccionarNave)
+	}
+}
+
 class Nivel inherits Pantalla {
 
 	const property numero
@@ -132,7 +152,10 @@ class Nivel inherits Pantalla {
 		keyboard.space().onPressDo{ canion.disparar()}
 }
 	method siguienteNivel()
-	method siguienteNivelSetear() {}
+	method siguienteNivelSetear() {
+		actual.nivel(self.siguienteNivel())
+		pantallaSiguienteNivel.iniciar()
+	}
 	method serDaniado(objeto) {}
 }
 
