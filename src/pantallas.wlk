@@ -26,6 +26,10 @@ object soundProviderMock {
 	method sound(audioFile) = soundMock
 }
 
+object soundMock {
+	method play() {}
+}
+
 object actual {
 
 	var property pantalla = null
