@@ -48,33 +48,28 @@ class EstadoDeBalaCanion inherits Bala(direccionamiento = arriba, position = new
 	}
 	
 	method eliminarEnemigo() {
-		game.onCollideDo(self, { enemigo =>
+		game.onCollideDo(self, { enemigo => self.eliminarEnemigoModelo(enemigo)	})
+	}
+	
+	method eliminarEnemigoModelo(enemigo) {
 			self.serDestruido()
 			enemigo.serDestruido()
 			ovnis.remove(enemigo)
 			if (ovnis.isEmpty()) {
 				actual.nivel().siguienteNivelSetear()
 			}
-		})
 	}
 }
 
 object balaCanion inherits EstadoDeBalaCanion {	 }
 object balaPotente inherits EstadoDeBalaCanion {
-	override method eliminarEnemigo() {
-		game.onCollideDo(self, {enemigo => 
-			self.serDestruido() 
-			self.destruirPotente(enemigo)      
-			enemigo.serDestruido()
-			if (ovnis.isEmpty()) {
-			actual.pantalla().siguienteNivelSetear()
-			}
-		})
+	override method eliminarEnemigoModelo(enemigo) { 
+		self.destruirPotente(enemigo)
+		super(enemigo)
 	}
-
 	method destruirPotente(ovni) {
-		ovni.elDeArriba().forEach{nave => nave.serDestruido()}
-		ovni.elDeDosArriba().forEach{nave => nave.serDestruido()}
+		game.getObjectsIn(game.at(ovni.position().x(), ovni.position().y() + 2)).forEach{nave => nave.serDestruido()}
+		game.getObjectsIn(game.at(ovni.position().x(), ovni.position().y() + 4)).forEach{nave => nave.serDestruido()}
 	}
 	
 	override method moverAuto() {
