@@ -168,7 +168,7 @@ class Nivel inherits Pantalla {
 		factories.forEach{ factory => factory.construirNaves()}
 		gestorDeVidas.inicializarVidas()
 		game.schedule(1000, { balaNave.nuevoDisparo()})
-		movimiento.mover(ovnis, tiempoMover)
+		movimiento.mover(tiempoMover)
 			// VISUALES
 		game.addVisual(canion)
 		game.addVisual(nombre)

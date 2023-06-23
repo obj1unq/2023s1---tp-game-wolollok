@@ -6,20 +6,25 @@ import score.*
 import randomizer.*
 import pantallas.*
 
-const factories = [naveConFuegoFactory, nave3PatasFactory, nave2PatasFactory]
+const factories = [ naveConFuegoFactory, nave3PatasFactory, nave2PatasFactory ]
+
 const ovnis = []
 
 object movimiento {
+
 	var property direccion = derecha
 
-	method mover(ovnis, tiempo) {
-		game.onTick(tiempo, "moverOvnis", {=>
-			if (not self.hayAlgunOvniAlBorde()) {
-				self.moverOvnisDePosicion(direccion)
-			} else {
+	method mover(tiempo) {
+		game.onTick(tiempo, "moverOvnis", {=> self.moverNaves()})
+	}
+
+	method moverNaves() {
+		if (not self.hayAlgunOvniAlBorde()) {
+			self.moverOvnisDePosicion(direccion)
+		} else {
 			direccion = direccion.siguiente()
 			self.moverOvnisDePosicion(abajo)
-		}})
+		}
 	}
 
 	method hayAlgunOvniAlBorde() {
