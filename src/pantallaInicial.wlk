@@ -28,6 +28,10 @@ object iniciarJuego inherits ObjetoPantallaInicial(position = new Position(x = 8
 		pantallaInicial.eliminarse()
 		pantallaNombre.iniciar()
 	}
+	
+	method continuarJuego() {
+		actual.nivel().iniciar()
+	}
 
 }
 

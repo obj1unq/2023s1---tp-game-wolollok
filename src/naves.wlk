@@ -157,8 +157,8 @@ object movimientoNaveAleatoria {
 			if (not nave.direccionamiento().estaEnElBorde(nave)) {
 				nave.mover(nave.direccionamiento())
 			} else {
-				game.removeTickEvent("moverNaveAleatoria")
 				game.removeVisual(nave)
+				game.removeTickEvent("moverNaveAleatoria")
 			}
 	 	})
 	}

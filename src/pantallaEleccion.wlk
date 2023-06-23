@@ -100,7 +100,7 @@ object desbloqueado {
 object seleccionarNave {
 	const property image = "seleccionarNave.png"
 	const property position = new Posicion(x = 9 , y = 9)
-	method iniciar() {
+	method continuarJuego() {
 		pantallaSiguienteNivel.eliminarse()
 		pantallaEleccion.iniciar()
 	}
@@ -112,7 +112,7 @@ object punteroSigNivel {
 	var property apuntables = [iniciarJuego, seleccionarNave]
 	method iniciar(pantalla) {
 		game.sound("entrar.mp3").play()
-		pantalla.iniciar()
+		pantalla.continuarJuego()
 	}
 
 	method mover() {
@@ -136,5 +136,5 @@ object punteroSigNivel {
 
 object nivelCompletado {
 	const property image = "nivelCompletado.png"
-	const property position = new Posicion(x = 7, y = 15)
+	const property position = new Posicion(x = 5, y = 15)
 }
