@@ -86,6 +86,10 @@ object pantallaNombre inherits Fondo(indicador = punteroNombre, image = "fondoNo
 		nombre.iniciarTeclas()
 	}
 
+	method eliminarse() {
+		game.removeVisual(self)
+		game.removeVisual(nombre)
+	}
 }
 
 object pantallaEleccion inherits Fondo(indicador = puntero2, image = "fondoEleccion.png") {
