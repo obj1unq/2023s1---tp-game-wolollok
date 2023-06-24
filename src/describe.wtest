@@ -152,7 +152,11 @@ describe "Test space invaders" {
 		assert.that(29 == naveAleatoria.position().x() or 0 == naveAleatoria.position().x())
 	}
 	
-	test "Estoy en el nivel uno y no puedo elegir la nave dorada" {
+	test "Estoy en el nivel uno y no puedo elegir el canion dorado" {
+		//TODO realizar
+	}
+	
+	test "Estoy en el nivel uno y sí puedo elegir el canion rosa " {
 		//TODO realizar
 	}
 
