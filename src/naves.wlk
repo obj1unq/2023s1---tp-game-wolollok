@@ -5,6 +5,7 @@ import posDir.*
 import score.*
 import randomizer.*
 import pantallas.*
+import pantallaPerder.*
 
 const factories = [ naveConFuegoFactory, nave3PatasFactory, nave2PatasFactory ]
 
@@ -24,9 +25,15 @@ object movimiento {
 		} else {
 			direccion = direccion.siguiente()
 			self.moverOvnisDePosicion(abajo)
+			self.validarPerderPorY()
 		}
 	}
-
+	method validarPerderPorY() {
+		if (ovnis.any({nave => abajo.estaConElCanion(nave)})) {
+			fondoPerder.formaDePerder(naveEnLaTierra)
+			fondoPerder.iniciar()
+		}
+	}
 	method hayAlgunOvniAlBorde() {
 		return ovnis.any({ nave => direccion.estaEnElBorde(nave) })
 	}

@@ -26,7 +26,7 @@ object corazonPerder {
 
 object naveEnLaTierra {
 	var property image 
-	const property position = new Position( x = 4, y = 4)
+	const property position = new Position( x = 0, y = 0)
 	
 	method animacion() {
 		game.schedule(400, {//soundProducer.sound("perder.mp3").play()

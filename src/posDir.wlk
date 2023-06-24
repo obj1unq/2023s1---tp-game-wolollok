@@ -39,6 +39,9 @@ object abajo {
 	method estaEnElBorde(objeto) {
 		return objeto.position().y() == 0
 	}
+	method estaConElCanion(objeto) {
+		return objeto.position().y() == 1
+	}
 }
 
 object arriba {

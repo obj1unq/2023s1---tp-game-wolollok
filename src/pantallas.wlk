@@ -233,13 +233,13 @@ object fondoPerder {
 
 	var property image = "fondoPantallaInicial.jpg"
 	const property position = new Position(x = 0, y = 0)
-	var property formaDePerder = null
+	var property formaDePerder = naveEnLaTierra
 
 	method iniciar() {
 		ovnis.clear()
 		balaCanion.eliminarse()
 		balaNave.eliminarse()
-		game.removeTickEvent("moverOvnis")
+//		game.removeTickEvent("moverOvnis")
 		game.clear()
 		game.addVisual(self)
 		formaDePerder.animacion()
