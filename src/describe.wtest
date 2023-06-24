@@ -10,8 +10,9 @@ import score.*
 import pantallaPerder.*
 import nombre.*
 import pantallaEleccion.*
+import easterEgg.*
 
-describe "Testeo de canion: Movimiento, disparar," {
+describe "Test space invaders" {
 	
 	method initialize() {
 		game.clear()
@@ -91,7 +92,7 @@ describe "Testeo de canion: Movimiento, disparar," {
 		assert.equals(gestorDeVidas.vidas(), [ uno, dos, tres ])
 	}
 	
-test "Al mover una nave más allá del borde, desciende" {
+	test "Al mover una nave más allá del borde izquierdo, desciende" {
 		const nave1 = new NaveConFuego(position = (new Posicion(x = 0, y = 4)))
 		const nave2 = new NaveConFuego(position = (new Posicion(x = 2, y = 4)))
 		ovnis.add(nave1)
@@ -103,4 +104,61 @@ test "Al mover una nave más allá del borde, desciende" {
 		assert.equals(2, nave2.position().x())
 		assert.equals(3, nave2.position().y())
 	}
+	
+	test "Al mover una nave más allá del borde derecho, desciende" {
+		const nave1 = new NaveConFuego(position = (new Posicion(x = 29, y = 4)))
+		const nave2 = new NaveConFuego(position = (new Posicion(x = 27, y = 4)))
+		ovnis.add(nave1)
+		ovnis.add(nave2)
+		movimiento.moverNaves()
+		assert.equals(29, nave1.position().x())
+		assert.equals(3, nave1.position().y())
+		assert.equals(27, nave2.position().x())
+		assert.equals(3, nave2.position().y())
+	}
+	
+	test "Mato una de cada y sumo puntaje" {
+		const nave1 = new NaveConFuego(position = (new Posicion(x = 29, y = 4)))
+		const nave2 = new Nave3Patas(position = (new Posicion(x = 29, y = 4)))
+		const nave3 = new Nave2Patas(position = (new Posicion(x = 29, y = 4)))
+		
+		nave1.serDestruido()
+		nave2.serDestruido()
+		nave3.serDestruido()
+		assert.equals(101700, score.puntaje())
+	}
+	
+	test "Estoy en el nivel uno, paso al dos y al tres" {
+		actual.nivel(nivel1)
+		assert.that(nivel1 == actual.nivel())
+		actual.nivel().siguienteNivelSetear()
+		assert.that(nivel2 == actual.nivel())
+		actual.nivel().siguienteNivelSetear()
+		assert.that(nivel3 == actual.nivel())
+	}
+	
+	test "Misterioso easter egg está listo para revelarnos todo su esplendor" {
+		easterEgg.agregar('e')
+		easterEgg.agregar('a')
+		easterEgg.agregar('s')
+		easterEgg.agregar('t')
+		easterEgg.agregar('e')
+		easterEgg.agregar('r')
+		assert.that(easterEgg.acumulador().join("") == "easter")
+	}
+	
+	test "Nave aleatoria si no está de un lado, está del otro" {
+		naveAleatoria.aparecer()
+		assert.that(29 == naveAleatoria.position().x() or 0 == naveAleatoria.position().x())
+	}
+	
+	test "Estoy en el nivel uno y no puedo elegir el canion dorado" {
+		//TODO realizar
+	}
+	
+	test "Estoy en el nivel uno y sí puedo elegir el canion rosa " {
+		//TODO realizar
+	}
+
 }
+

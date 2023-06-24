@@ -3,7 +3,7 @@ import canion.*
 
 object easterEgg {
 	
-	const acumulador = []
+	const property acumulador = []
 	
 	method iniciarTeclas(){
 		keyboard.e().onPressDo{self.agregar("e")}

@@ -69,13 +69,6 @@ object balaPotente inherits EstadoDeBalaCanion {
 	method destruirPotente(ovni) {
 		game.getObjectsIn(game.at(ovni.position().x(), ovni.position().y() + 2)).forEach{nave => nave.serDestruido()}
 		game.getObjectsIn(game.at(ovni.position().x(), ovni.position().y() + 4)).forEach{nave => nave.serDestruido()}
-	}
-	
-	override method moverAuto() {
-		game.onTick(25, tick, {=>
-			self.mover()
-			if (direccionamiento.estaEnElBorde(self)) self.serDestruido() else self.eliminarEnemigo()
-		})
 	}	
 }
 object balaVeloz inherits EstadoDeBalaCanion {
