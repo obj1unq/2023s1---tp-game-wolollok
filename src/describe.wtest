@@ -153,7 +153,7 @@ describe "Test space invaders" {
 	}
 	
 	test "Estoy en el nivel uno y no puedo elegir la nave dorada" {
-		
+		//TODO realizar
 	}
 
 }
