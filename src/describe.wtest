@@ -10,8 +10,9 @@ import score.*
 import pantallaPerder.*
 import nombre.*
 import pantallaEleccion.*
+import easterEgg.*
 
-describe "Testeo de canion: Movimiento, disparar," {
+describe "Test space invaders" {
 	
 	method initialize() {
 		game.clear()
@@ -134,6 +135,29 @@ describe "Testeo de canion: Movimiento, disparar," {
 		assert.that(nivel2 == actual.nivel())
 		actual.nivel().siguienteNivelSetear()
 		assert.that(nivel3 == actual.nivel())
+	}
+	
+	test "Misterioso easter egg está listo para revelarnos todo su esplendor" {
+		easterEgg.agregar('e')
+		easterEgg.agregar('a')
+		easterEgg.agregar('s')
+		easterEgg.agregar('t')
+		easterEgg.agregar('e')
+		easterEgg.agregar('r')
+		assert.that(easterEgg.acumulador().join("") == "easter")
+	}
+	
+	test "Nave aleatoria si no está de un lado, está del otro" {
+		naveAleatoria.aparecer()
+		assert.that(29 == naveAleatoria.position().x() or 0 == naveAleatoria.position().x())
+	}
+	
+	test "Estoy en el nivel uno y no puedo elegir el canion dorado" {
+		//TODO realizar
+	}
+	
+	test "Estoy en el nivel uno y sí puedo elegir el canion rosa " {
+		//TODO realizar
 	}
 
 }
