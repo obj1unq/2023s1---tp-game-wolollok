@@ -18,7 +18,7 @@ program spaceInvaders {
 	game.width(30)
 	game.cellSize(35)
 	
-	pantallaGanaste.iniciar()
+	pantallaInicial.iniciar()
 
 //	START
 

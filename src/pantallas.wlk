@@ -233,6 +233,7 @@ object fondoPerder {
 
 	var property image = "fondoPantallaInicial.jpg"
 	const property position = new Position(x = 0, y = 0)
+	var property formaDePerder = null
 
 	method iniciar() {
 		ovnis.clear()
@@ -241,7 +242,7 @@ object fondoPerder {
 		game.removeTickEvent("moverOvnis")
 		game.clear()
 		game.addVisual(self)
-		corazonPerder.animacion()
+		formaDePerder.animacion()
 	}
 
 }

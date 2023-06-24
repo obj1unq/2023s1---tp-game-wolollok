@@ -3,6 +3,7 @@ import naves.*
 import balas.*
 import posDir.*
 import pantallas.*
+import pantallaPerder.*
 
 object canion {
 	var property position = new Posicion(x = game.center().x(), y = 1)
@@ -73,6 +74,7 @@ class Vida {
 object uno inherits Vida(position = new Posicion(x = 0, y = 0)) {
 	override method eliminarse() {
 		super()
+		fondoPerder.formaDePerder(corazonPerder)
 		fondoPerder.iniciar()
 	}
  }
