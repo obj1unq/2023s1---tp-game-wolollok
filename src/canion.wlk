@@ -70,7 +70,6 @@ class Vida {
 
 	method serDaniado(objeto) {}
 }
-
 object uno inherits Vida(position = new Posicion(x = 0, y = 0)) {
 	override method eliminarse() {
 		super()
