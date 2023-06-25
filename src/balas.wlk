@@ -9,8 +9,10 @@ class Bala {
 	const tick
 	var property position
 	const property direccionamiento
-	var property primerDisparo = true
-
+	var property hayColision = false
+	const velocidad
+	
+	method condicionDeSerDestruido()
 	method image() = self.toString() + ".png"
 
 	method disparar(objeto) {
@@ -18,8 +20,9 @@ class Bala {
 		direccionamiento.nuevaPosicion(position)
 		game.addVisual(self)
 		self.moverAuto()
+		self.eliminarEnemigo()
 	}
-
+	method eliminarEnemigo()
 	method mover() {
 		direccionamiento.nuevaPosicion(position)
 	}
@@ -30,7 +33,11 @@ class Bala {
 		
 	}
 
-	method moverAuto()
+	method moverAuto() {
+		game.onTick(velocidad, tick, {=>
+			self.mover()
+			if (self.condicionDeSerDestruido() ) self.serDestruido()  })
+	}
 	
 	method eliminarse() {
 		if (game.hasVisual(self)) {
@@ -40,23 +47,18 @@ class Bala {
 	}
 }
 
-class EstadoDeBalaCanion inherits Bala(direccionamiento = arriba, position = new Posicion(x = 0, y = 0), tick = "subir bala"){
-	override method moverAuto() {
-		game.onTick(25, tick, {=>
-			self.mover()
-			if (direccionamiento.estaEnElBorde(self)) self.serDestruido() else self.eliminarEnemigo()
-		})
-	}
+class EstadoDeBalaCanion inherits Bala(direccionamiento = arriba, position = new Posicion(x = 0, y = 0), tick = "subir bala", velocidad = 25){
+	override method condicionDeSerDestruido() = direccionamiento.estaEnElBorde(self)
 	
-	method eliminarEnemigo() {
-		if (primerDisparo) {
+	override method eliminarEnemigo() {
+		if (not hayColision) {
+		hayColision = true
 		game.onCollideDo(self, { enemigo => self.eliminarEnemigoModelo(enemigo)	})
 		}
 	}
 	
 	method eliminarEnemigoModelo(enemigo) {
 			self.serDestruido()
-			primerDisparo = false
 			enemigo.serDestruido()
 			if (ovnis.isEmpty()) {
 				actual.nivel().siguienteNivelSetear()
@@ -80,37 +82,22 @@ object balaPotente inherits EstadoDeBalaCanion {
 		game.getObjectsIn(game.at(ovni.position().x(), ovni.position().y() + 4)).forEach{nave => nave.serDestruido()}
 	}	
 }
-object balaVeloz inherits EstadoDeBalaCanion {
-	override method moverAuto() {
-		game.onTick(5, tick, {=>
-			self.mover()
-			if (direccionamiento.estaEnElBorde(self)) self.serDestruido() else self.eliminarEnemigo()
-		})
-	}	
-}
+object balaVeloz inherits EstadoDeBalaCanion(velocidad = 5) {}
 //BALA DE LA NAVE
-object balaNave inherits Bala(direccionamiento = abajo, position = new Posicion(x = 0, y = 0), tick = "bajar bala") {
+object balaNave inherits Bala(direccionamiento = abajo, position = new Posicion(x = 0, y = 0), tick = "bajar bala", velocidad = 50) {
 
-	override method moverAuto() {
-		game.onTick(50, tick, {=>
-			self.mover()
-			self.daniarCanion()  
-			if (self.position().y() < 1) self.serDestruido()
-		})
-	}
-
+	override method condicionDeSerDestruido() = self.position().y() < 1
+	
 	override method serDestruido() {
 		super()
 		self.nuevoDisparo()
 	}
 
-	method daniarCanion() {
-	if (primerDisparo) {
-		primerDisparo = false	
-		game.onCollideDo(self, { objetivo => objetivo.serDaniado(self) 
-	})		                                 
-		}
-		
+	override method eliminarEnemigo() {
+	if (not hayColision) {
+		hayColision = true	
+		game.onCollideDo(self, { objetivo => objetivo.serDaniado(self) })		                                 
+		}	
 	}
 
 	method nuevoDisparo() {

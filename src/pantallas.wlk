@@ -137,7 +137,7 @@ object pantallaSiguienteNivel inherits Fondo(indicador = punteroSigNivel, image 
 	override method iniciar() {
 		game.clear()
 		super()
-		balas.forEach{bala => bala.primerDisparo(true)}
+		balas.forEach{bala => bala.hayColision(false)}
 		game.addVisual(iniciarJuego)
 		game.addVisual(seleccionarNave)
 		game.addVisual(nivelCompletado)
@@ -216,7 +216,7 @@ class PantallaFinal inherits Pantalla {
 		game.clear()
 		super()
 		scoreCompleto.forEach{ puntaje => puntaje.puntajeFinal()}
-		balas.forEach{bala => bala.primerDisparo(true)}
+		balas.forEach{bala => bala.hayColision(false)}
 		
 		
 		keyboard.r().onPressDo{ pantallaInicial.reiniciarJuego()}

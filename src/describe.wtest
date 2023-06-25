@@ -23,7 +23,6 @@ describe "Test space invaders" {
 		soundProducer.provider(soundProviderMock)
 		
 		nivel1.iniciar()
-			
 	}
 	
 	test "Al iniciar el juego, se crearon las naves y las vidas" {
@@ -128,15 +127,6 @@ describe "Test space invaders" {
 		assert.equals(101700, score.puntaje())
 	}
 	
-	test "Estoy en el nivel uno, paso al dos y al tres" {
-		actual.nivel(nivel1)
-		assert.that(nivel1 == actual.nivel())
-		actual.nivel().siguienteNivelSetear()
-		assert.that(nivel2 == actual.nivel())
-		actual.nivel().siguienteNivelSetear()
-		assert.that(nivel3 == actual.nivel())
-	}
-	
 	test "Misterioso easter egg está listo para revelarnos todo su esplendor" {
 		easterEgg.agregar('e')
 		easterEgg.agregar('a')
@@ -159,6 +149,74 @@ describe "Test space invaders" {
 	test "Estoy en el nivel uno y sí puedo elegir el canion rosa " {
 		//TODO realizar
 	}
+}
 
+describe "Pasaje de niveles" {
+	method initialize() {
+		game.clear()
+		game.title("Space Invaders")
+		game.height(20)
+		game.width(30)
+		game.cellSize(35)
+		soundProducer.provider(soundProviderMock)
+		
+		nivel1.iniciar()
+	}
+	
+	test "Estoy en el nivel uno, paso al dos y al tres" {
+		actual.nivel(nivel1)
+		assert.that(nivel1 == actual.nivel())
+		actual.nivel().siguienteNivelSetear()
+		assert.that(nivel2 == actual.nivel())
+		actual.nivel().siguienteNivelSetear()
+		assert.that(nivel3 == actual.nivel())
+	}
+	
+	test "Una nave enemiga dispara, por lo que su bala ya no tiene mas el hayColision en false" {
+		assert.notThat(balaNave.hayColision())
+		const nave1 = new NaveConFuego(position = (new Posicion(x = 29, y = 4)))
+		nave1.disparar()
+		assert.that(balaNave.hayColision() )
+	}
+		
+	test "El canion en estado normal dispara, por lo que su bala ya no tiene mas el hayColision en false" {
+		//Set canion on normal mode
+		canion.estado(normal)
+		//Checking hayColision() is false atm
+		assert.notThat(balaCanion.hayColision())
+		canion.disparar()
+		//Checking hayColision() is true now
+		assert.that(balaCanion.hayColision() )
+	}
+	
+	test "El canion en estado disparoPotente dispara, por lo que su bala ya no tiene mas el hayColision en false" {
+		//Set canion on disparoPotente mode
+		canion.estado(disparoPotente)
+		//Checking hayColision() is false atm
+		assert.notThat(balaPotente.hayColision())
+		canion.disparar()
+		//Checking hayColision() is true now
+		assert.that(balaPotente.hayColision())
+	}
+	
+	test "El canion en estado inmune dispara, por lo que su bala ya no tiene mas el hayColision en false" {
+		//Set canion on inmune mode
+		canion.estado(inmune)
+		//Checking hayColision() is false atm
+		assert.notThat(balaCanion.hayColision())
+		canion.disparar()
+		//Checking hayColision() is true now
+		assert.that(balaCanion.hayColision() )
+	}
+	
+	test "El canion en estado balaVeloz dispara, por lo que su bala ya no tiene mas el hayColision en false" {
+		//Set canion on disparoVeloz mode
+		canion.estado(balaVeloz)
+		//Checking hayColision() is false atm
+		assert.notThat(balaVeloz.hayColision())
+		canion.disparar()
+		//Checking hayColision() is true now
+		assert.that(balaVeloz.hayColision() )
+	}
 }
 
