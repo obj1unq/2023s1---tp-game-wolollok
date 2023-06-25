@@ -94,7 +94,8 @@ object balaNave inherits Bala(direccionamiento = abajo, position = new Posicion(
 	override method moverAuto() {
 		game.onTick(50, tick, {=>
 			self.mover()
-			if (direccionamiento.estaEnElBorde(self)) self.daniarCanion() else if (self.position().y() < 1) self.serDestruido()
+			self.daniarCanion()  
+			if (self.position().y() < 1) self.serDestruido()
 		})
 	}
 
@@ -104,9 +105,11 @@ object balaNave inherits Bala(direccionamiento = abajo, position = new Posicion(
 	}
 
 	method daniarCanion() {
+	if (not primerDisparo) {
+		primerDisparo = true	
 		game.onCollideDo(self, { objetivo => objetivo.serDaniado(self) 
-			                                 
-		})
+	})		                                 
+		}
 		
 	}
 
