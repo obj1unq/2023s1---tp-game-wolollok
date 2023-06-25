@@ -33,7 +33,7 @@ object soundMock {
 object actual {
 
 	var property pantalla = null
-	var property nivel = nivel3
+	var property nivel = nivel1
 
 	method nivelActual() {
 		return nivel.numero()
@@ -137,6 +137,7 @@ object pantallaSiguienteNivel inherits Fondo(indicador = punteroSigNivel, image 
 	override method iniciar() {
 		game.clear()
 		super()
+		balas.forEach{bala => bala.hayColision(false)}
 		game.addVisual(iniciarJuego)
 		game.addVisual(seleccionarNave)
 		game.addVisual(nivelCompletado)
@@ -210,18 +211,20 @@ object nivel3 inherits Nivel(numero = 3, tiempoMover = 1000) {
 	override method siguienteNivel() {}
 	}
 
-class PantallaDerrota inherits Pantalla {
+class PantallaFinal inherits Pantalla {
 	override method iniciar() {
 		game.clear()
 		super()
 		scoreCompleto.forEach{ puntaje => puntaje.puntajeFinal()}
+		balas.forEach{bala => bala.hayColision(false)}
+		
 		
 		keyboard.r().onPressDo{ pantallaInicial.reiniciarJuego()}
 		keyboard.e().onPressDo{ game.stop()}
 		
 	}
 }
-object pantallaGanaste inherits PantallaDerrota {
+object pantallaGanaste inherits PantallaFinal {
 	const property image = "gameWin.png"
 	override method iniciar() {
 		super()
@@ -247,6 +250,6 @@ object fondoPerder {
 
 }
 
-object gameOver inherits PantallaDerrota {
+object gameOver inherits PantallaFinal {
 	const property image = "gameOver.png"
 }
