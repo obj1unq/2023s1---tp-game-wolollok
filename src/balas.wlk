@@ -64,7 +64,7 @@ class EstadoDeBalaCanion inherits Bala(direccionamiento = arriba, position = new
 	}
 	
 	method serDaniado(objeto) {
-		objeto.serDstruido()
+		objeto.serDestruido()
 		self.serDestruido()
 	}
 }
