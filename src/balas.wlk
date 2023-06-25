@@ -12,7 +12,7 @@ class Bala {
 	var property hayColision = false
 	const velocidad
 	
-	method condicionDeSerDestruido()
+	method condicionDeSerDestruido() = direccionamiento.estaEnElBorde(self)
 	method image() = self.toString() + ".png"
 
 	method disparar(objeto) {
@@ -48,7 +48,6 @@ class Bala {
 }
 
 class EstadoDeBalaCanion inherits Bala(direccionamiento = arriba, position = new Posicion(x = 0, y = 0), tick = "subir bala", velocidad = 25){
-	override method condicionDeSerDestruido() = direccionamiento.estaEnElBorde(self)
 	
 	override method eliminarEnemigo() {
 		if (not hayColision) {
@@ -85,8 +84,6 @@ object balaPotente inherits EstadoDeBalaCanion {
 object balaVeloz inherits EstadoDeBalaCanion(velocidad = 5) {}
 //BALA DE LA NAVE
 object balaNave inherits Bala(direccionamiento = abajo, position = new Posicion(x = 0, y = 0), tick = "bajar bala", velocidad = 50) {
-
-	override method condicionDeSerDestruido() = self.position().y() < 1
 	
 	override method serDestruido() {
 		super()
