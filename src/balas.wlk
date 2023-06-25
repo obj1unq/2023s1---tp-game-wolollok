@@ -9,6 +9,7 @@ class Bala {
 	const tick
 	var property position
 	const property direccionamiento
+	var primerDisparo = false
 
 	method image() = self.toString() + ".png"
 
@@ -48,15 +49,23 @@ class EstadoDeBalaCanion inherits Bala(direccionamiento = arriba, position = new
 	}
 	
 	method eliminarEnemigo() {
+		if (not primerDisparo) {
 		game.onCollideDo(self, { enemigo => self.eliminarEnemigoModelo(enemigo)	})
+		}
 	}
 	
 	method eliminarEnemigoModelo(enemigo) {
 			self.serDestruido()
+			primerDisparo = true
 			enemigo.serDestruido()
 			if (ovnis.isEmpty()) {
 				actual.nivel().siguienteNivelSetear()
 			}
+	}
+	
+	method serDaniado(objeto) {
+		objeto.serDstruido()
+		self.serDestruido()
 	}
 }
 
