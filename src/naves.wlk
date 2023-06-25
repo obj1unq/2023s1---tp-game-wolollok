@@ -46,6 +46,7 @@ class Nave {
 
 	var property image
 	var property position
+	var naveMuerta = false
 
 	method mover(direccion) {
 		if (self.puedeMover(direccion)) {
@@ -58,6 +59,8 @@ class Nave {
 	}
 
 	method serDestruido() {
+	if (not naveMuerta) {
+		naveMuerta = true	
 		soundProducer.sound("explosion1.mp3").play()
 		self.image("explosion1.png")
 		game.schedule(200, {=> self.image("explosion2.png")})
@@ -65,6 +68,7 @@ class Nave {
 		game.schedule(600, {=> game.removeVisual(self)})
 		score.scorear(self.puntaje())
 		ovnis.remove(self)
+		}
 	}
 
 	method disparar() {

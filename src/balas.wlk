@@ -62,11 +62,6 @@ class EstadoDeBalaCanion inherits Bala(direccionamiento = arriba, position = new
 				actual.nivel().siguienteNivelSetear()
 			}
 	}
-	
-	method serDaniado(objeto) {
-		objeto.serDestruido()
-		self.serDestruido()
-	}
 }
 
 object balaCanion inherits EstadoDeBalaCanion {	 }
