@@ -137,7 +137,7 @@ object pantallaSiguienteNivel inherits Fondo(indicador = punteroSigNivel, image 
 	override method iniciar() {
 		game.clear()
 		super()
-		balas.forEach{bala => bala.hayColision(false)}
+		balas.forEach{bala => bala.yaDisparada(false)}
 		game.addVisual(iniciarJuego)
 		game.addVisual(seleccionarNave)
 		game.addVisual(nivelCompletado)
@@ -160,6 +160,7 @@ class Nivel inherits Pantalla {
 	const property numero
 	const property image = "fondo" + numero + ".jpg"
 	const tiempoMover
+	const property siguienteNivel
 
 	override method iniciar() {
 		soundProducer.sound("musicaInGame.mp3").play()
@@ -182,7 +183,6 @@ class Nivel inherits Pantalla {
 		keyboard.right().onPressDo{ canion.mover(derecha)}
 		keyboard.space().onPressDo{ canion.disparar()}
 }
-	method siguienteNivel()
 	method siguienteNivelSetear() {
 		actual.nivel(self.siguienteNivel())
 		pantallaSiguienteNivel.iniciar()
@@ -190,15 +190,11 @@ class Nivel inherits Pantalla {
 	method serDaniado(objeto) {}
 }
 
-object nivel1 inherits Nivel(numero = 1, tiempoMover = 2500) {
-	override method siguienteNivel() = nivel2
-}
+object nivel1 inherits Nivel(numero = 1, tiempoMover = 2500, siguienteNivel = nivel2) {}
 
-object nivel2 inherits Nivel(numero = 2, tiempoMover = 1750){
-	override method siguienteNivel() = nivel3
-}
+object nivel2 inherits Nivel(numero = 2, tiempoMover = 1750, siguienteNivel = nivel3){}
 
-object nivel3 inherits Nivel(numero = 3, tiempoMover = 1000) {
+object nivel3 inherits Nivel(numero = 3, tiempoMover = 1000,siguienteNivel = null) {
 
 	override method iniciar() {
 		super()
@@ -208,15 +204,14 @@ object nivel3 inherits Nivel(numero = 3, tiempoMover = 1000) {
 	override method siguienteNivelSetear() {
 		pantallaGanaste.iniciar()
 	} 
-	override method siguienteNivel() {}
-	}
+}
 
 class PantallaFinal inherits Pantalla {
 	override method iniciar() {
 		game.clear()
 		super()
 		scoreCompleto.forEach{ puntaje => puntaje.puntajeFinal()}
-		balas.forEach{bala => bala.hayColision(false)}
+		balas.forEach{bala => bala.yaDisparada(false)}
 		
 		
 		keyboard.r().onPressDo{ pantallaInicial.reiniciarJuego()}
