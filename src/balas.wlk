@@ -9,7 +9,7 @@ class Bala {
 	const tick
 	var property position
 	const property direccionamiento
-	var primerDisparo = false
+	var property primerDisparo = true
 
 	method image() = self.toString() + ".png"
 
@@ -49,18 +49,23 @@ class EstadoDeBalaCanion inherits Bala(direccionamiento = arriba, position = new
 	}
 	
 	method eliminarEnemigo() {
-		if (not primerDisparo) {
+		if (primerDisparo) {
 		game.onCollideDo(self, { enemigo => self.eliminarEnemigoModelo(enemigo)	})
 		}
 	}
 	
 	method eliminarEnemigoModelo(enemigo) {
 			self.serDestruido()
-			primerDisparo = true
+			primerDisparo = false
 			enemigo.serDestruido()
 			if (ovnis.isEmpty()) {
 				actual.nivel().siguienteNivelSetear()
 			}
+	}
+	
+	method serDaniado(objeto) {
+		objeto.serDestruido()
+		self.serDestruido()
 	}
 }
 
@@ -100,8 +105,8 @@ object balaNave inherits Bala(direccionamiento = abajo, position = new Posicion(
 	}
 
 	method daniarCanion() {
-	if (not primerDisparo) {
-		primerDisparo = true	
+	if (primerDisparo) {
+		primerDisparo = false	
 		game.onCollideDo(self, { objetivo => objetivo.serDaniado(self) 
 	})		                                 
 		}
@@ -112,7 +117,6 @@ object balaNave inherits Bala(direccionamiento = abajo, position = new Posicion(
 		const naveAlAzar = ovnis.anyOne()
 		naveAlAzar.disparar()
 	}
-	
-	method elDeArriba() = game.getObjectsIn(game.at(self.position().x(), self.position().y() + 2))
-	method elDeDosArria() {}
 }
+
+const balas = [balaCanion, balaVeloz, balaPotente, balaNave]
