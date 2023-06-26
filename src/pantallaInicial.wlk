@@ -5,6 +5,7 @@ import balas.*
 import posDir.*
 import score.*
 import pantallas.*
+import sound.*
 
 class ObjetoPantallaInicial {
 

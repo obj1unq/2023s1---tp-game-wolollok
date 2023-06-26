@@ -9,16 +9,12 @@ class Bala {
 	const tick
 	var property position
 	const property direccionamiento
-	var yaDisparada = false
+	var property yaDisparada = false
 	const velocidad
 
 	method condicionDeSerDestruido() = direccionamiento.estaEnElBorde(self)
 
 	method image() = self.toString() + ".png"
-
-	method yaDisparada(_yaDisparada) {
-		yaDisparada = _yaDisparada
-	}
 
 	method disparar(objeto) {
 		position.clonar(objeto)

@@ -4,6 +4,7 @@ import balas.*
 import posDir.*
 import pantallas.*
 import pantallaPerder.*
+import sound.*
 
 object canion {
 

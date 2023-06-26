@@ -6,6 +6,7 @@ import score.*
 import randomizer.*
 import pantallas.*
 import pantallaPerder.*
+import sound.*
 
 const factories = [ naveConFuegoFactory, nave3PatasFactory, nave2PatasFactory ]
 

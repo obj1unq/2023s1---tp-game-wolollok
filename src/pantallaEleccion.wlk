@@ -5,6 +5,7 @@ import posDir.*
 import score.*
 import pantallas.*
 import pantallaInicial.*
+import sound.*
 
 object puntero2 {
 	const property image = "puntero2.png"
