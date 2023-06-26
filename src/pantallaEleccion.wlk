@@ -38,12 +38,13 @@ object puntero2 {
 			game.say(colorDeCanion, "Este canion se desbloquea en el nivel" + colorDeCanion.nivelDeDesbloqueo()) 
 			// No mostramos el mensaje de error porque nos parece feo el mensaje en rojo
 		}
-		}
-	} 
+	}
+} 
 
 class ColorDeCanion {
 	 const property nivelDeDesbloqueo
-	 const imagenJugar = self.toString() +"Jugar.png" 
+	 const imagenJugar = self.toString() +"Jugar.png"
+	 const property position
 	 
 	 method image() = self.estado().image(self)
 	 method serElegido() {
@@ -63,31 +64,17 @@ class ColorDeCanion {
 	
 	method estado() = if (self.estaDesbloqueado() ) desbloqueado else candado
 }
-object canionNormal inherits ColorDeCanion(nivelDeDesbloqueo = 1) {
-	const property position = new Position (x = 7, y = 7)
-}
+object canionNormal  inherits ColorDeCanion(nivelDeDesbloqueo = 1, position = new Position (x = 7, y = 7)) {}
 
-object canionRosa inherits ColorDeCanion(nivelDeDesbloqueo = 1) {
-	const property position = new Position (x = 10, y = 7)
-}
+object canionRosa 	 inherits ColorDeCanion(nivelDeDesbloqueo = 1, position = new Position (x = 10, y = 7)) {}
 
-object canionAzul inherits ColorDeCanion(nivelDeDesbloqueo = 2) {
-	const property position = new Position (x = 13, y = 7)
-}
+object canionAzul    inherits ColorDeCanion(nivelDeDesbloqueo = 2, position = new Position (x = 13, y = 7)) {}
 
-object canionNaranja inherits ColorDeCanion(nivelDeDesbloqueo = 2) {
-	const property position = new Position (x = 16, y = 7)
-}
+object canionNaranja inherits ColorDeCanion(nivelDeDesbloqueo = 2, position = new Position (x = 16, y = 7)) {}
 
-object canionVerde inherits ColorDeCanion(nivelDeDesbloqueo = 3) {
-	const property position = new Position (x = 19, y = 7)
-}
+object canionVerde   inherits ColorDeCanion(nivelDeDesbloqueo = 3, position = new Position (x = 19, y = 7)) {}
 
-object canionDorado inherits ColorDeCanion(nivelDeDesbloqueo = 3) {
-	const property position = new Position (x = 22, y = 7)
-}
-
-
+object canionDorado  inherits ColorDeCanion(nivelDeDesbloqueo = 3, position = new Position (x = 22, y = 7)) {}
 
 object candado {
 	method image(color) = "candado.png"
