@@ -145,7 +145,7 @@ class Nivel inherits Pantalla {
 
 	override method iniciar() {
 		game.clear()
-		soundProducer.playCancion()
+		soundProducer.playCancion("musicaInGame.mp3")
 		super()
 		actual.nivel(self)
 		factories.forEach{ factory => factory.construirNaves()}
