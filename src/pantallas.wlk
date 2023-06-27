@@ -144,8 +144,8 @@ class Nivel inherits Pantalla {
 	const property siguienteNivel
 
 	override method iniciar() {
-		soundProducer.playCancion()
 		game.clear()
+		soundProducer.playCancion()
 		super()
 		actual.nivel(self)
 		factories.forEach{ factory => factory.construirNaves()}

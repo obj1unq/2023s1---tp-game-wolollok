@@ -183,7 +183,7 @@ object naveAleatoria inherits Nave(position = new Posicion(x = 0, y = 0), image 
 object movimientoNaveAleatoria {
 
 	method mover(nave) {
-		game.onTick(500, "moverNaveAleatoria", {=>
+		game.onTick(500, "moverNaveAleatoria", {
 			if ((not nave.direccionamiento().estaEnElBorde(nave)) and game.hasVisual(self)) {
 				nave.mover(nave.direccionamiento())
 			} else {

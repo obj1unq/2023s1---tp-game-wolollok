@@ -9,7 +9,7 @@ import sound.*
 object canion {
 
 	var property position = new Posicion(x = game.center().x(), y = 1)
-	var property estado = normal
+	var property estado = potente
 
 	method image() = estado.image()
 
@@ -108,7 +108,10 @@ class Estado {
 	method serDaniado() {
 		gestorDeVidas.perderVida()
 	}
-
+	
+	method volverANormalidad() {
+		canion.estado(normal)
+	}
 }
 
 object normal inherits Estado(tipoDeBala = balaCanion) {}
@@ -128,8 +131,9 @@ object gestorDeBeneficios {
 	const beneficios = [ inmune, potente, veloz ]
 
 	method asignar(objeto) {
-		objeto.estado(beneficios.anyOne())
-		game.schedule(10000, { objeto.volverANormalidad()})
+		var beneficioAzar = beneficios.anyOne()
+		objeto.estado(beneficioAzar)
+		game.schedule(10000, { beneficioAzar.volverANormalidad()})
 	}
 }
 

@@ -4,8 +4,8 @@ object soundProducer {
 
 	var provider = game
 	const cancion = provider.sound("musicaInGame.mp3")
-	var volumenFX = 0.2
-	var volumenMusica = 0.2
+	var volumenFX = 0.1
+	var volumenMusica = 0.1
 
 	method provider(_provider) {
 		provider = _provider
@@ -24,20 +24,20 @@ object soundProducer {
 	}
 
 	method subirVolumenFX() {
-		volumenFX = (volumenFX + 0.2).min(1)
+		volumenFX = (volumenFX + 0.1).min(1)
 	}
 
 	method bajarVolumenFX() {
-		volumenFX = (volumenFX - 0.2).max(0)
+		volumenFX = (volumenFX - 0.1).max(0)
 	}
 
 	method subirVolumenMusica() {
-		volumenMusica = (volumenMusica + 0.2).min(1)
+		volumenMusica = (volumenMusica + 0.1).min(1)
 		cancion.volume(volumenMusica)
 	}
 
 	method bajarVolumenMusica() {
-		volumenMusica = (volumenMusica - 0.2).max(0)
+		volumenMusica = (volumenMusica - 0.1).max(0)
 		cancion.volume(volumenMusica)
 	}
 

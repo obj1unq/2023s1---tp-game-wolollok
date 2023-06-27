@@ -74,17 +74,27 @@ object balaCanion inherits EstadoDeBalaCanion {}
 object balaPotente inherits EstadoDeBalaCanion {
 
 	override method eliminarEnemigo(enemigo) {
-		self.destruirPotente()
-		super(enemigo)
-	}
-
-	method destruirPotente() {
-		[self.position().y() .. game.height()].forEach{posicionY => self.destruirColumna(posicionY)}
+		self.destruirAlrededor()
 	}
 	
-	method destruirColumna(posicionY){
-		game.getObjectsIn(game.at(self.position().x(), posicionY)).forEach{ nave => nave.serDestruido()}
+	override method disparar(objeto){
+		super(objeto)
+		objeto.volverANormalidad()
 	}
+	
+	method destruirAlrededor() {
+		(self.position().y()-2..self.position().y()+2).forEach{posicionY => self.destruirPotente(posicionY)}
+	}
+	
+	//method 	
+	
+	method destruirPotente(posicionY) {
+		game.getObjectsIn(game.at(self.position().x(), posicionY)).forEach{ nave => nave.serDestruido()}
+		game.getObjectsIn(game.at(self.position().x()+2, posicionY)).forEach{ nave => nave.serDestruido()}
+		game.getObjectsIn(game.at(self.position().x()-2, posicionY)).forEach{ nave => nave.serDestruido()}
+
+	}
+	
 }
 
 object balaVeloz inherits EstadoDeBalaCanion(velocidad = 5) {}
