@@ -32,6 +32,7 @@ class Pantalla {
 	method iniciar() {
 		actual.pantalla(self)
 		game.addVisual(self)
+		
 	}
 
 }
@@ -143,7 +144,7 @@ class Nivel inherits Pantalla {
 	const property siguienteNivel
 
 	override method iniciar() {
-		soundProducer.sound("musicaInGame.mp3").play()
+		soundProducer.playCancion()
 		game.clear()
 		super()
 		actual.nivel(self)
@@ -162,6 +163,11 @@ class Nivel inherits Pantalla {
 		keyboard.left().onPressDo{ canion.mover(izquierda)}
 		keyboard.right().onPressDo{ canion.mover(derecha)}
 		keyboard.space().onPressDo{ canion.disparar()}
+		keyboard.z().onPressDo({soundProducer.bajarVolumenFX()})
+		keyboard.a().onPressDo({soundProducer.subirVolumenFX()})
+		keyboard.x().onPressDo({soundProducer.bajarVolumenMusica()})
+		keyboard.s().onPressDo({soundProducer.subirVolumenMusica()})
+		
 }
 	method siguienteNivelSetear() {
 		actual.nivel(self.siguienteNivel())
