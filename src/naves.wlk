@@ -154,9 +154,12 @@ object naveAleatoria inherits Nave(position = new Posicion(x = 0, y = 0), image 
 	var property direccionamiento = null
 
 	method aparecer() {
+		naveMuerta = false
 		self.generarPosicion()
+		self.image("navecita.png")
 		game.addVisual(self)
 		self.generarAccionar()
+		
 	}
 
 	method generarAccionar() {
@@ -175,7 +178,6 @@ object naveAleatoria inherits Nave(position = new Posicion(x = 0, y = 0), image 
 	override method serDestruido() {
 		super()
 		canion.ganarBeneficio()
-		self.image("navecita.png")
 	}
 
 }
