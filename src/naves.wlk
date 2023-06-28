@@ -168,8 +168,7 @@ object naveAleatoria inherits Nave(position = new Posicion(x = 0, y = 0), image 
 		randomizer.position(direccionamiento, position)
 	}
 
-	override method disparar() {
-	}
+	override method disparar() { }
 
 	override method puntaje() = 1000.randomUpTo(2000)
 
@@ -184,11 +183,10 @@ object movimientoNaveAleatoria {
 
 	method mover(nave) {
 		game.onTick(500, "moverNaveAleatoria", {=>
-			if ((not nave.direccionamiento().estaEnElBorde(nave)) and game.hasVisual(self)) {
+			if ((not nave.direccionamiento().estaEnElBorde(nave)) and game.hasVisual(naveAleatoria)) {
 				nave.mover(nave.direccionamiento())
 			} else {
 				game.removeTickEvent("moverNaveAleatoria")
-				game.removeVisual(nave)
 			}
 		})
 	}
