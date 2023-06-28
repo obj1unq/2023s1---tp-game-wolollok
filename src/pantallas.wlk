@@ -171,6 +171,7 @@ class Nivel inherits Pantalla {
 		
 }
 	method siguienteNivelSetear() {
+		soundProducer.sacarCancion()
 		actual.nivel(self.siguienteNivel())
 		pantallaSiguienteNivel.iniciar()
 	}
@@ -189,6 +190,7 @@ object nivel3 inherits Nivel(numero = 3, tiempoMover = 1000,siguienteNivel = nul
 	  }
 	
 	override method siguienteNivelSetear() {
+		super()
 		pantallaGanaste.iniciar()
 	} 
 }

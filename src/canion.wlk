@@ -9,7 +9,7 @@ import sound.*
 object canion {
 
 	var property position = new Posicion(x = game.center().x(), y = 1)
-	var property estado = normal
+	var property estado = potente
 
 	method image() = estado.image()
 

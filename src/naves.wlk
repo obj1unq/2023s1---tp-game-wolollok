@@ -154,9 +154,12 @@ object naveAleatoria inherits Nave(position = new Posicion(x = 0, y = 0), image 
 	var property direccionamiento = null
 
 	method aparecer() {
+		naveMuerta = false
 		self.generarPosicion()
+		self.image("navecita.png")
 		game.addVisual(self)
 		self.generarAccionar()
+		
 	}
 
 	method generarAccionar() {
@@ -185,6 +188,9 @@ object movimientoNaveAleatoria {
 		game.onTick(500, "moverNaveAleatoria", {=>
 			if ((not nave.direccionamiento().estaEnElBorde(nave)) and game.hasVisual(naveAleatoria)) {
 				nave.mover(nave.direccionamiento())
+			} else if (nave.direccionamiento().estaEnElBorde(nave)) {
+				game.removeVisual(naveAleatoria)
+				game.removeTickEvent("moverNaveAleatoria")
 			} else {
 				game.removeTickEvent("moverNaveAleatoria")
 			}
