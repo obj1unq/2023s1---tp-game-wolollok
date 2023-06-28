@@ -144,6 +144,7 @@ class Nivel inherits Pantalla {
 	const property siguienteNivel
 
 	override method iniciar() {
+		canion.position(new Posicion(x = game.center().x(), y = 1) )
 		game.clear()
 		soundProducer.playCancion("musicaInGame.mp3")
 		super()
