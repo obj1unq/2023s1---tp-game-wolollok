@@ -9,7 +9,7 @@ import sound.*
 object canion {
 
 	var property position = new Posicion(x = game.center().x(), y = 1)
-	var property estado = potente
+	var property estado = normal
 
 	method image() = estado.image()
 
@@ -122,7 +122,7 @@ object inmune inherits Estado(tipoDeBala = balaCanion) {
 
 }
 
-object potente inherits Estado(tipoDeBala = balaPotente) {} /*Este estado mata una columna de naves */
+object potente inherits Estado(tipoDeBala = balaPotente) {} /*Este estado mata un radio de naves */
 
 object veloz inherits Estado(tipoDeBala = balaVeloz) {}
 
