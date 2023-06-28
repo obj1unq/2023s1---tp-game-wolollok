@@ -5,6 +5,7 @@ import posDir.*
 import score.*
 import pantallas.*
 import pantallaInicial.*
+import sound.*
 
 object corazonPerder {
 	var property image 

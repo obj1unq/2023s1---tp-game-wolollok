@@ -8,27 +8,7 @@ import nombre.*
 import pantallaInicial.*
 import pantallaEleccion.*
 import pantallaPerder.*
-
-object soundProducer {
-	
-	var provider = game
-	
-	method provider(_provider){
-		provider = _provider
-	}
-	
-	method sound(audioFile) = provider.sound(audioFile)
-	
-}
-
-object soundProviderMock {
-	
-	method sound(audioFile) = soundMock
-}
-
-object soundMock {
-	method play() {}
-}
+import sound.*
 
 object actual {
 
@@ -52,6 +32,7 @@ class Pantalla {
 	method iniciar() {
 		actual.pantalla(self)
 		game.addVisual(self)
+		
 	}
 
 }
@@ -163,8 +144,8 @@ class Nivel inherits Pantalla {
 	const property siguienteNivel
 
 	override method iniciar() {
-		soundProducer.sound("musicaInGame.mp3").play()
 		game.clear()
+		soundProducer.playCancion("musicaInGame.mp3")
 		super()
 		actual.nivel(self)
 		factories.forEach{ factory => factory.construirNaves()}
@@ -182,6 +163,11 @@ class Nivel inherits Pantalla {
 		keyboard.left().onPressDo{ canion.mover(izquierda)}
 		keyboard.right().onPressDo{ canion.mover(derecha)}
 		keyboard.space().onPressDo{ canion.disparar()}
+		keyboard.z().onPressDo({soundProducer.bajarVolumenFX()})
+		keyboard.a().onPressDo({soundProducer.subirVolumenFX()})
+		keyboard.x().onPressDo({soundProducer.bajarVolumenMusica()})
+		keyboard.s().onPressDo({soundProducer.subirVolumenMusica()})
+		
 }
 	method siguienteNivelSetear() {
 		actual.nivel(self.siguienteNivel())

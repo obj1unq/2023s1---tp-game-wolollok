@@ -11,6 +11,7 @@ import pantallaPerder.*
 import nombre.*
 import pantallaEleccion.*
 import easterEgg.*
+import sound.*
 
 describe "Test space invaders" {
 	
@@ -172,51 +173,51 @@ describe "Pasaje de niveles" {
 		assert.that(nivel3 == actual.nivel())
 	}
 	
-	test "Una nave enemiga dispara, por lo que su bala ya no tiene mas el hayColision en false" {
-		assert.notThat(balaNave.hayColision())
+	test "Una nave enemiga dispara, por lo que su bala ya no tiene mas el yaDisparada en false" {
+		assert.notThat(balaNave.yaDisparada())
 		const nave1 = new NaveConFuego(position = (new Posicion(x = 29, y = 4)))
 		nave1.disparar()
-		assert.that(balaNave.hayColision() )
+		assert.that(balaNave.yaDisparada() )
 	}
 		
 	test "El canion en estado normal dispara, por lo que su bala ya no tiene mas el hayColision en false" {
 		//Set canion on normal mode
 		canion.estado(normal)
 		//Checking hayColision() is false atm
-		assert.notThat(balaCanion.hayColision())
+		assert.notThat(balaCanion.yaDisparada())
 		canion.disparar()
 		//Checking hayColision() is true now
-		assert.that(balaCanion.hayColision() )
+		assert.that(balaCanion.yaDisparada() )
 	}
 	
 	test "El canion en estado disparoPotente dispara, por lo que su bala ya no tiene mas el hayColision en false" {
 		//Set canion on disparoPotente mode
-		canion.estado(disparoPotente)
+		canion.estado(potente)
 		//Checking hayColision() is false atm
-		assert.notThat(balaPotente.hayColision())
+		assert.notThat(balaPotente.yaDisparada())
 		canion.disparar()
 		//Checking hayColision() is true now
-		assert.that(balaPotente.hayColision())
+		assert.that(balaPotente.yaDisparada())
 	}
 	
 	test "El canion en estado inmune dispara, por lo que su bala ya no tiene mas el hayColision en false" {
 		//Set canion on inmune mode
 		canion.estado(inmune)
 		//Checking hayColision() is false atm
-		assert.notThat(balaCanion.hayColision())
+		assert.notThat(balaCanion.yaDisparada())
 		canion.disparar()
 		//Checking hayColision() is true now
-		assert.that(balaCanion.hayColision() )
+		assert.that(balaCanion.yaDisparada() )
 	}
 	
 	test "El canion en estado balaVeloz dispara, por lo que su bala ya no tiene mas el hayColision en false" {
 		//Set canion on disparoVeloz mode
 		canion.estado(balaVeloz)
 		//Checking hayColision() is false atm
-		assert.notThat(balaVeloz.hayColision())
+		assert.notThat(balaVeloz.yaDisparada())
 		canion.disparar()
 		//Checking hayColision() is true now
-		assert.that(balaVeloz.hayColision() )
+		assert.that(balaVeloz.yaDisparada() )
 	}
 }
 

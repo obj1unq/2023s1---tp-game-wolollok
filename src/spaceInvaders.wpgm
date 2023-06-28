@@ -6,7 +6,7 @@ import posDir.*
 import score.*
 import pantallas.*
 import pantallaInicial.*
-
+import pantallaEleccion.*
 
 
 program spaceInvaders {
@@ -17,11 +17,10 @@ program spaceInvaders {
 	game.height(20)
 	game.width(30)
 	game.cellSize(35)
-	
 	pantallaInicial.iniciar()
 
 //	START
 
 	game.start()
 	
-}
+} 
