@@ -66,8 +66,27 @@ object soundProviderMock {
 
 object soundMock {
 
-	method play() {
-	}
+	   method pause(){}
+
+    method paused() = true
+
+    method play(){}
+
+    method played() = false
+
+    method resume(){}
+
+    method shouldLoop(looping){}
+
+    method shouldLoop() = false
+
+    method stop(){}
+
+    method volume(newVolume){}
+
+    method volume() = 0
+	
+	
 
 }
 
