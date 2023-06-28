@@ -75,6 +75,7 @@ object balaPotente inherits EstadoDeBalaCanion {
 
 	override method eliminarEnemigo(enemigo) {
 		self.destruirAlrededor()
+		animacionExplosion.comenzar(position)
 	}
 	
 	override method disparar(objeto){
@@ -84,6 +85,8 @@ object balaPotente inherits EstadoDeBalaCanion {
 	
 	method destruirAlrededor() {
 		(self.position().y()-2..self.position().y()+2).forEach{posicionY => self.destruirPotente(posicionY)}
+		
+		
 	}
 	
 	//method 	
@@ -92,7 +95,6 @@ object balaPotente inherits EstadoDeBalaCanion {
 		game.getObjectsIn(game.at(self.position().x(), posicionY)).forEach{ nave => nave.serDestruido()}
 		game.getObjectsIn(game.at(self.position().x()+2, posicionY)).forEach{ nave => nave.serDestruido()}
 		game.getObjectsIn(game.at(self.position().x()-2, posicionY)).forEach{ nave => nave.serDestruido()}
-
 	}
 	
 }
@@ -123,3 +125,16 @@ object balaNave inherits Bala(direccionamiento = abajo, position = new Posicion(
 
 const balas = [ balaCanion, balaVeloz, balaPotente, balaNave ]
 
+object animacionExplosion {
+	var property position
+	var property image 
+	
+	method comenzar(pose) {
+		self.image("explosionGrande.png") 
+		game.addVisualIn(self, new Posicion (x = pose.x() - 2, y = pose.y() - 2 ))   
+		game.schedule(100, {self.image("explosionGrande2.png") })	
+		game.schedule(200, {self.image("explosionGrande3.png")})
+		game.schedule(300, {game.removeVisual(self)}) 
+	}
+	
+}
