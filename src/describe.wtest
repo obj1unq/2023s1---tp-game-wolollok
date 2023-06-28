@@ -293,5 +293,3 @@ describe "Naves: movimiento y disparos" {
 		assert.equals(101700, score.puntaje())
 	}
 }
-
-

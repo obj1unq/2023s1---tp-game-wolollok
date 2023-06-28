@@ -16,7 +16,6 @@ object soundProducer {
 		audio.volume(volumenFX)
 		return audio
 	}
-
 	method soundMusic(audioFile) {
 		const audio = provider.sound(audioFile)
 		audio.volume(volumenMusica)
