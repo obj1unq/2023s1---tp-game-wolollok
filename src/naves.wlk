@@ -175,6 +175,7 @@ object naveAleatoria inherits Nave(position = new Posicion(x = 0, y = 0), image 
 	override method serDestruido() {
 		super()
 		canion.ganarBeneficio()
+		self.image("navecita.png")
 	}
 
 }
