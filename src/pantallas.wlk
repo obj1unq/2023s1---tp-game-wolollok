@@ -13,7 +13,7 @@ import sound.*
 object actual {
 
 	var property pantalla = null
-	var property nivel = nivel3
+	var property nivel = nivel1
 
 	method nivelActual() {
 		return nivel.numero()
@@ -63,6 +63,7 @@ object pantallaInicial inherits Fondo(indicador = puntero, image = "fondoPantall
 		game.addVisual(wolollok)
 		indicador.iniciarTeclas()
 		keyboard.enter().onPressDo({ actual.indicador().iniciar(game.uniqueCollider(actual.indicador()))})
+		settingsMusica.iniciarTeclas()
 	}
 
 	override method eliminarse() {
@@ -165,10 +166,8 @@ class Nivel inherits Pantalla {
 		keyboard.left().onPressDo{ canion.mover(izquierda)}
 		keyboard.right().onPressDo{ canion.mover(derecha)}
 		keyboard.space().onPressDo{ canion.disparar()}
-		keyboard.z().onPressDo({ soundProducer.bajarVolumenFX()})
-		keyboard.a().onPressDo({ soundProducer.subirVolumenFX()})
-		keyboard.x().onPressDo({ soundProducer.bajarVolumenMusica()})
-		keyboard.s().onPressDo({ soundProducer.subirVolumenMusica()})
+		settingsMusica.iniciarTeclas()
+
 	}
 
 	method siguienteNivelSetear() {
@@ -190,7 +189,7 @@ object nivel2 inherits Nivel(numero = 2, tiempoMover = 1750, siguienteNivel = ni
 
 }
 
-object nivel3 inherits Nivel(numero = 3, tiempoMover = 1000, siguienteNivel = null) {
+object nivel3 inherits Nivel(numero = 3, tiempoMover = 300, siguienteNivel = null) {
 
 	override method iniciar() {
 		super()
@@ -262,3 +261,11 @@ object gameOver inherits PantallaFinal(cancion = "musicaDefeat.mp3") {
 
 }
 
+object settingsMusica {
+	method iniciarTeclas() {
+		keyboard.z().onPressDo({ soundProducer.bajarVolumenFX()})
+		keyboard.a().onPressDo({ soundProducer.subirVolumenFX()})
+		keyboard.x().onPressDo({ soundProducer.bajarVolumenMusica()})
+		keyboard.s().onPressDo({ soundProducer.subirVolumenMusica()})
+	}
+}

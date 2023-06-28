@@ -32,13 +32,17 @@ object soundProducer {
 	}
 
 	method subirVolumenMusica() {
+	if (cancion!=(null)) {	
 		volumenMusica = (volumenMusica + 0.1).min(1)
 		cancion.volume(volumenMusica)
+		}
 	}
 
 	method bajarVolumenMusica() {
+	if (cancion!=(null)) {	
 		volumenMusica = (volumenMusica - 0.1).max(0)
 		cancion.volume(volumenMusica)
+		}
 	}
 
 	method playCancion(audioFile) {

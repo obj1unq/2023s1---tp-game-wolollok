@@ -30,7 +30,7 @@ object naveEnLaTierra {
 	const property position = new Position( x = 0, y = 0)
 	
 	method animacion() {
-		game.schedule(400, {//soundProducer.sound("perder.mp3").play()
+		game.schedule(400, {soundProducer.sound("perderPorY.mp3").play()
 							self.image("pantallaPerder1.png")
 							game.addVisual(self)})
 		game.schedule(550, {self.image("pantallaPerder2.png")})

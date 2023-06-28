@@ -16,9 +16,10 @@ object nombre {
 	method textColor() = "ffffffff"
 	
 	method agregar(letra){
+	if (self.sePuedeAgregarLetra() )
 	 	nombre.add(letra)
 	}
-	
+	method sePuedeAgregarLetra() = actual.pantalla() == pantallaNombre
 	method borrarUltima(){
 			nombre = nombre.take(nombre.size()-1)
 	}
