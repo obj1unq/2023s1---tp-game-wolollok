@@ -2,7 +2,7 @@ import wollok.game.*
 
 object soundProducer {
 
-	var cancion
+	var cancion = null
 	var provider = game
 	var volumenFX = 0.1
 	var volumenMusica = 0.2
@@ -45,6 +45,11 @@ object soundProducer {
 		cancion = provider.sound(audioFile)
 		cancion.volume(volumenMusica)
 		cancion.play()
+	}
+	
+	method sacarCancion() {
+		cancion.stop()
+		cancion = null
 	}
 
 }
