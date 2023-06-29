@@ -13,7 +13,7 @@ import pantallaEleccion.*
 import easterEgg.*
 import sound.*
 
-describe "movimiento de canion" {
+describe "Movimiento de Canion y comportamiento de sus vidas." {
 	
 	method initialize() {
 		game.clear()
@@ -55,7 +55,7 @@ describe "movimiento de canion" {
 		assert.equals(29, canion.position().x())
 		assert.equals(1, canion.position().y())
 		canion.mover(derecha)
-		// Canion didnt move 
+		// Canion didn't move 
 		assert.equals(29, canion.position().x())
 		// If we want to move left, we can do it
 		canion.mover(izquierda)
@@ -68,7 +68,7 @@ describe "movimiento de canion" {
 		assert.equals(0, canion.position().x())
 		assert.equals(1, canion.position().y())
 		canion.mover(izquierda)
-		// Canion didnt move 
+		// Canion didn't move 
 		assert.equals(0, canion.position().x())
 		// If we want to move left, we can do it
 		canion.mover(derecha)
@@ -158,7 +158,7 @@ describe "Pasaje de niveles, eleccion de caniones" {
 	
 }
 
-describe "estados del canion" {
+describe "Estados del Canion" {
 	method initialize() {
 		game.clear()
 		game.title("Space Invaders")
@@ -175,23 +175,23 @@ describe "estados del canion" {
 		assert.notThat(canion.estado() == normal)
 	}
 	
-	test "El canion en estado normal dispara, por lo que su bala ya no tiene mas el hayColision en false" {
+	test "El canion en estado normal dispara, por lo que su bala ya no tiene mas el yaDisparada en false" {
 		//Set canion on normal mode
 		canion.estado(normal)
-		//Checking hayColision() is false atm
+		//Checking yaDisparada() is false atm
 		assert.notThat(balaCanion.yaDisparada())
 		canion.disparar()
-		//Checking hayColision() is true now
+		//Checking yaDisparada() is true now
 		assert.that(balaCanion.yaDisparada() )
 	}
 	
-	test "El canion en estado disparoPotente dispara, por lo que su bala ya no tiene mas el hayColision en false" {
+	test "El canion en estado disparoPotente dispara, por lo que su bala ya no tiene mas el yaDisparada en false" {
 		//Set canion on disparoPotente mode
 		canion.estado(potente)
-		//Checking hayColision() is false atm
+		//Checking yaDisparada() is false atm
 		assert.notThat(balaPotente.yaDisparada())
 		canion.disparar()
-		//Checking hayColision() is true now
+		//Checking yaDisparada() is true now
 		assert.that(balaPotente.yaDisparada())
 	}
 	
@@ -201,23 +201,23 @@ describe "estados del canion" {
 		assert.that(canion.estado() == normal)
 	}
 	
-	test "El canion en estado inmune dispara, por lo que su bala ya no tiene mas el hayColision en false" {
+	test "El canion en estado inmune dispara, por lo que su bala ya no tiene mas el yaDisparada en false" {
 		//Set canion on inmune mode
 		canion.estado(inmune)
-		//Checking hayColision() is false atm
+		//Checking yaDisparada() is false atm
 		assert.notThat(balaCanion.yaDisparada())
 		canion.disparar()
-		//Checking hayColision() is true now
+		//Checking yaDisparada() is true now
 		assert.that(balaCanion.yaDisparada() )
 	}
 	
-	test "El canion en estado balaVeloz dispara, por lo que su bala ya no tiene mas el hayColision en false" {
+	test "El canion en estado balaVeloz dispara, por lo que su bala ya no tiene mas el yaDisparada en false" {
 		//Set canion on disparoVeloz mode
-		canion.estado(balaVeloz)
-		//Checking hayColision() is false atm
+		canion.estado(veloz)
+		//Checking yaDisparada() is false atm
 		assert.notThat(balaVeloz.yaDisparada())
 		canion.disparar()
-		//Checking hayColision() is true now
+		//Checking yaDisparada() is true now
 		assert.that(balaVeloz.yaDisparada() )
 	}
 	
