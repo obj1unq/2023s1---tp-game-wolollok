@@ -112,8 +112,10 @@ object balaNave inherits Bala(direccionamiento = abajo, position = new Posicion(
 	}
 
 	method nuevoDisparo() {
+	if (not ovnis.isEmpty()) {	
 		const naveAlAzar = ovnis.anyOne()
 		naveAlAzar.disparar()
+	}
 	}
 }
 
