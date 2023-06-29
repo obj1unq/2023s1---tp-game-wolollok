@@ -95,7 +95,7 @@ object balaPotente inherits EstadoDeBalaCanion {
 
 object balaVeloz inherits EstadoDeBalaCanion(velocidad = 5) {}
 
-object balaLaser inherits EstadoDeBalaCanion {
+object balaLaser inherits EstadoDeBalaCanion(velocidad = 35) {
 	var disparos = 2
 	override method disparar(objeto) {
 		super(objeto)
