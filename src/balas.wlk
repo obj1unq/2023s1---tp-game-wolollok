@@ -145,7 +145,7 @@ object balaNave inherits Bala(direccionamiento = abajo, position = new Posicion(
 	}
 }
 
-const balas = [ balaCanion, balaVeloz, balaPotente, balaNave ]
+const balas = [ balaCanion, balaVeloz, balaPotente, balaNave, balaLaser ]
 
 object animacionExplosion {
 	var property image 
