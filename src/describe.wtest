@@ -211,7 +211,7 @@ describe "Estados del Canion" {
 		assert.that(balaCanion.yaDisparada() )
 	}
 	
-	test "El canion en estado balaVeloz dispara, por lo que su bala ya no tiene mas el yaDisparada en false" {
+	test "El canion en estado veloz dispara, por lo que su bala ya no tiene mas el yaDisparada en false" {
 		//Set canion on disparoVeloz mode
 		canion.estado(veloz)
 		//Checking yaDisparada() is false atm
@@ -221,11 +221,32 @@ describe "Estados del Canion" {
 		assert.that(balaVeloz.yaDisparada() )
 	}
 	
+	test "El canion en estado laser dispara, por lo que su bala ya no tiene mas el yaDisparada en false" {
+		//Set canion on laser mode
+		canion.estado(laser)
+		//Checking yaDisparada() is false atm
+		assert.notThat(balaLaser.yaDisparada())
+		canion.disparar()
+		//Checking yaDisparada() is true now
+		assert.that(balaLaser.yaDisparada() )
+	}
+	
+	test "El canion en estado laser dispara y resta un disparo" {
+		//Set canion on laser mode
+		balaLaser.disparos(2)
+		canion.estado(laser)
+		canion.disparar()
+		assert.that(balaLaser.disparos() == 1 )
+		canion.disparar()
+		assert.that(balaLaser.disparos() == 0 )
+	}
+	
 	test "Al poseer el canion el estado inmune, las balas que colisionen con él no le quitan vida" {
 		canion.estado(inmune)
 		canion.estado().serDaniado()
 		assert.equals(gestorDeVidas.vidas(), [ uno, dos, tres ])
-	}	
+	}
+		
 }
 
 describe "Naves: movimiento y disparos" {

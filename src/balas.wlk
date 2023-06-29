@@ -90,17 +90,17 @@ object balaPotente inherits EstadoDeBalaCanion {
 	method destruirPotente(posicionY,posicionX) {
 		game.getObjectsIn(game.at(posicionX, posicionY)).forEach{ nave => nave.serDestruido()}
 	}
-	
 }
 
 object balaVeloz inherits EstadoDeBalaCanion(velocidad = 5) {}
 
 object balaLaser inherits EstadoDeBalaCanion(velocidad = 35) {
-	var disparos = 2
+	var property disparos = 2
+	
 	override method disparar(objeto) {
 		super(objeto)
 		disparos = disparos - 1
-		if (disparos == 0) { objeto.estado().volverANormalidad() }
+		if (disparos < 1) { objeto.estado().volverANormalidad() }
 	}
 	override method eliminarEnemigo(enemigo) {
 		enemigo.serDestruido() 
@@ -141,7 +141,7 @@ object balaNave inherits Bala(direccionamiento = abajo, position = new Posicion(
 	if (not ovnis.isEmpty()) {	
 		const naveAlAzar = ovnis.anyOne()
 		naveAlAzar.disparar()
-	}
+		}
 	}
 }
 
@@ -174,10 +174,9 @@ object factoryLaser {
 		lasers.clear()
 	}
 }
+
 class LaserDeRelleno {
 	const property image = "laserMedio.png"
 	
-	method serDaniado(objeto) {
-		
-	}
+	method serDaniado(objeto) {}
 }
