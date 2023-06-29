@@ -10,7 +10,7 @@ import easterEgg.*
 object canion {
 
 	var property position = new Posicion(x = game.center().x(), y = 1)
-	var property estado = laser
+	var property estado = normal
 
 	method image() = estado.image()
 
