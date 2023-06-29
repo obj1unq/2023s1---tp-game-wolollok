@@ -10,7 +10,7 @@ import easterEgg.*
 object canion {
 
 	var property position = new Posicion(x = game.center().x(), y = 1)
-	var property estado = normal
+	var property estado = laser
 
 	method image() = estado.image()
 
@@ -132,11 +132,12 @@ object potente inherits Estado(tipoDeBala = balaPotente) {} /*Este estado mata u
 
 object veloz inherits Estado(tipoDeBala = balaVeloz) {}
 
+object laser inherits Estado(tipoDeBala = balaLaser) {}
 object wolollokJugar inherits Estado(tipoDeBala = balaPotente, image = "wolollokJugar.png") {}
 
 object gestorDeBeneficios {
 
-	const beneficios = [ inmune, potente, veloz ]
+	const beneficios = [ inmune, potente, veloz, laser ]
 
 	method asignar(objeto) {
 		const beneficioAzar = beneficios.anyOne()

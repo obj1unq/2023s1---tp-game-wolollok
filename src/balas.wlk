@@ -95,6 +95,32 @@ object balaPotente inherits EstadoDeBalaCanion {
 
 object balaVeloz inherits EstadoDeBalaCanion(velocidad = 5) {}
 
+object balaLaser inherits EstadoDeBalaCanion {
+	var disparos = 2
+	override method disparar(objeto) {
+		super(objeto)
+		disparos = disparos - 1
+		if (disparos == 0) { objeto.estado().volverANormalidad() }
+	}
+	override method eliminarEnemigo(enemigo) {
+		enemigo.serDestruido() 
+	}
+	
+	override method mover() {
+		super()
+		factoryLaser.crearLaser(position)
+	}
+	
+	override method serDestruido() {
+		super()
+		factoryLaser.eliminarCreados()
+	}
+	
+	override method serDaniado(objeto) {
+		objeto.serDestruido()
+	}
+}
+
 //BALA DE LA NAVE
 
 object balaNave inherits Bala(direccionamiento = abajo, position = new Posicion(x = 0, y = 0), tick = "bajar bala", velocidad = 50) {
@@ -133,5 +159,21 @@ object animacionExplosion {
 	}
 	
 	method serDestruido(){}
+}
+
+object factoryLaser {
+	const lasers = []
+	method crearLaser(posicion) {
+	const laserNuevo = new LaserDeRelleno()
+	lasers.add(laserNuevo)
+		game.addVisualIn(laserNuevo, game.at(posicion.x(), posicion.y() - 1))
+	}
 	
+	method eliminarCreados() {
+		lasers.forEach{laserCreado => game.removeVisual(laserCreado)}
+		lasers.clear()
+	}
+}
+class LaserDeRelleno {
+	const property image = "laserMedio.png"
 }
