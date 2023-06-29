@@ -5,11 +5,12 @@ import posDir.*
 import pantallas.*
 import pantallaPerder.*
 import sound.*
+import easterEgg.*
 
 object canion {
 
 	var property position = new Posicion(x = game.center().x(), y = 1)
-	var property estado = potente
+	var property estado = normal
 
 	method image() = estado.image()
 
@@ -110,7 +111,11 @@ class Estado {
 	}
 	
 	method volverANormalidad() {
-		canion.estado(normal)
+		if (easterEgg.activado()){
+			canion.estado(potente)
+		} else {
+			canion.estado(normal)
+		}
 	}
 }
 
@@ -131,7 +136,7 @@ object gestorDeBeneficios {
 	const beneficios = [ inmune, potente, veloz ]
 
 	method asignar(objeto) {
-		var beneficioAzar = beneficios.anyOne()
+		const beneficioAzar = beneficios.anyOne()
 		objeto.estado(beneficioAzar)
 		game.schedule(10000, { beneficioAzar.volverANormalidad()})
 	}
