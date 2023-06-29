@@ -2,10 +2,10 @@
 
 ## Equipo de desarrollo
 
-- Bolaños Rodrigo
-- Cuevas Leandro
-- Moreira Ignacio
-- Sofarelli Thiago
+- Bolaños, Rodrigo
+- Cuevas, Leandro
+- Moreira, Ignacio
+- Sofarelli, Thiago
 
 ## Capturas
 
