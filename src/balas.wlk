@@ -176,4 +176,8 @@ object factoryLaser {
 }
 class LaserDeRelleno {
 	const property image = "laserMedio.png"
+	
+	method serDaniado(objeto) {
+		
+	}
 }
