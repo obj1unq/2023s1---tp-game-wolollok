@@ -13,7 +13,7 @@ import pantallaEleccion.*
 import easterEgg.*
 import sound.*
 
-describe "Test space invaders" {
+describe "movimiento de canion" {
 	
 	method initialize() {
 		game.clear()
@@ -80,16 +80,181 @@ describe "Test space invaders" {
 		assert.equals(gestorDeVidas.vidas(), [uno, dos])	
 	}
 	
+	test "Misterioso easter egg está listo para revelarnos todo su esplendor" {
+		easterEgg.agregar('e')
+		easterEgg.agregar('a')
+		easterEgg.agregar('s')
+		easterEgg.agregar('t')
+		easterEgg.agregar('e')
+		easterEgg.agregar('r')
+		assert.that(easterEgg.acumulador().join("") == "easter")
+	}
+	
+	test "Nave aleatoria si no está de un lado, está del otro" {
+		naveAleatoria.aparecer()
+		assert.that(29 == naveAleatoria.position().x() or 0 == naveAleatoria.position().x())
+	}
+	
+}
+
+describe "Pasaje de niveles, eleccion de caniones" {
+	method initialize() {
+		game.clear()
+		game.title("Space Invaders")
+		game.height(20)
+		game.width(30)
+		game.cellSize(35)
+		soundProducer.provider(soundProviderMock)
+		
+		nivel1.iniciar()
+	}
+	
+	test "Estoy en el nivel uno, paso al dos y al tres" {
+		soundProducer.playCancion("perder.mp3")
+		actual.nivel(nivel1)
+		assert.that(nivel1 == actual.nivel())
+		actual.nivel().siguienteNivelSetear()
+		soundProducer.playCancion("perder.mp3")
+		assert.that(nivel2 == actual.nivel())
+		soundProducer.playCancion("perder.mp3")
+		actual.nivel().siguienteNivelSetear()
+		assert.that(nivel3 == actual.nivel())
+	}
+	test "Estoy en el nivel uno y solo puedo elegir el canion Rosa y Normal" {
+		//Si puedo elegir
+		actual.nivel(nivel1)
+		canionNormal.serElegido()
+		assert.equals(normal.image(), "canionNormalJugar.png")
+		canionRosa.serElegido()
+		assert.equals(normal.image(), "canionRosaJugar.png")
+		// No puedo elegir
+		assert.throwsException{canionAzul.serElegido()}
+		assert.throwsException{canionNaranja.serElegido()}
+		assert.throwsException{canionVerde.serElegido()}
+		assert.throwsException{canionDorado.serElegido()}
+	}
+	test "Estoy en el nivel dos y solo puedo elegir el canion Rosa y Normal" {
+		//Si puedo elegir
+		actual.nivel(nivel2)
+		canionNormal.serElegido()
+		assert.equals(normal.image(), "canionNormalJugar.png")
+		canionRosa.serElegido()
+		assert.equals(normal.image(), "canionRosaJugar.png")
+		// No puedo elegir
+		canionAzul.serElegido()
+		assert.equals(normal.image(), "canionAzulJugar.png")
+		canionNaranja.serElegido()
+		assert.equals(normal.image(), "canionNaranjaJugar.png")
+		assert.throwsException{canionVerde.serElegido()}
+		assert.throwsException{canionDorado.serElegido()}
+	}
+	test "Estoy en el nivel tres y solo puedo elegir el canion Rosa y Normal" {
+		//Si puedo elegir
+		actual.nivel(nivel3)
+		canionNormal.serElegido()
+		assert.equals(normal.image(), "canionNormalJugar.png")
+		canionRosa.serElegido()
+		assert.equals(normal.image(), "canionRosaJugar.png")
+		// No puedo elegir
+		canionAzul.serElegido()
+		assert.equals(normal.image(), "canionAzulJugar.png")
+		canionNaranja.serElegido()
+		assert.equals(normal.image(), "canionNaranjaJugar.png")
+		canionVerde.serElegido()
+		assert.equals(normal.image(), "canionVerdeJugar.png")
+		canionDorado.serElegido()
+		assert.equals(normal.image(), "canionDoradoJugar.png")
+	}
+	
+}
+
+describe "estados del canion" {
+	method initialize() {
+		game.clear()
+		game.title("Space Invaders")
+		game.height(20)
+		game.width(30)
+		game.cellSize(35)
+		soundProducer.provider(soundProviderMock)
+		
+		nivel1.iniciar()
+	}
 	test "El estado del canion cambia al dispararle a la nave aleatoria" {
 		canion.estado(normal)
 		naveAleatoria.serDestruido()
 		assert.notThat(canion.estado() == normal)
 	}
-
+	
+	test "El canion en estado normal dispara, por lo que su bala ya no tiene mas el hayColision en false" {
+		//Set canion on normal mode
+		canion.estado(normal)
+		//Checking hayColision() is false atm
+		assert.notThat(balaCanion.yaDisparada())
+		canion.disparar()
+		//Checking hayColision() is true now
+		assert.that(balaCanion.yaDisparada() )
+	}
+	
+	test "El canion en estado disparoPotente dispara, por lo que su bala ya no tiene mas el hayColision en false" {
+		//Set canion on disparoPotente mode
+		canion.estado(potente)
+		//Checking hayColision() is false atm
+		assert.notThat(balaPotente.yaDisparada())
+		canion.disparar()
+		//Checking hayColision() is true now
+		assert.that(balaPotente.yaDisparada())
+	}
+	
+	test "El canion en estado potente dispara, por lo que su estado vuelve a la normalidad" {
+		canion.estado(potente)
+		canion.disparar()
+		assert.that(canion.estado() == normal)
+	}
+	
+	test "El canion en estado inmune dispara, por lo que su bala ya no tiene mas el hayColision en false" {
+		//Set canion on inmune mode
+		canion.estado(inmune)
+		//Checking hayColision() is false atm
+		assert.notThat(balaCanion.yaDisparada())
+		canion.disparar()
+		//Checking hayColision() is true now
+		assert.that(balaCanion.yaDisparada() )
+	}
+	
+	test "El canion en estado balaVeloz dispara, por lo que su bala ya no tiene mas el hayColision en false" {
+		//Set canion on disparoVeloz mode
+		canion.estado(balaVeloz)
+		//Checking hayColision() is false atm
+		assert.notThat(balaVeloz.yaDisparada())
+		canion.disparar()
+		//Checking hayColision() is true now
+		assert.that(balaVeloz.yaDisparada() )
+	}
+	
 	test "Al poseer el canion el estado inmune, las balas que colisionen con él no le quitan vida" {
 		canion.estado(inmune)
 		canion.estado().serDaniado()
 		assert.equals(gestorDeVidas.vidas(), [ uno, dos, tres ])
+	}	
+}
+
+describe "Naves: movimiento y disparos" {
+	method initialize() {
+		game.clear()
+		game.title("Space Invaders")
+		game.height(20)
+		game.width(30)
+		game.cellSize(35)
+		soundProducer.provider(soundProviderMock)
+		
+		nivel1.iniciar()
+	}
+	
+	test "Una nave enemiga dispara, por lo que su bala ya no tiene mas el yaDisparada en false" {
+		assert.notThat(balaNave.yaDisparada())
+		const nave1 = new NaveConFuego(position = (new Posicion(x = 29, y = 4)))
+		nave1.disparar()
+		assert.that(balaNave.yaDisparada() )
 	}
 	
 	test "Al mover una nave más allá del borde izquierdo, desciende" {
@@ -127,97 +292,4 @@ describe "Test space invaders" {
 		nave3.serDestruido()
 		assert.equals(101700, score.puntaje())
 	}
-	
-	test "Misterioso easter egg está listo para revelarnos todo su esplendor" {
-		easterEgg.agregar('e')
-		easterEgg.agregar('a')
-		easterEgg.agregar('s')
-		easterEgg.agregar('t')
-		easterEgg.agregar('e')
-		easterEgg.agregar('r')
-		assert.that(easterEgg.acumulador().join("") == "easter")
-	}
-	
-	test "Nave aleatoria si no está de un lado, está del otro" {
-		naveAleatoria.aparecer()
-		assert.that(29 == naveAleatoria.position().x() or 0 == naveAleatoria.position().x())
-	}
-	
-	test "Estoy en el nivel uno y no puedo elegir el canion dorado" {
-		//TODO realizar
-	}
-	
-	test "Estoy en el nivel uno y sí puedo elegir el canion rosa " {
-		//TODO realizar
-	}
 }
-
-describe "Pasaje de niveles" {
-	method initialize() {
-		game.clear()
-		game.title("Space Invaders")
-		game.height(20)
-		game.width(30)
-		game.cellSize(35)
-		soundProducer.provider(soundProviderMock)
-		
-		nivel1.iniciar()
-	}
-	
-	test "Estoy en el nivel uno, paso al dos y al tres" {
-		actual.nivel(nivel1)
-		assert.that(nivel1 == actual.nivel())
-		actual.nivel().siguienteNivelSetear()
-		assert.that(nivel2 == actual.nivel())
-		actual.nivel().siguienteNivelSetear()
-		assert.that(nivel3 == actual.nivel())
-	}
-	
-	test "Una nave enemiga dispara, por lo que su bala ya no tiene mas el yaDisparada en false" {
-		assert.notThat(balaNave.yaDisparada())
-		const nave1 = new NaveConFuego(position = (new Posicion(x = 29, y = 4)))
-		nave1.disparar()
-		assert.that(balaNave.yaDisparada() )
-	}
-		
-	test "El canion en estado normal dispara, por lo que su bala ya no tiene mas el hayColision en false" {
-		//Set canion on normal mode
-		canion.estado(normal)
-		//Checking hayColision() is false atm
-		assert.notThat(balaCanion.yaDisparada())
-		canion.disparar()
-		//Checking hayColision() is true now
-		assert.that(balaCanion.yaDisparada() )
-	}
-	
-	test "El canion en estado disparoPotente dispara, por lo que su bala ya no tiene mas el hayColision en false" {
-		//Set canion on disparoPotente mode
-		canion.estado(potente)
-		//Checking hayColision() is false atm
-		assert.notThat(balaPotente.yaDisparada())
-		canion.disparar()
-		//Checking hayColision() is true now
-		assert.that(balaPotente.yaDisparada())
-	}
-	
-	test "El canion en estado inmune dispara, por lo que su bala ya no tiene mas el hayColision en false" {
-		//Set canion on inmune mode
-		canion.estado(inmune)
-		//Checking hayColision() is false atm
-		assert.notThat(balaCanion.yaDisparada())
-		canion.disparar()
-		//Checking hayColision() is true now
-		assert.that(balaCanion.yaDisparada() )
-	}
-	
-	test "El canion en estado balaVeloz dispara, por lo que su bala ya no tiene mas el hayColision en false" {
-		//Set canion on disparoVeloz mode
-		canion.estado(balaVeloz)
-		//Checking hayColision() is false atm
-		assert.notThat(balaVeloz.yaDisparada())
-		canion.disparar()
-		//Checking hayColision() is true now
-		assert.that(balaVeloz.yaDisparada() )
-	}
-}
-
