@@ -3,6 +3,7 @@ import canion.*
 import naves.*
 import posDir.*
 import pantallas.*
+import easterEgg.*
 
 class Bala {
 
@@ -78,23 +79,26 @@ object balaPotente inherits EstadoDeBalaCanion {
 		animacionExplosion.comenzar(position)
 	}
 	
+	
 	override method disparar(objeto){
 		super(objeto)
-		objeto.volverANormalidad()
+		if (not easterEgg.activado()){
+			objeto.volverANormalidad()
+		}
 	}
 	
 	method destruirAlrededor() {
-		(self.position().y()-2..self.position().y()+2).forEach{posicionY => self.destruirPotente(posicionY)}
-		
-		
+		(self.position().y()-2..self.position().y()+2).forEach{posicionY => self.destruirX(posicionY)}
+	}
+	
+	method destruirX(posicionY){
+		(self.position().x()-2..self.position().x()+2).forEach{posicionX => self.destruirPotente(posicionY,posicionX)}
 	}
 	
 	//method 	
 	
-	method destruirPotente(posicionY) {
-		game.getObjectsIn(game.at(self.position().x(), posicionY)).forEach{ nave => nave.serDestruido()}
-		game.getObjectsIn(game.at(self.position().x()+2, posicionY)).forEach{ nave => nave.serDestruido()}
-		game.getObjectsIn(game.at(self.position().x()-2, posicionY)).forEach{ nave => nave.serDestruido()}
+	method destruirPotente(posicionY,posicionX) {
+		game.getObjectsIn(game.at(posicionX, posicionY)).forEach{ nave => nave.serDestruido()}
 	}
 	
 }
@@ -126,7 +130,6 @@ object balaNave inherits Bala(direccionamiento = abajo, position = new Posicion(
 const balas = [ balaCanion, balaVeloz, balaPotente, balaNave ]
 
 object animacionExplosion {
-	var property position
 	var property image 
 	
 	method comenzar(pose) {
@@ -136,5 +139,7 @@ object animacionExplosion {
 		game.schedule(200, {self.image("explosionGrande3.png")})
 		game.schedule(300, {game.removeVisual(self)}) 
 	}
+	
+	method serDestruido(){}
 	
 }

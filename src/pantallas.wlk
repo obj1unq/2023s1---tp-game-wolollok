@@ -181,15 +181,12 @@ class Nivel inherits Pantalla {
 
 }
 
-object nivel1 inherits Nivel(numero = 1, tiempoMover = 2500, siguienteNivel = nivel2) {
+object nivel1 inherits Nivel(numero = 1, tiempoMover = 2000, siguienteNivel = nivel2) {}
 
-}
+object nivel2 inherits Nivel(numero = 2, tiempoMover = 1500, siguienteNivel = nivel3) {}
 
-object nivel2 inherits Nivel(numero = 2, tiempoMover = 1750, siguienteNivel = nivel3) {
+object nivel3 inherits Nivel(numero = 3, tiempoMover = 1000, siguienteNivel = null) {
 
-}
-
-object nivel3 inherits Nivel(numero = 3, tiempoMover = 800, siguienteNivel = null) {
 
 	override method iniciar() {
 		super()

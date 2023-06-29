@@ -6,6 +6,7 @@ import posDir.*
 import score.*
 import pantallas.*
 import sound.*
+import easterEgg.*
 
 class ObjetoPantallaInicial {
 
@@ -50,6 +51,7 @@ object wolollok inherits ObjetoPantallaInicial(position = new Position(x = 13, y
 	override method iniciar() {
 		game.clear()
 		pantallaWolollok.iniciar()
+		easterEgg.iniciarTeclas()
 	}
 
 }
