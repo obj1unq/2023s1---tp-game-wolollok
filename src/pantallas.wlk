@@ -13,7 +13,7 @@ import sound.*
 object actual {
 
 	var property pantalla = null
-	var property nivel = nivel1
+	var property nivel = nivel3
 
 	method nivelActual() {
 		return nivel.numero()
@@ -189,7 +189,7 @@ object nivel2 inherits Nivel(numero = 2, tiempoMover = 1750, siguienteNivel = ni
 
 }
 
-object nivel3 inherits Nivel(numero = 3, tiempoMover = 300, siguienteNivel = null) {
+object nivel3 inherits Nivel(numero = 3, tiempoMover = 800, siguienteNivel = null) {
 
 	override method iniciar() {
 		super()
@@ -223,7 +223,7 @@ class PantallaFinal inherits Pantalla {
 
 object pantallaGanaste inherits PantallaFinal(cancion = "musicaVictory.mp3") {
 
-	const property image = "gameWin.png"
+	const property image = "gameWinTip.png"
 
 	override method iniciar() {
 		super()
