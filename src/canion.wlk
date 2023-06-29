@@ -40,7 +40,6 @@ object canion {
 	method volverANormalidad() {
 		estado = normal
 	}
-
 }
 
 object gestorDeVidas {
@@ -87,7 +86,6 @@ object uno inherits Vida(position = new Posicion(x = 0, y = 0)) {
 		fondoPerder.formaDePerder(corazonPerder)
 		fondoPerder.iniciar()
 	}
-
 }
 
 object dos inherits Vida(position = new Posicion(x = 1, y = 0)) {}
@@ -115,7 +113,6 @@ class Estado {
 			canion.estado(wolollokJugar)
 		} else {
 			canion.estado(normal)
-		
 		}
 	}
 }
@@ -123,9 +120,7 @@ class Estado {
 object normal inherits Estado(tipoDeBala = balaCanion) {}
 
 object inmune inherits Estado(tipoDeBala = balaCanion) {
-
 	override method serDaniado() {}
-
 }
 
 object potente inherits Estado(tipoDeBala = balaPotente) {} /*Este estado mata un radio de naves */
@@ -133,6 +128,7 @@ object potente inherits Estado(tipoDeBala = balaPotente) {} /*Este estado mata u
 object veloz inherits Estado(tipoDeBala = balaVeloz) {}
 
 object laser inherits Estado(tipoDeBala = balaLaser) {}
+
 object wolollokJugar inherits Estado(tipoDeBala = balaPotente, image = "wolollokJugar.png") {}
 
 object gestorDeBeneficios {
@@ -145,4 +141,3 @@ object gestorDeBeneficios {
 		game.schedule(10000, { beneficioAzar.volverANormalidad()})
 	}
 }
-
