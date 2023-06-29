@@ -19,6 +19,10 @@ object easterEgg {
 						   	   self.validarEasterEgg()}
 	}
 	
+	method borrarAcumulador() {
+		acumulador.clear()
+	}
+	
 	method agregar(letra){
 		acumulador.add(letra)
 	}
@@ -26,7 +30,7 @@ object easterEgg {
 	method validarEasterEgg(){
 		if (acumulador.join("") == "easter"){
 			activado = true
-			canion.estado(potente)
+			canion.estado(wolollokJugar)
 			soundProducer.sound("easterEgg.mp3").play()
 			self.animacion()
 		}

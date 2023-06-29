@@ -112,9 +112,10 @@ class Estado {
 	
 	method volverANormalidad() {
 		if (easterEgg.activado()){
-			canion.estado(potente)
+			canion.estado(wolollokJugar)
 		} else {
 			canion.estado(normal)
+		
 		}
 	}
 }
@@ -130,6 +131,8 @@ object inmune inherits Estado(tipoDeBala = balaCanion) {
 object potente inherits Estado(tipoDeBala = balaPotente) {} /*Este estado mata un radio de naves */
 
 object veloz inherits Estado(tipoDeBala = balaVeloz) {}
+
+object wolollokJugar inherits Estado(tipoDeBala = balaPotente, image = "wolollokJugar.png") {}
 
 object gestorDeBeneficios {
 

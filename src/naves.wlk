@@ -86,7 +86,7 @@ class Nave {
 
 	method validarCantidadOvnis() {
 		if (ovnis.isEmpty()) {
-			actual.nivel().siguienteNivelSetear()
+			game.schedule(150, {actual.nivel().siguienteNivelSetear() })
 		}
 	}
 
