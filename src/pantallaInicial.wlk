@@ -101,7 +101,8 @@ object pantallaWolollok {
 
 	method iniciar() {
 		game.addVisual(self)
-		keyboard.backspace().onPressDo({ pantallaInicial.iniciar()})
+		keyboard.backspace().onPressDo({ pantallaInicial.iniciar()
+										 easterEgg.borrarAcumulador() })
 	}
 
 }

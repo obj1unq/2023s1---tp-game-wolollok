@@ -13,7 +13,7 @@ import sound.*
 object actual {
 
 	var property pantalla = null
-	var property nivel = nivel3
+	var property nivel = nivel1
 
 	method nivelActual() {
 		return nivel.numero()
@@ -237,9 +237,6 @@ object fondoPerder {
 
 	method iniciar() {
 		ovnis.clear()
-		balaCanion.eliminarse()
-		balaNave.eliminarse()
-//		game.removeTickEvent("moverOvnis")
 		game.clear()
 		game.addVisual(self)
 		formaDePerder.animacion()

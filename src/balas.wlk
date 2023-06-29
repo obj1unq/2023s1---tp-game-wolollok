@@ -31,18 +31,13 @@ class Bala {
 		direccionamiento.nuevaPosicion(position)
 	}
 
-	method serDestruido() {
-		game.removeVisual(self)
-		game.removeTickEvent(tick)
-	}
-
 	method moverAuto() {
 		game.onTick(velocidad, tick, {=>
 			self.mover()
 			if (self.condicionDeSerDestruido()) self.serDestruido()})
 	}
 
-	method eliminarse() {
+	method serDestruido() {
 		if (game.hasVisual(self)) {
 			game.removeTickEvent(tick)
 			game.removeVisual(self)
@@ -79,12 +74,9 @@ object balaPotente inherits EstadoDeBalaCanion {
 		animacionExplosion.comenzar(position)
 	}
 	
-	
 	override method disparar(objeto){
 		super(objeto)
-		if (not easterEgg.activado()){
-			objeto.volverANormalidad()
-		}
+		objeto.estado().volverANormalidad()
 	}
 	
 	method destruirAlrededor() {
@@ -94,8 +86,6 @@ object balaPotente inherits EstadoDeBalaCanion {
 	method destruirX(posicionY){
 		(self.position().x()-2..self.position().x()+2).forEach{posicionX => self.destruirPotente(posicionY,posicionX)}
 	}
-	
-	//method 	
 	
 	method destruirPotente(posicionY,posicionX) {
 		game.getObjectsIn(game.at(posicionX, posicionY)).forEach{ nave => nave.serDestruido()}
