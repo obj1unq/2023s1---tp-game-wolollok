@@ -22,7 +22,6 @@ object actual {
 	method indicador() {
 		return pantalla.indicador()
 	}
-
 }
 
 class Pantalla {
@@ -33,7 +32,6 @@ class Pantalla {
 		actual.pantalla(self)
 		game.addVisual(self)
 	}
-
 }
 
 class Fondo inherits Pantalla {
@@ -49,7 +47,6 @@ class Fondo inherits Pantalla {
 	method eliminarse() {
 		game.removeVisual(self)
 	}
-
 }
 
 object pantallaInicial inherits Fondo(indicador = puntero, image = "fondoPantallaInicial.jpg") {
@@ -82,7 +79,6 @@ object pantallaInicial inherits Fondo(indicador = puntero, image = "fondoPantall
 		self.iniciar()
 		soundProducer.sacarCancion()
 	}
-
 }
 
 object pantallaNombre inherits Fondo(indicador = punteroNombre, image = "fondoNombre.png") {
@@ -97,7 +93,6 @@ object pantallaNombre inherits Fondo(indicador = punteroNombre, image = "fondoNo
 		super()
 		game.removeVisual(nombre)
 	}
-
 }
 
 object pantallaEleccion inherits Fondo(indicador = puntero2, image = "fondoEleccion.png") {
@@ -113,7 +108,6 @@ object pantallaEleccion inherits Fondo(indicador = puntero2, image = "fondoElecc
 		keyboard.left().onPressDo({ puntero2.moverIzquierda()})
 		keyboard.right().onPressDo({ puntero2.moverDerecha()})
 	}
-
 }
 
 object pantallaSiguienteNivel inherits Fondo(indicador = punteroSigNivel, image = "fondoPantallaInicial.jpg") {
@@ -135,7 +129,6 @@ object pantallaSiguienteNivel inherits Fondo(indicador = punteroSigNivel, image 
 		game.removeVisual(iniciarJuego)
 		game.removeVisual(seleccionarNave)
 	}
-
 }
 
 class Nivel inherits Pantalla {
@@ -167,7 +160,6 @@ class Nivel inherits Pantalla {
 		keyboard.right().onPressDo{ canion.mover(derecha)}
 		keyboard.space().onPressDo{ canion.disparar()}
 		settingsMusica.iniciarTeclas()
-
 	}
 
 	method siguienteNivelSetear() {
@@ -178,7 +170,6 @@ class Nivel inherits Pantalla {
 
 	method serDaniado(objeto) {
 	}
-
 }
 
 object nivel1 inherits Nivel(numero = 1, tiempoMover = 2000, siguienteNivel = nivel2) {}
@@ -186,7 +177,6 @@ object nivel1 inherits Nivel(numero = 1, tiempoMover = 2000, siguienteNivel = ni
 object nivel2 inherits Nivel(numero = 2, tiempoMover = 1500, siguienteNivel = nivel3) {}
 
 object nivel3 inherits Nivel(numero = 3, tiempoMover = 1000, siguienteNivel = null) {
-
 
 	override method iniciar() {
 		super()
@@ -197,7 +187,6 @@ object nivel3 inherits Nivel(numero = 3, tiempoMover = 1000, siguienteNivel = nu
 		super()
 		pantallaGanaste.iniciar()
 	}
-
 }
 
 class PantallaFinal inherits Pantalla {
@@ -215,7 +204,6 @@ class PantallaFinal inherits Pantalla {
 		keyboard.x().onPressDo({ soundProducer.bajarVolumenMusica()})
 		keyboard.s().onPressDo({ soundProducer.subirVolumenMusica()})
 	}
-
 }
 
 object pantallaGanaste inherits PantallaFinal(cancion = "musicaVictory.mp3") {
@@ -226,7 +214,6 @@ object pantallaGanaste inherits PantallaFinal(cancion = "musicaVictory.mp3") {
 		super()
 		actual.nivel(nivel1)
 	}
-
 }
 
 object fondoPerder {
@@ -241,7 +228,6 @@ object fondoPerder {
 		game.addVisual(self)
 		formaDePerder.animacion()
 	}
-
 }
 
 object gameOver inherits PantallaFinal(cancion = "musicaDefeat.mp3") {
@@ -252,7 +238,6 @@ object gameOver inherits PantallaFinal(cancion = "musicaDefeat.mp3") {
 		soundProducer.sacarCancion()
 		super()
 	}
-
 }
 
 object settingsMusica {
