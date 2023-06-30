@@ -1,0 +1,25 @@
+import wollok.game.*
+import canion.*
+import naves.*
+import balas.*
+import posDir.*
+import score.*
+import pantallas.*
+import pantallaInicial.*
+import pantallaEleccion.*
+
+
+program spaceInvaders {
+
+//	CONFIG	
+
+	game.title("Space Invaders")
+	game.height(20)
+	game.width(30)
+	game.cellSize(35)
+	pantallaInicial.iniciar()
+
+//	START
+	game.start()
+	
+}  

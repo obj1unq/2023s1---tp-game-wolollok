@@ -1,0 +1,346 @@
+import wollok.game.*
+import canion.*
+import naves.*
+import balas.*
+import posDir.*
+import score.*
+import pantallas.*
+import pantallaInicial.*
+import score.*
+import pantallaPerder.*
+import nombre.*
+import pantallaEleccion.*
+import easterEgg.*
+import sound.*
+
+describe "Movimiento de Canion y comportamiento de sus vidas." {
+	
+	method initialize() {
+		game.clear()
+		game.title("Space Invaders")
+		game.height(20)
+		game.width(30)
+		game.cellSize(35)
+		soundProducer.provider(soundProviderMock)
+		
+		nivel1.iniciar()
+	}
+	
+	test "Al iniciar el juego, se crearon las naves y las vidas" {
+		assert.equals(3, gestorDeVidas.vidas().size())
+		assert.equals(33, ovnis.size())
+	}
+	
+	test "Canion se mueve a la derecha" {
+		// Check initial positions
+		assert.equals(15, canion.position().x())
+		assert.equals(1, canion.position().y()) 
+		canion.mover(derecha)
+		// Canion has moved right perfectly
+		assert.equals(16, canion.position().x()) 
+	}
+	
+	test "Canion se mueve a la izquierda" {
+		// Check initial positions
+		assert.equals(15, canion.position().x())
+		assert.equals(1, canion.position().y()) 
+		canion.mover(izquierda)
+		// Canion has moved left perfectly
+		assert.equals(14, canion.position().x()) 
+	}
+	
+	test "El canion no pasa del borde derecho" {
+		// Set the position in a border. The game has 30 cells and the first is 0. 30 - 1 = 29 is the border
+		canion.position(new Posicion(x = 29, y = 1))
+		assert.equals(29, canion.position().x())
+		assert.equals(1, canion.position().y())
+		canion.mover(derecha)
+		// Canion didn't move 
+		assert.equals(29, canion.position().x())
+		// If we want to move left, we can do it
+		canion.mover(izquierda)
+		assert.equals(28, canion.position().x()) 
+	}
+	
+	test "El canion no pasa del borde izquierdo" {
+		// Set the position in a border. The game has 30 cells and the first is 0. 30 - 1 = 29 is the border
+		canion.position(new Posicion(x = 0, y = 1))
+		assert.equals(0, canion.position().x())
+		assert.equals(1, canion.position().y())
+		canion.mover(izquierda)
+		// Canion didn't move 
+		assert.equals(0, canion.position().x())
+		// If we want to move left, we can do it
+		canion.mover(derecha)
+		assert.equals(1, canion.position().x()) 
+	}
+	
+	test "SerDaniado() reduce una vida del gestor de vidas" {
+		canion.estado().serDaniado()
+		assert.equals(gestorDeVidas.vidas(), [uno, dos])	
+	}
+	
+	test "Nave aleatoria si no está de un lado, está del otro" {
+		naveAleatoria.aparecer()
+		assert.that(29 == naveAleatoria.position().x() or 0 == naveAleatoria.position().x())
+	}
+	
+}
+
+describe "Pasaje de niveles, eleccion de caniones" {
+	method initialize() {
+		game.clear()
+		game.title("Space Invaders")
+		game.height(20)
+		game.width(30)
+		game.cellSize(35)
+		soundProducer.provider(soundProviderMock)
+		
+		nivel1.iniciar()
+	}
+	
+	test "Estoy en el nivel uno, paso al dos y al tres" {
+		soundProducer.playCancion("perder.mp3")
+		actual.nivel(nivel1)
+		assert.that(nivel1 == actual.nivel())
+		actual.nivel().siguienteNivelSetear()
+		soundProducer.playCancion("perder.mp3")
+		assert.that(nivel2 == actual.nivel())
+		soundProducer.playCancion("perder.mp3")
+		actual.nivel().siguienteNivelSetear()
+		assert.that(nivel3 == actual.nivel())
+	}
+	test "Estoy en el nivel uno y solo puedo elegir el canion Rosa y Normal" {
+		//Si puedo elegir
+		actual.nivel(nivel1)
+		canionNormal.serElegido()
+		assert.equals(normal.image(), "canionNormalJugar.png")
+		canionRosa.serElegido()
+		assert.equals(normal.image(), "canionRosaJugar.png")
+		// No puedo elegir
+		assert.throwsException{canionAzul.serElegido()}
+		assert.throwsException{canionNaranja.serElegido()}
+		assert.throwsException{canionVerde.serElegido()}
+		assert.throwsException{canionDorado.serElegido()}
+	}
+	test "Estoy en el nivel dos y solo puedo elegir el canion Rosa y Normal" {
+		//Si puedo elegir
+		actual.nivel(nivel2)
+		canionNormal.serElegido()
+		assert.equals(normal.image(), "canionNormalJugar.png")
+		canionRosa.serElegido()
+		assert.equals(normal.image(), "canionRosaJugar.png")
+		// No puedo elegir
+		canionAzul.serElegido()
+		assert.equals(normal.image(), "canionAzulJugar.png")
+		canionNaranja.serElegido()
+		assert.equals(normal.image(), "canionNaranjaJugar.png")
+		assert.throwsException{canionVerde.serElegido()}
+		assert.throwsException{canionDorado.serElegido()}
+	}
+	test "Estoy en el nivel tres y solo puedo elegir el canion Rosa y Normal" {
+		//Si puedo elegir
+		actual.nivel(nivel3)
+		canionNormal.serElegido()
+		assert.equals(normal.image(), "canionNormalJugar.png")
+		canionRosa.serElegido()
+		assert.equals(normal.image(), "canionRosaJugar.png")
+		// No puedo elegir
+		canionAzul.serElegido()
+		assert.equals(normal.image(), "canionAzulJugar.png")
+		canionNaranja.serElegido()
+		assert.equals(normal.image(), "canionNaranjaJugar.png")
+		canionVerde.serElegido()
+		assert.equals(normal.image(), "canionVerdeJugar.png")
+		canionDorado.serElegido()
+		assert.equals(normal.image(), "canionDoradoJugar.png")
+	}
+	
+}
+
+describe "Estados del Canion" {
+	method initialize() {
+		game.clear()
+		game.title("Space Invaders")
+		game.height(20)
+		game.width(30)
+		game.cellSize(35)
+		soundProducer.provider(soundProviderMock)
+		
+		nivel1.iniciar()
+	}
+	test "El estado del canion cambia al dispararle a la nave aleatoria" {
+		canion.estado(normal)
+		naveAleatoria.serDestruido()
+		assert.notThat(canion.estado() == normal)
+	}
+	
+	test "El canion en estado normal dispara, por lo que su bala ya no tiene mas el yaDisparada en false" {
+		//Set canion on normal mode
+		canion.estado(normal)
+		//Checking yaDisparada() is false atm
+		assert.notThat(balaCanion.yaDisparada())
+		canion.disparar()
+		//Checking yaDisparada() is true now
+		assert.that(balaCanion.yaDisparada() )
+	}
+	
+	test "El canion en estado disparoPotente dispara, por lo que su bala ya no tiene mas el yaDisparada en false" {
+		//Set canion on disparoPotente mode
+		canion.estado(potente)
+		//Checking yaDisparada() is false atm
+		assert.notThat(balaPotente.yaDisparada())
+		canion.disparar()
+		//Checking yaDisparada() is true now
+		assert.that(balaPotente.yaDisparada())
+	}
+	
+	test "El canion en estado potente dispara, por lo que su estado vuelve a la normalidad" {
+		canion.estado(potente)
+		canion.disparar()
+		assert.that(canion.estado() == normal)
+	}
+	
+	test "El canion en estado inmune dispara, por lo que su bala ya no tiene mas el yaDisparada en false" {
+		//Set canion on inmune mode
+		canion.estado(inmune)
+		//Checking yaDisparada() is false atm
+		assert.notThat(balaCanion.yaDisparada())
+		canion.disparar()
+		//Checking yaDisparada() is true now
+		assert.that(balaCanion.yaDisparada() )
+	}
+	
+	test "El canion en estado veloz dispara, por lo que su bala ya no tiene mas el yaDisparada en false" {
+		//Set canion on disparoVeloz mode
+		canion.estado(veloz)
+		//Checking yaDisparada() is false atm
+		assert.notThat(balaVeloz.yaDisparada())
+		canion.disparar()
+		//Checking yaDisparada() is true now
+		assert.that(balaVeloz.yaDisparada() )
+	}
+	
+	test "El canion en estado laser dispara, por lo que su bala ya no tiene mas el yaDisparada en false" {
+		//Set canion on laser mode
+		canion.estado(laser)
+		//Checking yaDisparada() is false atm
+		assert.notThat(balaLaser.yaDisparada())
+		canion.disparar()
+		//Checking yaDisparada() is true now
+		assert.that(balaLaser.yaDisparada() )
+	}
+	
+	test "El canion en estado laser dispara y resta un disparo" {
+		//Set canion on laser mode
+		assert.equals(2, balaLaser.disparos())
+		canion.estado(laser)
+		canion.disparar()
+		assert.equals(1, balaLaser.disparos())
+	}
+	
+	test "Al poseer el canion el estado inmune, las balas que colisionen con él no le quitan vida" {
+		canion.estado(inmune)
+		canion.estado().serDaniado()
+		assert.equals(gestorDeVidas.vidas(), [ uno, dos, tres ])
+	}
+		
+}
+
+describe "Naves: movimiento y disparos" {
+	method initialize() {
+		game.clear()
+		game.title("Space Invaders")
+		game.height(20)
+		game.width(30)
+		game.cellSize(35)
+		soundProducer.provider(soundProviderMock)
+		
+		nivel1.iniciar()
+	}
+	
+	test "Una nave enemiga dispara, por lo que su bala ya no tiene mas el yaDisparada en false" {
+		assert.notThat(balaNave.yaDisparada())
+		const nave1 = new NaveConFuego(position = (new Posicion(x = 29, y = 4)))
+		nave1.disparar()
+		assert.that(balaNave.yaDisparada() )
+	}
+	
+	test "Al mover una nave más allá del borde izquierdo, desciende" {
+		const nave1 = new NaveConFuego(position = (new Posicion(x = 0, y = 4)))
+		const nave2 = new NaveConFuego(position = (new Posicion(x = 2, y = 4)))
+		ovnis.add(nave1)
+		ovnis.add(nave2)
+		movimiento.direccion(izquierda)
+		movimiento.moverNaves()
+		assert.equals(0, nave1.position().x())
+		assert.equals(3, nave1.position().y())
+		assert.equals(2, nave2.position().x())
+		assert.equals(3, nave2.position().y())
+	}
+	
+	test "Al mover una nave más allá del borde derecho, desciende" {
+		const nave1 = new NaveConFuego(position = (new Posicion(x = 29, y = 4)))
+		const nave2 = new NaveConFuego(position = (new Posicion(x = 27, y = 4)))
+		ovnis.add(nave1)
+		ovnis.add(nave2)
+		movimiento.moverNaves()
+		assert.equals(29, nave1.position().x())
+		assert.equals(3, nave1.position().y())
+		assert.equals(27, nave2.position().x())
+		assert.equals(3, nave2.position().y())
+	}
+	
+	test "Mato una de cada y sumo puntaje" {
+		const nave1 = new NaveConFuego(position = (new Posicion(x = 29, y = 4)))
+		const nave2 = new Nave3Patas(position = (new Posicion(x = 29, y = 4)))
+		const nave3 = new Nave2Patas(position = (new Posicion(x = 29, y = 4)))
+		
+		nave1.serDestruido()
+		nave2.serDestruido()
+		nave3.serDestruido()
+		assert.equals(101700, score.puntaje())
+	}
+}
+
+describe "EasterEgg" {
+	method initialize() {
+		game.clear()
+		game.title("Space Invaders")
+		game.height(20)
+		game.width(30)
+		game.cellSize(35)
+		soundProducer.provider(soundProviderMock)
+		
+		nivel1.iniciar()
+	}
+	test "Misterioso easter egg está listo para revelarnos todo su esplendor" {
+		easterEgg.agregar('e')
+		easterEgg.agregar('a')
+		easterEgg.agregar('s')
+		easterEgg.agregar('t')
+		easterEgg.agregar('e')
+		easterEgg.agregar('r')
+		easterEgg.validarEasterEgg()
+		assert.that(easterEgg.activado())
+	}
+	
+	test "El acumulador se borra cuando salis de Wolollok" {
+		easterEgg.agregar('a')
+		easterEgg.agregar('s')
+		easterEgg.agregar('t')
+		easterEgg.agregar('e')
+		easterEgg.agregar('r')
+		easterEgg.validarEasterEgg()
+		assert.notThat(easterEgg.activado())
+		easterEgg.borrarAcumulador()
+		easterEgg.agregar('e')
+		easterEgg.agregar('a')
+		easterEgg.agregar('s')
+		easterEgg.agregar('t')
+		easterEgg.agregar('e')
+		easterEgg.agregar('r')
+		easterEgg.validarEasterEgg()
+		assert.that(easterEgg.activado())
+	}
+}
