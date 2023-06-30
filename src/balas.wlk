@@ -95,12 +95,15 @@ object balaPotente inherits EstadoDeBalaCanion {
 object balaVeloz inherits EstadoDeBalaCanion(velocidad = 5) {}
 
 object balaLaser inherits EstadoDeBalaCanion(velocidad = 35) {
-	var disparos = 2
+	
+	var property disparos = 2
+	
 	override method disparar(objeto) {
 		super(objeto)
-		disparos = disparos - 1
-		if (disparos == 0) { objeto.estado().volverANormalidad() }
+		disparos -= 1
+		if (disparos < 1) { objeto.estado().volverANormalidad() }
 	}
+	
 	override method eliminarEnemigo(enemigo) {
 		enemigo.serDestruido() 
 	}
@@ -147,6 +150,7 @@ object balaNave inherits Bala(direccionamiento = abajo, position = new Posicion(
 const balas = [ balaCanion, balaVeloz, balaPotente, balaNave, balaLaser ]
 
 object animacionExplosion {
+	
 	var property image 
 	
 	method comenzar(pose) {
