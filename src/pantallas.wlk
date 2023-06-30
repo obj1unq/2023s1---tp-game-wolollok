@@ -141,6 +141,7 @@ class Nivel inherits Pantalla {
 	override method iniciar() {
 		canion.position(new Posicion(x = game.center().x(), y = 1))
 		game.clear()
+		canion.estado().volverANormalidad()
 		soundProducer.playCancion("musicaInGame.mp3")
 		super()
 		actual.nivel(self)
