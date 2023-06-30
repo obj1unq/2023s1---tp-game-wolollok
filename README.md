@@ -1,4 +1,4 @@
-# Space Invaders#
+# Space Invaders
 Una versión de grupo Wolollok 
 
 # Equipo de desarrollo
