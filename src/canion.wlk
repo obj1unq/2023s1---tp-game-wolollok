@@ -133,6 +133,7 @@ object potente inherits Estado(tipoDeBala = balaPotente) {} /*Este estado mata u
 object veloz inherits Estado(tipoDeBala = balaVeloz) {}
 
 object laser inherits Estado(tipoDeBala = balaLaser) {}
+
 object wolollokJugar inherits Estado(tipoDeBala = balaPotente, image = "wolollokJugar.png") {}
 
 object gestorDeBeneficios {

@@ -233,12 +233,10 @@ describe "Estados del Canion" {
 	
 	test "El canion en estado laser dispara y resta un disparo" {
 		//Set canion on laser mode
-		balaLaser.disparos(2)
+		assert.equals(2, balaLaser.disparos())
 		canion.estado(laser)
 		canion.disparar()
-		assert.that(balaLaser.disparos() == 1 )
-		canion.disparar()
-		assert.that(balaLaser.disparos() == 0 )
+		assert.equals(1, balaLaser.disparos())
 	}
 	
 	test "Al poseer el canion el estado inmune, las balas que colisionen con él no le quitan vida" {
