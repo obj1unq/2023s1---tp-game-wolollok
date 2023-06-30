@@ -10,7 +10,15 @@ Una versión de grupo Wolollok
 
 ## Capturas
 
-(agregar)
+![menu inicio](assets/screenshots/2.png)
+
+![menu inicio](assets/screenshots/1.png)
+
+![menu inicio](assets/screenshots/3.png)
+
+![menu inicio](assets/screenshots/4.png)
+
+
 
 ## Reglas de Juego / Instrucciones
 
